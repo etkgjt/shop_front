@@ -8,7 +8,7 @@ const initialState = {
 		id: '',
 	},
 };
-export default userReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case REDUX.LOG_IN: {
 			return { ...state };
@@ -24,3 +24,4 @@ export default userReducer = (state = initialState, action) => {
 		}
 	}
 };
+export default userReducer;

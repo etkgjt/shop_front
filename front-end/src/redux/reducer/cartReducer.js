@@ -3,7 +3,7 @@ const initialState = {
 	cartId: '',
 	items: [],
 };
-export default cartReducer = (state = initialState, action) => {
+const cartReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case REDUX.CLEAR_DATA: {
 			return {
@@ -25,3 +25,4 @@ export default cartReducer = (state = initialState, action) => {
 		}
 	}
 };
+export default cartReducer;

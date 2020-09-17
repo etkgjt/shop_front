@@ -2,7 +2,7 @@ import { REDUX } from '../store/type';
 const initialState = {
 	favoriteItems: [],
 };
-export default favoriteReducer = (state = initialState, action) => {
+ const favoriteReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case REDUX.CLEAR_DATA: {
 			return {
@@ -21,3 +21,4 @@ export default favoriteReducer = (state = initialState, action) => {
 		}
 	}
 };
+export default favoriteReducer;
