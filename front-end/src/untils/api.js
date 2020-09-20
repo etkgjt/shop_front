@@ -9,3 +9,5 @@ export const API = axios.create({
 		Authorization: `Bearer ${accessToken}`,
 	},
 });
+export const a = () => {};
+
