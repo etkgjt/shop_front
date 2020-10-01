@@ -2,5 +2,32 @@
 	padding-bottom: 120px;
 	padding-top: 150px;
 	width: 100%;
-	background-color: blue;
+}
+.footer-description {
+	font-size: 16px;
+	font-weight: 300;
+	margin-bottom: 15px;
+	color: #868c98;
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-transform: perspective(1px) translateZ(0);
+	transform: perspective(1px) translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-property: transform;
+	transition-property: transform;
+}
+.footer-description:hover,
+.footer-description:focus,
+.footer-description:active {
+	-webkit-transform: translateX(8px);
+	transform: translateX(8px);
+	text-decoration: none;
+	color: #ff003c;
+}
+h4 {
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 29px;
 }

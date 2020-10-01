@@ -14,6 +14,10 @@ import {
 	NavItem,
 	Col,
 	Row,
+	Dropdown,
+	DropdownToggle,
+	DropdownItem,
+	DropdownMenu,
 } from 'reactstrap';
 import mainLogo from '../assets/timezone-logo.png';
 const data = [
@@ -27,7 +31,7 @@ const data = [
 	},
 	{
 		path: '/single_product',
-		title: 'Single Product',
+		title: 'Product',
 	},
 	{
 		path: '/cart',
@@ -48,34 +52,52 @@ const _renderNavItem = (data) => (
 		<NavLink
 			exact
 			to={data?.path}
-			className="nav-link-title"
+			className="nav-link-title hvr-grow"
 			activeStyle={{ color: '#ff003c' }}
 		>
 			{data?.title}
 		</NavLink>
 	</NavItem>
 );
+const _renderDropDownItems = (data) => (
+	<DropdownItem className="nav-link mx-2" key={data?.title}>
+		<NavLink
+			exact
+			to={data?.path}
+			className="nav-link-title hvr-grow"
+			activeStyle={{ color: '#ff003c' }}
+		>
+			{data?.title}
+		</NavLink>
+	</DropdownItem>
+);
 const NavigationBar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(!isOpen);
 	return (
-		<Navbar expand="md" light className="main-header">
+		<Navbar expand="md" light>
 			<NavbarBrand to="/">
 				<img src={mainLogo} className="img-fluid"></img>
 			</NavbarBrand>
-			<NavbarToggler className="toggler-button" onClick={toggle} />
-			<Collapse
-				isOpen={isOpen}
-				navbar
-				className="justify-content-center display-block"
-			>
-				<Nav navbar>{data.map((item) => _renderNavItem(item))}</Nav>
+			<Collapse navbar className="justify-content-center">
+				<div className="ml-sm-auto navbar-nav main-menu">
+					<Nav navbar>{data.map((item) => _renderNavItem(item))}</Nav>
+				</div>
 			</Collapse>
 			<Container className="icon_wrapper">
-				<ion-icon className="search" name="search-outline"></ion-icon>
-				<ion-icon name="person-outline"></ion-icon>
-				<ion-icon name="cart-outline"></ion-icon>
+				<ion-icon class="_icon" name="search-outline"></ion-icon>
+				<ion-icon class="_icon" name="person-outline"></ion-icon>
+				<ion-icon class="_icon" name="cart-outline"></ion-icon>
 			</Container>
+			<Dropdown isOpen={isOpen} toggle={toggle}>
+				<DropdownToggle className="navbar-toggler">
+					<ion-icon name="menu-outline"></ion-icon>
+				</DropdownToggle>
+				<DropdownMenu right>
+					{data.map((item) => _renderDropDownItems(item))}
+				</DropdownMenu>
+			</Dropdown>
+			{/* <NavbarToggler onClick={toggle} /> */}
 		</Navbar>
 	);
 };

@@ -1,6 +1,6 @@
 import React, { useCallback, memo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import Header from '../components/Header';
 const Home = memo(() => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -8,36 +8,9 @@ const Home = memo(() => {
 	const toggle = () => setIsOpen(!isOpen);
 	return (
 		<Container>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
-			<h1>I'm Home</h1>
+			<Row>
+				<h1>Home</h1>
+			</Row>
 		</Container>
 	);
 });

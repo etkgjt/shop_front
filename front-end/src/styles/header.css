@@ -8,20 +8,29 @@
 	font-weight: normal;
 	font-style: normal;
 	font-size: 16px;
+	border-width: 2px;
 }
-ion-icon {
+.navbar {
+	width: 100%;
+}
+
+.nav-link {
+	border-width: 2px;
+	border-color: black;
+}
+ion-icon._icon {
 	font-size: 25px;
 	margin-left: 25px;
 	margin-right: 25px;
 }
-ion-icon:hover {
+ion-icon._icon:hover {
 	-webkit-transform: scale(1.5);
 }
 
 .icon_wrapper {
 	width: auto;
 	height: 50;
-	justify-content: space-between;
+	justify-content: space-around;
 
 	display: block;
 }
@@ -50,4 +59,34 @@ ion-icon:hover {
 	z-index: 999;
 	background-color: #fff;
 	box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+.toggler-button {
+	color: red;
+}
+.btn:hover {
+	background-color: #bbb;
+}
+.dropdown {
+	width: 100;
+	color: #ff003c;
+}
+/*
+Animation
+*/
+.hvr-grow {
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-transform: perspective(1px) translateZ(0);
+	transform: perspective(1px) translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-property: transform;
+	transition-property: transform;
+}
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
 }
