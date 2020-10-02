@@ -1,7 +1,7 @@
 import React, { useCallback, memo, useState } from 'react';
 
 import { Container } from 'reactstrap';
-import CustomCarousel from '../components/CustomCarousel';
+import { CustomCarousel } from '../components';
 
 const ShopPage = memo(() => {
 	const [isOpen, setIsOpen] = useState(false);
