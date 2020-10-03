@@ -46,6 +46,10 @@ const data = [
 		path: '/category',
 		title: 'Category',
 	},
+	{
+		path: '/confirmation',
+		title: 'Confirmation',
+	},
 ];
 const _renderNavItem = (data) => (
 	<NavItem className="nav-link mx-2" key={data?.title}>
@@ -102,8 +106,7 @@ const NavigationBar = () => {
 	);
 };
 const Header = memo(() => {
-	const height = window.innerHeight;
-	const [isOpen, setIsOpen] = useState(false);
+	console.log('header render ??');
 
 	return (
 		<Container fluid className="header-area">

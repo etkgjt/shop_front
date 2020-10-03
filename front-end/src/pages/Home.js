@@ -1,17 +1,15 @@
 import React, { useCallback, memo, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { Container, Row } from 'reactstrap';
-import Header from '../components/Header';
-const Home = memo(() => {
-	const [isOpen, setIsOpen] = useState(false);
 
-	const toggle = () => setIsOpen(!isOpen);
+import { Container, Row } from 'reactstrap';
+
+import '../styles/pageTitle.css';
+const Home = memo(() => {
+	console.log('homepage render ne');
+
 	return (
-		<Container>
-			
-			<Row>
-				<h1>Home</h1>
+		<Container fluid>
+			<Row className="title-container">
+				<p class="page-title">Home</p>
 			</Row>
 		</Container>
 	);

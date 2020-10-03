@@ -1,14 +1,14 @@
 import React, { useCallback, memo, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Container } from 'reactstrap';
-import Header from '../components/Header';
-const Category = memo(() => {
-	const [isOpen, setIsOpen] = useState(false);
 
-	const toggle = () => setIsOpen(!isOpen);
+import { Container, Row } from 'reactstrap';
+import '../styles/pageTitle.css';
+const Category = memo(() => {
+	console.log('category render ne');
 	return (
-		<Container>
-			<h1>I'm Category</h1>
+		<Container fluid>
+			<Row className="title-container">
+				<p class="page-title">Category</p>
+			</Row>
 		</Container>
 	);
 });

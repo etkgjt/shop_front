@@ -4,4 +4,5 @@ import SingleProduct from './SingleProduct';
 import Contact from './Contact';
 import ShopPage from './ShopPage';
 import Category from './Category';
-export { Cart, Category, Home, SingleProduct, ShopPage, Contact };
+import Confirmation from './Confirmation';
+export { Cart, Category, Home, SingleProduct, ShopPage, Contact,Confirmation };

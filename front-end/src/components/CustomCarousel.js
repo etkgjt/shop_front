@@ -54,7 +54,7 @@ const items = [
 ];
 
 const CustomCarousel = () => (
-	<Container fluid >
+	<Container>
 		<UncontrolledCarousel items={items} />
 	</Container>
 );

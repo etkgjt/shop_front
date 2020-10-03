@@ -1,9 +1,14 @@
 import React, { useCallback, memo } from 'react';
+import { Container, Row } from 'reactstrap';
+import '../styles/pageTitle.css';
 const Cart = memo(() => {
+	console.log('cart render ne');
 	return (
-		<div>
-			<h1>Hello i'm Cart</h1>
-		</div>
+		<Container fluid>
+			<Row className="title-container">
+				<p class="page-title">Cart List</p>
+			</Row>
+		</Container>
 	);
 });
 export default Cart;

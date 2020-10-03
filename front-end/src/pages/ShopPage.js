@@ -1,15 +1,18 @@
 import React, { useCallback, memo, useState } from 'react';
 
-import { Container } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import { CustomCarousel } from '../components';
+import '../styles/pageTitle.css';
 
 const ShopPage = memo(() => {
-	const [isOpen, setIsOpen] = useState(false);
+	console.log('shopage render ne');
 
-	const toggle = () => setIsOpen(!isOpen);
 	return (
-		<Container>
-			<h1>I'm ShopPage</h1>
+		<Container fluid>
+			<Row className="title-container">
+				<p class="page-title">Shop Page</p>
+			</Row>
+
 			<CustomCarousel />
 		</Container>
 	);
