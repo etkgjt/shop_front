@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, UncontrolledCarousel } from 'reactstrap';
 import background from '../assets/slider_background.png';
-
+import '../styles/pageTitle.css';
 const items = [
 	{
 		src:
@@ -29,8 +29,8 @@ const items = [
 	},
 ];
 
-const CustomCarousel = () => (
-	<Container className="my-5">
+const CustomCarousel = (props) => (
+	<Container className={`my-5 ${props?.className}`} {...props}>
 		<UncontrolledCarousel items={items} />
 	</Container>
 );

@@ -42,10 +42,15 @@ ion-icon._icon:hover {
 	margin: 0;
 }
 .header-area {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
 	width: 100%;
 	display: block;
 
 	height: 100px;
+	transition: all 300ms ease-in-out;
 }
 .header-container {
 	width: 100%;
@@ -53,12 +58,10 @@ ion-icon._icon:hover {
 	justify-content: center;
 	align-items: center;
 	display: flex;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 999;
 	background-color: #fff;
-	box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0px 9px 16px 2px rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 0px 9px 16px 2px rgba(0, 0, 0, 0.19);
+	box-shadow: 0px 9px 16px 2px rgba(0, 0, 0, 0.19);
 }
 .toggler-button {
 	color: red;
@@ -70,6 +73,24 @@ ion-icon._icon:hover {
 	width: 100;
 	color: #ff003c;
 }
+
+.scrolled {
+	/* position: fixed;
+	top: 0;
+	left: 0; */
+	pointer-events: none;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	background-color: #fff;
+	-webkit-box-shadow: 0px 9px 16px 2px rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 0px 9px 16px 2px rgba(0, 0, 0, 0.19);
+	box-shadow: 0px 9px 16px 2px rgba(0, 0, 0, 0.19);
+	/* transition: 2s;
+	transform: translateY(5%); */
+	opacity: 0;
+}
+
 /*
 Animation
 */

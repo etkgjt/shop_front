@@ -23,6 +23,7 @@ import './styles/footer.css';
 import './styles/appRoute.css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Confirmation from './pages/Confirmation';
+
 const AppRoute = () => {
 	let location = useLocation();
 	return (

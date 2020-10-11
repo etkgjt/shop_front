@@ -23,6 +23,8 @@
 		/>
 
 		<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+		<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+		<script src="https://code.jquery.com/jquery-migrate-3.3.1.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#000000" />
 		<meta
@@ -55,6 +57,26 @@
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root"></div>
+		<script>
+			let oldOffset = 0;
+
+			$(window).scroll(function () {
+				var scroll = $(window).scrollTop();
+
+				if (scroll - oldOffset >= 50) {
+					oldOffset = scroll;
+					// console.log('scroll to bottom');
+					$('.header-area').addClass('scrolled');
+				} else if (scroll - oldOffset <= -50) {
+					oldOffset = scroll;
+					// console.log('ko scroll ne');
+					$('.header-area').removeClass('scrolled');
+				} else if (scroll === 0) {
+					// console.log('ko scroll ne');
+					$('.header-area').removeClass('scrolled');
+				}
+			});
+		</script>
 		<!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

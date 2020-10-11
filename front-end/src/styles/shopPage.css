@@ -70,7 +70,9 @@ h5 {
 	background-color: #ff2020;
 	font-family: 'Roboto', sans-serif;
 }
-
+button:focus {
+	outline: none;
+}
 @media (min-width: 992px) {
 	.animate {
 		animation-duration: 0.3s;

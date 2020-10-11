@@ -109,8 +109,8 @@ const Header = memo(() => {
 	console.log('header render ??');
 
 	return (
-		<Container fluid className="header-area">
-			<div className="header-container">
+		<Container fluid className="header-area header-container slideIn">
+			<div>
 				<NavigationBar />
 			</div>
 		</Container>
