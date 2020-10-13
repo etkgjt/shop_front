@@ -13,7 +13,7 @@ import gallery4 from '../assets/gallery4.png';
 
 import '../styles/pageTitle.css';
 import '../styles/home.css';
-import src from '*.bmp';
+
 const Home = memo(() => {
 	console.log('homepage render ne');
 
@@ -49,32 +49,95 @@ const Home = memo(() => {
 				</Row>
 				<Row>
 					<Col xl="4" lg="4" md="6" sm="6">
-						<img src={newProduct1} />
+						<div
+							style={{
+								width: '100%',
+								height: '100%',
+								overflow: 'hidden',
+							}}
+						>
+							<img src={newProduct1} className="hvr-grow" />
+						</div>
 					</Col>
 					<Col xl="4" lg="4" md="6" sm="6">
-						<img src={newProduct2} />
+						<div
+							style={{
+								width: '100%',
+								height: '100%',
+								overflow: 'hidden',
+							}}
+						>
+							<img src={newProduct2} className="hvr-grow" />
+						</div>
 					</Col>
 					<Col xl="4" lg="4" md="6" sm="6">
-						<img src={newProduct3} />
+						<div
+							style={{
+								width: '100%',
+								height: '100%',
+								overflow: 'hidden',
+							}}
+						>
+							<img src={newProduct3} className="hvr-grow" />
+						</div>
 					</Col>
 				</Row>
 			</Container>
 			<Container fluid className="gallery-area p-0 fix">
-				<Row>
-					<Col xl="6" lg="4" md="6" sm="6">
-						<div className="gallery1" />
+				<Row className="gallery-container">
+					<Col
+						xl="6"
+						lg="4"
+						md="6"
+						sm="6"
+						className="justify-content-center align-items-center"
+					>
+						<div
+							style={{
+								width: '100%',
+								height: '100%',
+								overflow: 'hidden',
+							}}
+						>
+							<div className="gallery1 hvr-shrink" />
+						</div>
 					</Col>
 					<Col xl="3" lg="4" md="6" sm="6">
-						{/* <img src={gallery2} /> */}
+						<div
+							style={{
+								width: '100%',
+								height: '100%',
+								overflow: 'hidden',
+							}}
+						>
+							<div className="gallery2 hvr-shrink" />
+						</div>
 					</Col>
 					<Col
 						xl="3"
 						lg="4"
 						md="12"
-						className="d-flex flex-column justify-content-around p-0"
+						className="d-flex flex-column justify-content-around"
 					>
-						{/* <img src={gallery3} />
-						<img src={gallery4} /> */}
+						<div
+							style={{
+								width: '100%',
+								height: '100%',
+								overflow: 'hidden',
+							}}
+						>
+							<div className="gallery3 hvr-shrink" />
+						</div>
+						<div
+							style={{
+								width: '100%',
+								height: '100%',
+								overflow: 'hidden',
+								marginTop: '20px',
+							}}
+						>
+							<div className="gallery4 hvr-shrink" />
+						</div>
 					</Col>
 				</Row>
 			</Container>
