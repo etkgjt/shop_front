@@ -83,7 +83,7 @@ const NavigationBar = () => {
 			<NavbarBrand to="/">
 				<img src={mainLogo} className="img-fluid"></img>
 			</NavbarBrand>
-			<Collapse navbar className="justify-content-center">
+			<Collapse navbar className="justify-content-center ">
 				<div className="ml-sm-auto navbar-nav main-menu">
 					<Nav navbar>{data.map((item) => _renderNavItem(item))}</Nav>
 				</div>
