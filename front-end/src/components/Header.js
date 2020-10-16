@@ -1,4 +1,4 @@
-import React, { useCallback, memo, useState } from 'react';
+import React, { useCallback, memo, useState, useEffect } from 'react';
 import { BrowserRouter, Link, NavLink } from 'react-router-dom';
 
 import '../styles/header.css';
@@ -20,6 +20,8 @@ import {
 	DropdownMenu,
 } from 'reactstrap';
 import mainLogo from '../assets/timezone-logo.png';
+import { Badge, Icon } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 const data = [
 	{
 		path: '/',
@@ -77,6 +79,11 @@ const _renderDropDownItems = (data) => (
 );
 const NavigationBar = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [cartBadgeNum, setCartBadgeNum] = useState(0);
+	const numOfItems = useSelector((state) => state?.cartReducer?.items?.length);
+	useEffect(() => {
+		if (numOfItems) setCartBadgeNum(numOfItems);
+	}, [numOfItems]);
 	const toggle = () => setIsOpen(!isOpen);
 	return (
 		<Navbar expand="md" light>
@@ -89,9 +96,21 @@ const NavigationBar = () => {
 				</div>
 			</Collapse>
 			<Container className="icon_wrapper">
-				<ion-icon class="_icon" name="search-outline"></ion-icon>
-				<ion-icon class="_icon" name="person-outline"></ion-icon>
-				<ion-icon class="_icon" name="cart-outline"></ion-icon>
+				<Icon className="_icon" style={{ fontSize: 30 }}>
+					search
+				</Icon>
+				<Icon className="_icon" style={{ fontSize: 30 }}>
+					person
+				</Icon>
+				<Badge
+					badgeContent={cartBadgeNum}
+					color="error"
+					style={{ marginRight: '20px' }}
+				>
+					<Icon className="_icon" style={{ fontSize: 30 }}>
+						shopping_cart_outlined
+					</Icon>
+				</Badge>
 			</Container>
 			<Dropdown isOpen={isOpen} toggle={toggle}>
 				<DropdownToggle className="navbar-toggler">

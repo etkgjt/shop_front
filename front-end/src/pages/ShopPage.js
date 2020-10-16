@@ -461,18 +461,16 @@ const TabBar = ({ onChecked }) => {
 	);
 };
 const ShopMethod = () => (
-	<Row className="shop_method_container">
+	<Row className="shop_method_container box-shadow">
 		<Col xl="4" lg="4" md="6" className="p-2 text-white">
 			<Row className="px-5 mt-2">
-				<Icon style={{ fontSize: 50 }}>verified_user</Icon>
+				<Icon style={{ fontSize: 50 }}>local_shipping_rounded</Icon>
 			</Row>
 			<Row className="px-5 mt-4">
 				<h5>Free Shipping Method</h5>
 			</Row>
 			<Row className="px-5 mt-2">
-				<p>Free Shipping Method</p>
-				<p>Free Shipping Method</p>
-				<p>Free Shipping Method</p>
+				<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
 			</Row>
 		</Col>
 		<Col xl="4" lg="4" md="6" className="p-2 text-white">
@@ -480,25 +478,21 @@ const ShopMethod = () => (
 				<Icon style={{ fontSize: 50 }}>verified_user</Icon>
 			</Row>
 			<Row className="px-5 mt-4">
-				<h5>Free Shipping Method</h5>
+				<h5>Secure Payment</h5>
 			</Row>
 			<Row className="px-5 mt-2">
-				<p>Free Shipping Method</p>
-				<p>Free Shipping Method</p>
-				<p>Free Shipping Method</p>
+				<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
 			</Row>
 		</Col>
 		<Col xl="4" lg="4" md="6" className="p-2 text-white">
 			<Row className="px-5 mt-2">
-				<Icon style={{ fontSize: 50 }}>verified_user</Icon>
+				<Icon style={{ fontSize: 50 }}>cached_two_tone</Icon>
 			</Row>
 			<Row className="px-5 mt-4">
-				<h5>Free Shipping Method</h5>
+				<h5>Refunds and Exchanges</h5>
 			</Row>
 			<Row className="px-5 mt-2">
-				<p>Free Shipping Method</p>
-				<p>Free Shipping Method</p>
-				<p>Free Shipping Method</p>
+				<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
 			</Row>
 		</Col>
 	</Row>
@@ -561,14 +555,14 @@ const ShopPage = memo(() => {
 
 		return tempArr.splice(0, numOfItems * 10).map((item, idx) => (
 			<Col
-				className="px-5 my-1"
+				className="px-5 my-1 mt-5"
 				xl="4"
 				lg="4"
 				md="6"
 				sm="6"
 				key={`${item.name}-${idx}`}
 			>
-				<div className="mb-50 text-center single_items">
+				<div className="mb-50 text-center single_items box-shadow">
 					<div className="item_img">
 						<img src={item.img}></img>
 						<div className="img_cap">

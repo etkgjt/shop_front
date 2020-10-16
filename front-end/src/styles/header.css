@@ -19,13 +19,13 @@
 	border-width: 2px;
 	border-color: black;
 }
-ion-icon._icon {
-	font-size: 25px;
-	margin-left: 25px;
-	margin-right: 25px;
+._icon {
+	font-size: 30px;
+	margin-left: 20px;
 }
-ion-icon._icon:hover {
-	-webkit-transform: scale(1.5);
+._icon:hover {
+	-webkit-transform: scale(1.2);
+	color: #ff0020;
 }
 
 .icon_wrapper {

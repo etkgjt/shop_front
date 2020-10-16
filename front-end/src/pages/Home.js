@@ -135,217 +135,234 @@ const _renderItems = (data) => {
 		</Col>
 	));
 };
+const Intro = () => (
+	<Container fluid style={{ backgroundColor: '#f0f0f2' }}>
+		<Container className="intro-area-container">
+			<Row className="intro-area">
+				<Col xl="8" lg="8" md="8" sm="8" className="intro-title-container">
+					<h1 className="hvr-grow">Select your new perfect style</h1>
+					<p className="hvr-grow">
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut aliquip ex ea commodo consequat is aute irure.
+					</p>
+				</Col>
+				<Col xl="3" lg="3" md="4" sm="4">
+					<div
+						style={{
+							width: '100%',
+							height: '100%',
+							overflow: 'hidden',
+						}}
+					>
+						<img className="hvr-grow" src={watch}></img>
+					</div>
+				</Col>
+			</Row>
+		</Container>
+	</Container>
+);
+const NewArrival = () => (
+	<Container className="section-padding">
+		<Row className="section-title-container">
+			<h2 className="section-title">New Arrivals</h2>
+		</Row>
+		<Row>
+			<Col xl="4" lg="4" md="6" sm="6">
+				<div
+					style={{
+						width: '100%',
+						height: '100%',
+						overflow: 'hidden',
+					}}
+				>
+					<img src={newProduct1} className="hvr-grow" />
+				</div>
+			</Col>
+			<Col xl="4" lg="4" md="6" sm="6">
+				<div
+					style={{
+						width: '100%',
+						height: '100%',
+						overflow: 'hidden',
+					}}
+				>
+					<img src={newProduct2} className="hvr-grow" />
+				</div>
+			</Col>
+			<Col xl="4" lg="4" md="6" sm="6">
+				<div
+					style={{
+						width: '100%',
+						height: '100%',
+						overflow: 'hidden',
+					}}
+				>
+					<img src={newProduct3} className="hvr-grow" />
+				</div>
+			</Col>
+		</Row>
+	</Container>
+);
+const Gallery = () => (
+	<Container fluid className="gallery-area p-0 fix">
+		<Row className="gallery-container">
+			<Col
+				xl="6"
+				lg="4"
+				md="6"
+				sm="6"
+				className="justify-content-center align-items-center"
+			>
+				<div
+					style={{
+						width: '100%',
+						height: '100%',
+						overflow: 'hidden',
+					}}
+				>
+					<div className="gallery1 hvr-shrink" />
+				</div>
+			</Col>
+			<Col xl="3" lg="4" md="6" sm="6">
+				<div
+					style={{
+						width: '100%',
+						height: '100%',
+						overflow: 'hidden',
+					}}
+				>
+					<div className="gallery2 hvr-shrink" />
+				</div>
+			</Col>
+			<Col
+				xl="3"
+				lg="4"
+				md="12"
+				className="d-flex flex-column justify-content-around"
+			>
+				<div
+					style={{
+						width: '100%',
+						height: '100%',
+						overflow: 'hidden',
+					}}
+				>
+					<div className="gallery3 hvr-shrink" />
+				</div>
+				<div
+					style={{
+						width: '100%',
+						height: '100%',
+						overflow: 'hidden',
+						marginTop: '20px',
+					}}
+				>
+					<div className="gallery4 hvr-shrink" />
+				</div>
+			</Col>
+		</Row>
+	</Container>
+);
+const Popular = () => (
+	<Container className="popular-section-padding">
+		<Col className="popular-section-title-container">
+			<div className="popular-section-title">
+				<h2 className="popular-section-big-title">Popular Items</h2>
+				<p
+					style={{
+						textAlign: 'center',
+						color: '#777777',
+						fontWeight: '500',
+						fontSize: '16px',
+					}}
+				>
+					Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+					labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
+					gravida.
+				</p>
+			</div>
+		</Col>
+		<Row>{_renderItems(data)}</Row>
+		<Row
+			style={{
+				justifyContent: 'center',
+				alignItems: 'center',
+				marginTop: '30px',
+			}}
+		>
+			<div className="view-more-button hvr-sweep-to-right">
+				<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
+					View more product
+				</h4>
+			</div>
+		</Row>
+	</Container>
+);
+const VideoArea = () => (
+	<Container fluid className="video-area p-0 my-5">
+		<div className="video-background">
+			<div className="play-button border">
+				<Icon style={{ fontSize: 50 }}>play_arrow_rounded</Icon>
+			</div>
+			<div className="more-info">
+				<h5>NEXT VIDEO</h5>
+				<Icon style={{ fontSize: 40 }}>arrow_forward</Icon>
+			</div>
+		</div>
+	</Container>
+);
+const ChoseWatchAd = () => (
+	<Container className="watch-area-padding">
+		<Row className="choice-container">
+			<Col lg="5" md="6" className="px-5">
+				<h2 className="choice-title">Watch of Choice</h2>
+				<p>
+					Enim ad minim veniam, quis nostrud exercitation ullamco laboris
+					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+					reprehenderit in voluptate velit esse.
+				</p>
+				<div className="view-more-button hvr-sweep-to-right">
+					<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
+						Show Watch
+					</h4>
+				</div>
+			</Col>
+			<Col lg="6" md="6" sm="10">
+				<div className="choice-watch-img1" />
+			</Col>
+		</Row>
+		<Row className="choice-container">
+			<Col lg="6" md="6" sm="10">
+				<div className="choice-watch-img2" />
+			</Col>
+			<Col lg="5" md="6" className="px-5">
+				<h2 className="choice-title">Watch of Choice</h2>
+				<p>
+					Enim ad minim veniam, quis nostrud exercitation ullamco laboris
+					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+					reprehenderit in voluptate velit esse.
+				</p>
+				<div className="view-more-button hvr-sweep-to-right">
+					<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
+						Show Watch
+					</h4>
+				</div>
+			</Col>
+		</Row>
+	</Container>
+);
 const Home = memo(() => {
 	console.log('homepage render ne');
 
 	return (
 		<Container fluid className="p-0">
 			{/* <CustomCarousel fluid className = "large-margin" /> */}
-			<Container fluid style={{ backgroundColor: '#f0f0f2' }}>
-				<Container className="intro-area-container">
-					<Row className="intro-area">
-						<Col
-							xl="8"
-							lg="8"
-							md="8"
-							sm="8"
-							className="intro-title-container"
-						>
-							<h1>Select your new perfect style</h1>
-							<p>
-								Ut enim ad minim veniam, quis nostrud exercitation
-								ullamco laboris nisi ut aliquip ex ea commodo consequat
-								is aute irure.
-							</p>
-						</Col>
-						<Col xl="3" lg="3" md="4" sm="4">
-							<img src={watch}></img>
-						</Col>
-					</Row>
-				</Container>
-			</Container>
-			<Container className="section-padding">
-				<Row className="section-title-container">
-					<h2 className="section-title">New Arrivals</h2>
-				</Row>
-				<Row>
-					<Col xl="4" lg="4" md="6" sm="6">
-						<div
-							style={{
-								width: '100%',
-								height: '100%',
-								overflow: 'hidden',
-							}}
-						>
-							<img src={newProduct1} className="hvr-grow" />
-						</div>
-					</Col>
-					<Col xl="4" lg="4" md="6" sm="6">
-						<div
-							style={{
-								width: '100%',
-								height: '100%',
-								overflow: 'hidden',
-							}}
-						>
-							<img src={newProduct2} className="hvr-grow" />
-						</div>
-					</Col>
-					<Col xl="4" lg="4" md="6" sm="6">
-						<div
-							style={{
-								width: '100%',
-								height: '100%',
-								overflow: 'hidden',
-							}}
-						>
-							<img src={newProduct3} className="hvr-grow" />
-						</div>
-					</Col>
-				</Row>
-			</Container>
-			<Container fluid className="gallery-area p-0 fix">
-				<Row className="gallery-container">
-					<Col
-						xl="6"
-						lg="4"
-						md="6"
-						sm="6"
-						className="justify-content-center align-items-center"
-					>
-						<div
-							style={{
-								width: '100%',
-								height: '100%',
-								overflow: 'hidden',
-							}}
-						>
-							<div className="gallery1 hvr-shrink" />
-						</div>
-					</Col>
-					<Col xl="3" lg="4" md="6" sm="6">
-						<div
-							style={{
-								width: '100%',
-								height: '100%',
-								overflow: 'hidden',
-							}}
-						>
-							<div className="gallery2 hvr-shrink" />
-						</div>
-					</Col>
-					<Col
-						xl="3"
-						lg="4"
-						md="12"
-						className="d-flex flex-column justify-content-around"
-					>
-						<div
-							style={{
-								width: '100%',
-								height: '100%',
-								overflow: 'hidden',
-							}}
-						>
-							<div className="gallery3 hvr-shrink" />
-						</div>
-						<div
-							style={{
-								width: '100%',
-								height: '100%',
-								overflow: 'hidden',
-								marginTop: '20px',
-							}}
-						>
-							<div className="gallery4 hvr-shrink" />
-						</div>
-					</Col>
-				</Row>
-			</Container>
-			<Container className="popular-section-padding">
-				<Col className="popular-section-title-container">
-					<div className="popular-section-title">
-						<h2 className="popular-section-big-title">Popular Items</h2>
-						<p
-							style={{
-								textAlign: 'center',
-								color: '#777777',
-								fontWeight: '500',
-								fontSize: '16px',
-							}}
-						>
-							Consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua. Quis ipsum
-							suspendisse ultrices gravida.
-						</p>
-					</div>
-				</Col>
-				<Row>{_renderItems(data)}</Row>
-				<Row
-					style={{
-						justifyContent: 'center',
-						alignItems: 'center',
-						marginTop: '30px',
-					}}
-				>
-					<div className="view-more-button hvr-sweep-to-right">
-						<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
-							View more product
-						</h4>
-					</div>
-				</Row>
-			</Container>
-			<Container fluid className="video-area p-0 my-5">
-				<div className="video-background">
-					<div className="play-button border">
-						<Icon style={{ fontSize: 50 }}>play_arrow_rounded</Icon>
-					</div>
-					<div className="more-info">
-						<h5>NEXT VIDEO</h5>
-						<Icon style={{ fontSize: 40 }}>arrow_forward</Icon>
-					</div>
-				</div>
-			</Container>
-
-			<Container className="watch-area-padding">
-				<Row className="choice-container">
-					<Col lg="5" md="6" className="px-5">
-						<h2 className="choice-title">Watch of Choice</h2>
-						<p>
-							Enim ad minim veniam, quis nostrud exercitation ullamco
-							laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-							irure dolor in reprehenderit in voluptate velit esse.
-						</p>
-						<div className="view-more-button hvr-sweep-to-right">
-							<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
-								Show Watch
-							</h4>
-						</div>
-					</Col>
-					<Col lg="6" md="6" sm="10">
-						<div className="choice-watch-img1" />
-					</Col>
-				</Row>
-				<Row className="choice-container">
-					<Col lg="6" md="6" sm="10">
-						<div className="choice-watch-img2" />
-					</Col>
-					<Col lg="5" md="6" className="px-5">
-						<h2 className="choice-title">Watch of Choice</h2>
-						<p>
-							Enim ad minim veniam, quis nostrud exercitation ullamco
-							laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-							irure dolor in reprehenderit in voluptate velit esse.
-						</p>
-						<div className="view-more-button hvr-sweep-to-right">
-							<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
-								Show Watch
-							</h4>
-						</div>
-					</Col>
-				</Row>
-			</Container>
-
+			<Intro />
+			<NewArrival />
+			<Gallery />
+			<Popular />
+			<VideoArea />
+			<ChoseWatchAd />
 			<Container>
 				<ShopMethod />
 			</Container>

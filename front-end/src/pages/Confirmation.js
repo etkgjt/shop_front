@@ -37,10 +37,10 @@ const dataTable = [
 const SingleConfirmationDetails = ({ title, details = [] }) => {
 	console.log('long details', details);
 	return (
-		<Col lg="6" lx="4" className="single_confirmation_container">
-			<div class="sigle_confirmation_details">
+		<Col lg="6" lx="4" className="single_confirmation_container ">
+			<div class="sigle_confirmation_details box-shadow">
 				<Col>
-					<Row>
+					<Row className="mb-3">
 						<h4>{title}</h4>
 					</Row>
 					{details?.map((item, index) => (
@@ -58,7 +58,7 @@ const SingleConfirmationDetails = ({ title, details = [] }) => {
 	);
 };
 const TableDetails = memo(({ data }) => (
-	<Row>
+	<Row className="box-shadow">
 		<Col lg="12">
 			<div className="table_container">
 				<div>
@@ -120,7 +120,7 @@ const Confirmation = memo(() => {
 	const toggle = () => setIsOpen(!isOpen);
 	return (
 		<Container fluid>
-			<Row className="title-container">
+			<Row className="title-container mt-5">
 				<p class="page-title">Confirmation</p>
 			</Row>
 			<section class="confirmation-container">

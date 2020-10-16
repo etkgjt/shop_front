@@ -60,7 +60,7 @@ const AppRoute = () => {
 					<Route path="/confirmation" component={Confirmation} />
 				</Switch>
 
-				<footer>
+				<footer className="box-shadow mt-5">
 					<div className="footer-containter">
 						<Footer />
 					</div>
