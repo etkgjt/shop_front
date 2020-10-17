@@ -310,7 +310,11 @@ const SumaryCheckout = ({ items }) => {
 					>
 						<NavLink
 							exact
-							to="/checkout"
+							// to="/checkout"
+							to={{
+								pathname: '/checkout',
+								state: { data },
+							}}
 							className="w-100"
 							style={{ color: 'white', textDecoration: 'none' }}
 						>
