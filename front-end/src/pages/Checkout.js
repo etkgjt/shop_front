@@ -7,8 +7,8 @@ import {
 	TextField,
 } from '@material-ui/core';
 import { MDBContainer, MDBInput } from 'mdbreact';
-import React, { useCallback, memo, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useCallback, memo, useState, useEffect } from 'react';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 
 import {
 	Container,
@@ -18,10 +18,18 @@ import {
 	ListGroup,
 	ListGroupItem,
 } from 'reactstrap';
+import { CITY, DISTRICTS } from '../constants/constants';
 import '../styles/pageTitle.css';
 
-const Checkout = memo(() => {
-	console.log('category render ne');
+const Checkout = () => {
+	let { state } = useLocation();
+
+	let { data } = state;
+	console.log('state', data);
+	const [items, setItems] = useState(data ? data : []);
+	useEffect(() => {
+		setItems(data);
+	}, [data]);
 	return (
 		<Container fluid>
 			<Row className="title-container">
@@ -52,36 +60,11 @@ const Checkout = memo(() => {
 								/>
 							</Row>
 							<Row className="mt-5">
-								<Col
-									md="6"
-									className=" d-flex flex-column justify-content-center align-items-start p-0"
-								>
-									<InputLabel id="label">City</InputLabel>
-									<FormControl variant="outlined" className="w-75">
-										<Select labelId="label" id="select" value="20">
-											<MenuItem value="10">Ho Chi Minh</MenuItem>
-											<MenuItem value="20">Ha Noi</MenuItem>
-										</Select>
-									</FormControl>
-								</Col>
-								<Col
-									md="6"
-									className=" d-flex flex-column justify-content-center align-items-start p-0"
-								>
-									<InputLabel id="label">District</InputLabel>
-									<FormControl variant="outlined" className="w-75">
-										<Select labelId="label" id="select" value="20">
-											<MenuItem value="10">Quan 1</MenuItem>
-											<MenuItem value="20">Quan 2</MenuItem>
-											<MenuItem value="10">Quan 3</MenuItem>
-											<MenuItem value="20">Quan 4</MenuItem>
-											<MenuItem value="10">Quan 5</MenuItem>
-											<MenuItem value="20">Quan 6</MenuItem>
-											<MenuItem value="10">Quan 7</MenuItem>
-											<MenuItem value="20">Quan 8</MenuItem>
-										</Select>
-									</FormControl>
-								</Col>
+								<MyDropdownPicker title="City" items={CITY} />
+								<MyDropdownPicker
+									items={DISTRICTS[0]}
+									title="District"
+								/>
 							</Row>
 							<Row className="my-3">
 								<Divider className="w-100" />
@@ -112,62 +95,94 @@ const Checkout = memo(() => {
 							</Row>
 						</form>
 					</Col>
-					<Col md="4" className="p-0">
-						<Col className="box-shadow m-0 py-3">
-							<h4 style={{ textAlign: 'start' }}>Your Cart (3)</h4>
-
-							<h6 class="mb-3 mt-3">The total amount of</h6>
-							<ListGroup flush>
-								<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
-									<Col>
-										<Row className="justify-content-between align-items-center mb-2">
-											<small
-												style={{ fontSize: 16 }}
-												className="h-25"
-											>
-												First
-											</small>
-											<small style={{ fontSize: 16 }}>456</small>
-										</Row>
-										<Row className="justify-content-between align-items-center mb-2">
-											<small
-												style={{ fontSize: 16 }}
-												className="h-25"
-											>
-												Second
-											</small>
-											<small style={{ fontSize: 16 }}>456</small>
-										</Row>
-										<Row className="justify-content-between align-items-center mb-2">
-											<small
-												style={{ fontSize: 16 }}
-												className="h-25"
-											>
-												Third
-											</small>
-											<small style={{ fontSize: 16 }}>456</small>
-										</Row>
-									</Col>
-								</ListGroupItem>
-
-								<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
-									<small style={{ fontSize: 16 }}>Shipping</small>
-									<small style={{ fontSize: 16 }}>5</small>
-								</ListGroupItem>
-								<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
-									<small style={{ fontSize: 16, fontWeight: 'bold' }}>
-										The total amount of (including VAT)
-									</small>
-									<small style={{ fontSize: 16 }}>123</small>
-								</ListGroupItem>
-							</ListGroup>
-						</Col>
-					</Col>
+					<DetailsCheckout items={data} />
 				</Row>
 			</Container>
 		</Container>
 	);
-});
+};
+const DetailsCheckout = ({ items }) => {
+	console.log('items ne', items);
+	return (
+		<Col md="4" className="p-0">
+			<Col className="box-shadow m-0 py-3">
+				<h4 style={{ textAlign: 'start' }}>Your Cart (3)</h4>
+
+				<h6 class="mb-3 mt-3">The total amount of</h6>
+				<ListGroup flush>
+					<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
+						<Col>
+							{items?.map((v, i) => (
+								<Row
+									className="justify-content-between align-items-center mb-2"
+									key={`${v?.name}-${i}`}
+								>
+									<small style={{ fontSize: 16 }} className="h-25">
+										{v?.name}
+									</small>
+									<small style={{ fontSize: 16 }}>
+										{v?.amount * v?.price}
+									</small>
+								</Row>
+							))}
+
+							{/* <Row className="justify-content-between align-items-center mb-2">
+							<small style={{ fontSize: 16 }} className="h-25">
+								Second
+							</small>
+							<small style={{ fontSize: 16 }}>456</small>
+						</Row>
+						<Row className="justify-content-between align-items-center mb-2">
+							<small style={{ fontSize: 16 }} className="h-25">
+								Third
+							</small>
+							<small style={{ fontSize: 16 }}>456</small>
+						</Row> */}
+						</Col>
+					</ListGroupItem>
+
+					<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
+						<small style={{ fontSize: 16 }}>Shipping</small>
+						<small style={{ fontSize: 16 }}>5</small>
+					</ListGroupItem>
+					<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
+						<small style={{ fontSize: 16, fontWeight: 'bold' }}>
+							The total amount of (including VAT)
+						</small>
+						<small style={{ fontSize: 16 }}>
+							{items?.reduce((x, y) => (x += y?.price * y?.amount), 0) +
+								5}
+						</small>
+					</ListGroupItem>
+				</ListGroup>
+			</Col>
+		</Col>
+	);
+};
+const MyDropdownPicker = ({ items, title }) => {
+	const [value, setValue] = useState(0);
+	return (
+		<Col
+			md="6"
+			className=" d-flex flex-column justify-content-center align-items-start p-0"
+		>
+			<InputLabel id="label">{title}</InputLabel>
+			<FormControl variant="outlined" className="w-75">
+				<Select labelId="label" id="select" value={value}>
+					{items?.map((v, i) => (
+						<MenuItem
+							key={`${v}-${i}`}
+							value={i}
+							onClick={() => setValue(i)}
+						>
+							{v}
+						</MenuItem>
+					))}
+				</Select>
+			</FormControl>
+		</Col>
+	);
+};
 
 const MyRadioButton = () => {
 	const [radio, setRadio] = useState(1);

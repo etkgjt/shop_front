@@ -34,7 +34,7 @@ const AppRoute = () => {
 					<Header />
 				</header>
 
-				<TransitionGroup>
+				{/* <TransitionGroup>
 					<CSSTransition
 						timeout={{ enter: 500 }}
 						classNames="fadeLeft"
@@ -51,8 +51,8 @@ const AppRoute = () => {
 							<Route path="/checkout" component={Checkout} />
 						</Switch>
 					</CSSTransition>
-				</TransitionGroup>
-				{/* <Switch>
+				</TransitionGroup> */}
+				<Switch>
 					<Route exact={true} path="/" component={Home} />
 					<Route path="/single_product" component={SingleProduct} />
 					<Route path="/cart" component={Cart} />
@@ -61,7 +61,7 @@ const AppRoute = () => {
 					<Route path="/shop_page" component={ShopPage} />
 					<Route path="/confirmation" component={Confirmation} />
 					<Route path="/checkout" component={Checkout} />
-				</Switch> */}
+				</Switch>
 
 				<footer className="box-shadow mt-5">
 					<div className="footer-containter">
