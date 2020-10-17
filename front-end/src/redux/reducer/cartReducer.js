@@ -49,32 +49,21 @@ const cartReducer = (state = initialState, action) => {
 			};
 		}
 		case REDUX.ADD_TO_CART: {
-			let { id } = action.payload;
-			let tempArr = [...state.items];
-			let length = tempArr.length;
-			let idx = tempArr.findIndex((v) => v.id === id);
-			if (idx !== -1) {
-				tempArr = tempArr.map((v) =>
-					v?.id === id ? v.amount + 1 : v?.amount
-				);
-			} else {
-				tempArr.push(action.payload);
-			}
-			return { ...state, items: tempArr };
+			return { ...state, items: [...state.items, ...action.payload] };
 		}
 		case REDUX.REMOVE_FROM_CART: {
 			let { id } = action.payload;
-			let tempArr = [...state.items];
-			let length = tempArr.length;
-			let idx = tempArr.findIndex((v) => v.id === id);
-			if (idx !== -1) {
-				tempArr = tempArr.map((v) =>
-					v?.id === id ? v.amount - 1 : v?.amount
-				);
-				tempArr = tempArr.filter((v) => v?.amount !== 0);
-				console.log(tempArr);
-			}
+			let tempArr = [...state.items].filter((v) => v.id !== id);
 			return { ...state, items: tempArr };
+		}
+		case REDUX.UPDATE_ITEM: {
+			let tmpArr = [...state.items];
+			let idx = state.items.findIndex((v) => v.id === action.payload.id);
+			tmpArr.splice(idx, 1, { ...action.payload });
+			return {
+				...state,
+				items: [...tmpArr],
+			};
 		}
 		case REDUX.GET_CART_LIST: {
 			return { ...state };

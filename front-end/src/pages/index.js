@@ -5,4 +5,14 @@ import Contact from './Contact';
 import ShopPage from './ShopPage';
 import Category from './Category';
 import Confirmation from './Confirmation';
-export { Cart, Category, Home, SingleProduct, ShopPage, Contact,Confirmation };
+import Checkout from './Checkout';
+export {
+	Cart,
+	Category,
+	Home,
+	SingleProduct,
+	ShopPage,
+	Contact,
+	Confirmation,
+	Checkout,
+};

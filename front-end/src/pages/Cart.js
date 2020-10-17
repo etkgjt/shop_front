@@ -1,5 +1,5 @@
 import { MDBBtn, MDBBtnGroup } from 'mdbreact';
-import React, { useCallback, memo, useState, useEffect } from 'react';
+import React, { useCallback, memo, useState, useEffect, useRef } from 'react';
 import {
 	Container,
 	Row,
@@ -15,12 +15,21 @@ import '../styles/pageTitle.css';
 import '../styles/cart.css';
 import { Icon } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../redux/actions/cartAction';
+import {
+	addToCart,
+	removeCart,
+	removeFromCart,
+	updateItem,
+} from '../redux/actions/cartAction';
+import useDebounce from '../untils/debounce';
+import _ from 'lodash';
+import { NavLink } from 'react-router-dom';
 
 const Cart = memo(() => {
 	const [cartData, setCartData] = useState([]);
 	const data = useSelector((state) => state?.cartReducer?.items);
 	useEffect(() => {
+		console.log('data redux thay doi ne', data);
 		setCartData(data);
 	}, [data]);
 	console.log('cart render ne');
@@ -33,22 +42,27 @@ const Cart = memo(() => {
 				<Row className="mt-5">
 					<Col lg="7" className="box-shadow mr-5">
 						<h6 style={{ fontSize: 20 }} className="m-3">
-							Cart (2 items)
+							{`Cart ${cartData?.length} items`}
 						</h6>
 
 						{cartData.length ? (
-							cartData.map((item, idx) => <ItemDetails product={item} />)
+							cartData.map((item, idx) => (
+								<ItemDetails
+									product={item}
+									key={`${item?.name}-${idx}`}
+								/>
+							))
 						) : (
 							<h3>There is no items</h3>
 						)}
 					</Col>
-					<SumaryCheckout />
+					<SumaryCheckout items={cartData ? cartData : []} />
 				</Row>
 			</Container>
 		</Container>
 	);
 });
-const ItemDetails = ({ product, onValueChange, onRemoveClick }) => {
+const ItemDetails = memo(({ product }) => {
 	const dispatch = useDispatch();
 	const { name, color, brand, size, amount, price, id } = product;
 	const [amountOfItem, setAmountOfItem] = useState(amount ? amount : 0);
@@ -56,8 +70,22 @@ const ItemDetails = ({ product, onValueChange, onRemoveClick }) => {
 		setAmountOfItem((amount) => amount + 1);
 	};
 	const _handleSubItem = () => {
-		if (amountOfItem !== 1) setAmountOfItem((amount) => amount - 1);
+		setAmountOfItem((amount) => amount - 1);
 	};
+
+	useEffect(
+		useDebounce(() => {
+			if (amountOfItem > 0) {
+				console.log('update item ne');
+				updateItem(dispatch, { ...product, amount: amountOfItem });
+			} else {
+				console.log('remove item ne');
+				removeFromCart(dispatch, product);
+			}
+		}, 0),
+		[amountOfItem]
+	);
+
 	return (
 		<Col>
 			<Row className="mb-4 pt-4">
@@ -172,6 +200,7 @@ const ItemDetails = ({ product, onValueChange, onRemoveClick }) => {
 									paddingLeft: 0,
 									borderWidth: 0,
 								}}
+								onClick={() => removeFromCart(dispatch, product)}
 							>
 								<div className="p-0 m-0 d-flex justify-content-between align-items-center">
 									<Icon
@@ -231,10 +260,22 @@ const ItemDetails = ({ product, onValueChange, onRemoveClick }) => {
 			</Row>
 		</Col>
 	);
-};
-const SumaryCheckout = () => {
+});
+const SumaryCheckout = ({ items }) => {
 	const [isFaded, setIsFaded] = useState(false);
-
+	const [data, setData] = useState(items ? items : []);
+	const ship = 10;
+	const discount = 0;
+	useEffect(() => {
+		setData(items);
+	}, [items]);
+	const _caculateTotal = () => {
+		if (data && data.length) {
+			let total = data?.reduce((x, y) => (x += y?.price * y?.amount), 0);
+			return total;
+		}
+		return 0;
+	};
 	return (
 		<Col lg="4">
 			<div className="p-4 box-shadow">
@@ -242,17 +283,19 @@ const SumaryCheckout = () => {
 				<ListGroup flush>
 					<ListGroupItem className="d-flex justify-content-between align-items-center">
 						<small style={{ fontSize: 16 }}>Temporary amount</small>
-						<small style={{ fontSize: 16 }}>1151.56</small>
+						<small style={{ fontSize: 16 }}>{_caculateTotal()}</small>
 					</ListGroupItem>
 					<ListGroupItem className="d-flex justify-content-between align-items-center">
 						<small style={{ fontSize: 16 }}>Shipping</small>
-						<small style={{ fontSize: 16 }}>1151.56</small>
+						<small style={{ fontSize: 16 }}>{ship}</small>
 					</ListGroupItem>
 					<ListGroupItem className="d-flex justify-content-between align-items-center">
 						<small style={{ fontSize: 16, fontWeight: 'bold' }}>
 							The total amount of (including VAT)
 						</small>
-						<small style={{ fontSize: 16 }}>1151.56</small>
+						<small style={{ fontSize: 16 }}>
+							{_caculateTotal() + ship}
+						</small>
 					</ListGroupItem>
 
 					<Button
@@ -265,8 +308,16 @@ const SumaryCheckout = () => {
 							borderRadius: 0,
 						}}
 					>
-						Go to checkout
+						<NavLink
+							exact
+							to="/checkout"
+							className="w-100"
+							style={{ color: 'white', textDecoration: 'none' }}
+						>
+							Go to checkout
+						</NavLink>
 					</Button>
+
 					<Button
 						outline
 						color="primary"

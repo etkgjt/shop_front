@@ -36,10 +36,6 @@ const data = [
 		title: 'Product',
 	},
 	{
-		path: '/cart',
-		title: 'Cart',
-	},
-	{
 		path: '/contact',
 		title: 'Contact',
 	},
@@ -47,10 +43,6 @@ const data = [
 	{
 		path: '/category',
 		title: 'Category',
-	},
-	{
-		path: '/confirmation',
-		title: 'Confirmation',
 	},
 ];
 const _renderNavItem = (data) => (
@@ -102,15 +94,26 @@ const NavigationBar = () => {
 				<Icon className="_icon" style={{ fontSize: 30 }}>
 					person
 				</Icon>
-				<Badge
-					badgeContent={cartBadgeNum}
-					color="error"
-					style={{ marginRight: '20px' }}
+				<NavLink
+					exact
+					to="/cart"
+					style={{ color: 'black' }}
+					activeStyle={{ color: 'black' }}
 				>
-					<Icon className="_icon" style={{ fontSize: 30 }}>
-						shopping_cart_outlined
-					</Icon>
-				</Badge>
+					<Badge
+						badgeContent={cartBadgeNum}
+						color="error"
+						style={{ marginRight: '20px' }}
+					>
+						<Icon
+							onClick={() => {}}
+							className="_icon"
+							style={{ fontSize: 30 }}
+						>
+							shopping_cart_outlined
+						</Icon>
+					</Badge>
+				</NavLink>
 			</Container>
 			<Dropdown isOpen={isOpen} toggle={toggle}>
 				<DropdownToggle className="navbar-toggler">
