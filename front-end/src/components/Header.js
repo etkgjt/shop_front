@@ -51,19 +51,33 @@ const _renderNavItem = (data) => (
 			exact
 			to={data?.path}
 			className="nav-link-title hvr-grow"
-			activeStyle={{ color: '#ff003c' }}
+			activeStyle={{
+				color: '#fff',
+				fontWeight: '900',
+				fontSize: '18px',
+			}}
 		>
 			{data?.title}
 		</NavLink>
 	</NavItem>
 );
 const _renderDropDownItems = (data) => (
-	<DropdownItem className="nav-link mx-2" key={data?.title}>
+	<DropdownItem
+		className="nav-link"
+		style={{
+			backgroundColor: '#4285F4',
+			color: 'white',
+			flexDirection: 'row',
+			justifyContent: 'center',
+			alignItems: 'center',
+		}}
+		key={data?.title}
+	>
 		<NavLink
 			exact
 			to={data?.path}
 			className="nav-link-title hvr-grow"
-			activeStyle={{ color: '#ff003c' }}
+			activeStyle={{ fontWeight: '900' }}
 		>
 			{data?.title}
 		</NavLink>
@@ -97,7 +111,7 @@ const NavigationBar = () => {
 				<NavLink
 					exact
 					to="/cart"
-					style={{ color: 'black' }}
+					style={{ color: 'white' }}
 					activeStyle={{ color: 'black' }}
 				>
 					<Badge
@@ -119,7 +133,7 @@ const NavigationBar = () => {
 				<DropdownToggle className="navbar-toggler">
 					<ion-icon name="menu-outline"></ion-icon>
 				</DropdownToggle>
-				<DropdownMenu right>
+				<DropdownMenu right className="p-0">
 					{data.map((item) => _renderDropDownItems(item))}
 				</DropdownMenu>
 			</Dropdown>
@@ -131,7 +145,11 @@ const Header = memo(() => {
 	console.log('header render ??');
 
 	return (
-		<Container fluid className="header-area header-container slideIn">
+		<Container
+			fluid
+			className="header-area header-container slideIn header-gradient-bg"
+			style={{ color: 'white' }}
+		>
 			<div>
 				<NavigationBar />
 			</div>

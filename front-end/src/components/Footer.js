@@ -30,7 +30,7 @@ const Footer = () => {
 						<h4>Quick Links</h4>
 					</Row>
 
-					<Row>
+					<Row className="mt-4">
 						<Link className="footer-description" to="/">
 							Abouts
 						</Link>
@@ -56,7 +56,7 @@ const Footer = () => {
 						<h4>New Products</h4>
 					</Row>
 
-					<Row>
+					<Row className="mt-4">
 						<Link className="footer-description" to="/">
 							Woman Cloth
 						</Link>
@@ -82,7 +82,7 @@ const Footer = () => {
 						<h4>Support</h4>
 					</Row>
 
-					<Row>
+					<Row className="mt-4">
 						<Link className="footer-description" to="/">
 							Frequently Asked Questions
 						</Link>

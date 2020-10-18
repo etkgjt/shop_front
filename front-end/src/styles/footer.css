@@ -1,5 +1,4 @@
 .footer-containter {
-	padding-bottom: 120px;
 	padding-top: 150px;
 	width: 100%;
 }
@@ -7,7 +6,7 @@
 	font-size: 16px;
 	font-weight: 300;
 	margin-bottom: 15px;
-	color: #868c98;
+	color: #fff;
 	display: inline-block;
 	vertical-align: middle;
 	-webkit-transform: perspective(1px) translateZ(0);
@@ -24,7 +23,7 @@
 	-webkit-transform: translateX(8px);
 	transform: translateX(8px);
 	text-decoration: none;
-	color: #ff003c;
+	color: #fff;
 }
 .box-shadow {
 	-webkit-box-shadow: 1px 0px 44px 3px rgba(0, 0, 0, 0.1);
@@ -35,4 +34,23 @@ h4 {
 	font-size: 20px;
 	font-weight: 500;
 	margin-bottom: 29px;
+}
+.footer-background {
+	background: rgb(46, 144, 187);
+	background: linear-gradient(
+		90deg,
+		rgba(46, 144, 187, 1) 0%,
+		rgba(0, 145, 208, 1) 47%,
+		rgba(46, 142, 184, 1) 85%,
+		rgba(21, 173, 240, 1) 100%
+	);
+}
+.small-footer {
+	background: rgb(10, 101, 142);
+	background: linear-gradient(
+		90deg,
+		rgba(10, 101, 142, 1) 0%,
+		rgba(0, 88, 126, 1) 48%,
+		rgba(13, 122, 170, 1) 100%
+	);
 }

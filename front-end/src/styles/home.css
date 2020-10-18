@@ -14,15 +14,13 @@
 	justify-content: center;
 	align-items: flex-start;
 }
-.hero-img-wrapper{
-    
+.hero-img-wrapper {
 }
 h1 {
 	font-size: 5vw;
 	font-weight: 900;
 	margin-bottom: 35px;
 	max-width: 50vw;
-	font-family: 'Josefin Sans', sans-serif;
 }
 .section-padding {
 	padding-top: 150px;
@@ -35,7 +33,6 @@ h1 {
 .section-title {
 	font-size: 50px;
 	font-weight: bold;
-	font-family: 'Josefin Sans', sans-serif;
 }
 .gallery-area {
 	min-height: 720px;
@@ -183,7 +180,7 @@ h1 {
 }
 .choice-title {
 	font-size: 4vw;
-	font-family: 'Josefin Sans', sans-serif;
+
 	font-weight: 700;
 }
 /* Animation */

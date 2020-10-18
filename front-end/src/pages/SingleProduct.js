@@ -19,7 +19,7 @@ const SingleProduct = memo(() => {
 		delivery: 'USE, Europe',
 	};
 	return (
-		<Container fluid>
+		<Container fluid className="gradient-background mb-5">
 			<Row className="title-container mt-5">
 				<p class="page-title">Product Details</p>
 			</Row>
@@ -44,33 +44,33 @@ const ProductDetails = ({ productInfo }) => {
 		<Row className="pt-4">
 			<Col lg="6" md="6" className="pr-2 ">
 				<img
-					className="img-fluid w-100 box-shadow"
+					className="img-fluid w-100 item-container-box-shadow"
 					src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
 				/>
 				<Row className="p-2 mt-4 justify-content-between">
 					<img
 						style={{ width: 130, height: 150 }}
-						className="box-shadow mt-2"
+						className="item-container-box-shadow mt-2"
 						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
 					/>
 					<img
 						style={{ width: 130, height: 150 }}
-						className="box-shadow mt-2"
+						className="item-container-box-shadow mt-2"
 						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
 					/>
 					<img
 						style={{ width: 130, height: 150 }}
-						className="box-shadow mt-2"
+						className="item-container-box-shadow mt-2"
 						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
 					/>
 					<img
 						style={{ width: 130, height: 150 }}
-						className="box-shadow mt-2"
+						className="item-container-box-shadow mt-2"
 						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
 					/>
 				</Row>
 			</Col>
-			<Col lg="6" md="6">
+			<Col lg="6" md="6" className="item">
 				<p className="mb-2" style={{ fontSize: 20, fontWeight: '700' }}>
 					{name}
 				</p>

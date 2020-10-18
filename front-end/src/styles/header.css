@@ -1,10 +1,11 @@
 .nav-link-title:hover {
-	color: #ff003c;
+	color: #fff;
+	font-weight: 'bold';
 	text-decoration: none;
 }
 .nav-link-title {
-	color: #141517;
-	font-family: 'Josefin Sans', sans-serif;
+	color: #fff;
+
 	font-weight: normal;
 	font-style: normal;
 	font-size: 16px;
@@ -25,7 +26,6 @@
 }
 ._icon:hover {
 	-webkit-transform: scale(1.2);
-	color: #ff0020;
 }
 
 .icon_wrapper {
@@ -73,6 +73,16 @@
 .dropdown {
 	width: 100;
 	color: #ff003c;
+}
+.header-gradient-bg {
+	background: rgb(46, 144, 187);
+	background: linear-gradient(
+		90deg,
+		rgba(46, 144, 187, 1) 0%,
+		rgba(0, 145, 208, 1) 47%,
+		rgba(46, 142, 184, 1) 85%,
+		rgba(21, 173, 240, 1) 100%
+	);
 }
 
 .scrolled {

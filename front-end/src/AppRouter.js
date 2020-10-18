@@ -20,7 +20,7 @@ import {
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { Header, Footer, Layout } from './components';
-import { Container } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import './styles/footer.css';
 import './styles/appRoute.css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -63,10 +63,30 @@ const AppRoute = () => {
 					<Route path="/checkout" component={Checkout} />
 				</Switch>
 
-				<footer className="box-shadow mt-5">
+				<footer
+					className="box-shadow footer-background"
+					style={{ color: 'white' }}
+				>
 					<div className="footer-containter">
 						<Footer />
 					</div>
+					<Row
+						style={{
+							width: '100%',
+							height: '50px',
+						}}
+						className="justify-content-center align-items-center small-footer m-0 p-0"
+					>
+						<p
+							style={{
+								textAlign: 'center',
+								color: 'white',
+								paddingTop: 15,
+							}}
+						>
+							© 2018 Copyright: MDBootstrap.com
+						</p>
+					</Row>
 				</footer>
 			</Provider>
 		</React.Fragment>

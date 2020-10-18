@@ -136,7 +136,7 @@ const _renderItems = (data) => {
 	));
 };
 const Intro = () => (
-	<Container fluid style={{ backgroundColor: '#f0f0f2' }}>
+	<Container fluid>
 		<Container className="intro-area-container">
 			<Row className="intro-area">
 				<Col xl="8" lg="8" md="8" sm="8" className="intro-title-container">
@@ -355,7 +355,7 @@ const Home = memo(() => {
 	console.log('homepage render ne');
 
 	return (
-		<Container fluid className="p-0">
+		<Container fluid className="p-0 gradient-background">
 			{/* <CustomCarousel fluid className = "large-margin" /> */}
 			<Intro />
 			<NewArrival />
