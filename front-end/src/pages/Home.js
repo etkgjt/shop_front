@@ -1,6 +1,6 @@
 import React, { useCallback, memo, useState } from 'react';
 
-import { Col, Container, Row } from 'reactstrap';
+import { Button, Col, Container, Row } from 'reactstrap';
 import { CustomCarousel } from '../components';
 import {
 	popular1,
@@ -23,6 +23,8 @@ import '../styles/pageTitle.css';
 import '../styles/home.css';
 import '../styles/shopPage.css';
 import Icon from '@material-ui/core/Icon';
+import { Rating } from '@material-ui/lab';
+import { useSelector } from 'react-redux';
 const data = [
 	{
 		name: 'Thermo Ball Etip Gloves',
@@ -72,90 +74,189 @@ const data = [
 	},
 ];
 const ShopMethod = () => (
-	<Row className="shop_method_container">
-		<Col xl="4" lg="4" md="6" className="p-2 text-white">
-			<Row className="px-5 mt-2">
-				<Icon style={{ fontSize: 50 }}>local_shipping_rounded</Icon>
-			</Row>
-			<Row className="px-5 mt-4">
-				<h5>Free Shipping Method</h5>
-			</Row>
-			<Row className="px-5 mt-2">
-				<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-			</Row>
-		</Col>
-		<Col xl="4" lg="4" md="6" className="p-2 text-white">
-			<Row className="px-5 mt-2">
-				<Icon style={{ fontSize: 50 }}>verified_user</Icon>
-			</Row>
-			<Row className="px-5 mt-4">
-				<h5>Secure Payment</h5>
-			</Row>
-			<Row className="px-5 mt-2">
-				<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-			</Row>
-		</Col>
-		<Col xl="4" lg="4" md="6" className="p-2 text-white">
-			<Row className="px-5 mt-2">
-				<Icon style={{ fontSize: 50 }}>cached_two_tone</Icon>
-			</Row>
-			<Row className="px-5 mt-4">
-				<h5>Refunds and Exchanges</h5>
-			</Row>
-			<Row className="px-5 mt-2">
-				<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-			</Row>
-		</Col>
-	</Row>
+	<Container className="justify-content-center">
+		<h4 className="text-center" style={{ fontWeight: 'bold', fontSize: 40 }}>
+			Our services
+		</h4>
+		<h4 className="text-center my-4" style={{ fontWeight: '200' }}>
+			Join thousands of satisfied customers using our template globally.
+		</h4>
+		<Row className="my-5 py-5">
+			<Col xl="3" lg="6" className="px-3">
+				<Col
+					className="service-box-shadow pt-3"
+					style={{ backgroundColor: '#00C851', color: 'white' }}
+				>
+					<Row className="px-5 mt-2 justify-content-center ">
+						<Icon style={{ fontSize: 70, color: 'white' }}>
+							local_shipping_rounded
+						</Icon>
+					</Row>
+					<Row className="px-5 mt-4">
+						<h5>Shipping</h5>
+					</Row>
+					<Row className="px-5 mt-2">
+						<p>
+							aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.
+						</p>
+					</Row>
+				</Col>
+			</Col>
+			<Col xl="3" lg="6" className="px-3">
+				<Col
+					className="service-box-shadow pt-3"
+					style={{ backgroundColor: '#ff4444', color: 'white' }}
+				>
+					<Row className="px-5 mt-2 justify-content-center">
+						<Icon style={{ fontSize: 70 }}>verified_user</Icon>
+					</Row>
+					<Row className="px-5 mt-4">
+						<h5>Security</h5>
+					</Row>
+					<Row className="px-5 mt-2">
+						<p>
+							aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.
+						</p>
+					</Row>
+				</Col>
+			</Col>
+			<Col xl="3" lg="6" className="px-3">
+				<Col
+					className="service-box-shadow pt-3"
+					style={{ color: 'white', backgroundColor: '#ffbb33' }}
+				>
+					<Row className="px-5 mt-2 justify-content-center">
+						<Icon style={{ fontSize: 70 }}>headset_mic_rounded</Icon>
+					</Row>
+					<Row className="px-5 mt-4">
+						<h5>Good Support</h5>
+					</Row>
+					<Row className="px-5 mt-2">
+						<p>
+							aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.
+						</p>
+					</Row>
+				</Col>
+			</Col>
+			<Col xl="3" lg="6" className="px-3">
+				<Col
+					className="service-box-shadow pt-3"
+					style={{ backgroundColor: '#7E57C3', color: 'white' }}
+				>
+					<Row className="px-5 mt-2 justify-content-center">
+						<Icon style={{ fontSize: 70 }}>cached_two_tone</Icon>
+					</Row>
+					<Row className="px-5 mt-4">
+						<h5>Exchanges</h5>
+					</Row>
+					<Row className="px-5 mt-2">
+						<p>
+							aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.
+						</p>
+					</Row>
+				</Col>
+			</Col>
+		</Row>
+	</Container>
 );
-const _renderItems = (data) => {
+const MyRating = ({ value }) => {
+	return (
+		<Rating size="large" name="size-large" precision={0.5} value={value} />
+	);
+};
+const _renderItems = () => {
+	const productsDataRedux = useSelector(
+		(state) => state?.shopReducer?.products
+	);
+	const [data, setData] = useState(productsDataRedux ? productsDataRedux : []);
 	let tempArr = [...data];
 
-	return tempArr.map((item, idx) => (
+	return tempArr.splice(0, 6).map((item, idx) => (
 		<Col
-			className="px-5 my-1"
+			className="px-5 my-1 mt-5"
 			xl="4"
 			lg="4"
 			md="6"
 			sm="6"
 			key={`${item.name}-${idx}`}
 		>
-			<div className="mb-50 text-center single_items">
-				<div className="item_img">
+			<Col className="button-container-box-shadow">
+				<div className="mb-50 text-center single_items bg-primary">
 					<img src={item.img}></img>
-					<div className="img_cap">
-						<p>Add to cart</p>
-					</div>
 				</div>
-				<div className="item_caption">
-					<h4>{item.name}</h4>
-					<span>{`$ ${item.price}`}</span>
-				</div>
-			</div>
+				<Col
+					style={{ borderRadius: 5 }}
+					className="py-4 d-flex flex-column justify-content-center align-items-center mt-4"
+				>
+					<p
+						className="text-center m-0 my-1"
+						style={{ fontWeight: 'bold', color: '#0276D8' }}
+					>
+						{item?.name}
+					</p>
+					<p className="text-center m-0 my-1">{`$${item?.price}`}</p>
+					<MyRating value={item?.rating} />
+					<Row className="justify-content-center mt-2">
+						<Button
+							style={{
+								borderRadius: 20,
+								backgroundColor: '#4285F4',
+								color: 'white',
+								borderWidth: 0,
+								marginRight: 20,
+								width: 100,
+							}}
+						>
+							Buy Now
+						</Button>
+						<Button
+							style={{
+								borderRadius: 20,
+								borderWidth: 2,
+								borderColor: '#4285F4',
+								backgroundColor: 'white',
+								color: '#4285F4',
+								width: 100,
+							}}
+						>
+							Detail
+						</Button>
+					</Row>
+				</Col>
+			</Col>
 		</Col>
 	));
 };
+
 const Intro = () => (
-	<Container fluid>
-		<Container className="intro-area-container">
+	<Container fluid className="p-0 intro-area-shadow">
+		<Container className="intro-area-container w-100 mt-lg-5" fluid>
 			<Row className="intro-area">
-				<Col xl="8" lg="8" md="8" sm="8" className="intro-title-container">
-					<h1 className="hvr-grow">Select your new perfect style</h1>
-					<p className="hvr-grow">
-						Ut enim ad minim veniam, quis nostrud exercitation ullamco
-						laboris nisi ut aliquip ex ea commodo consequat is aute irure.
-					</p>
-				</Col>
-				<Col xl="3" lg="3" md="4" sm="4">
+				<Col xl="6" lg="6" md="4" sm="4">
 					<div
 						style={{
 							width: '100%',
 							height: '100%',
 							overflow: 'hidden',
 						}}
-					>
-						<img className="hvr-grow" src={watch}></img>
-					</div>
+					></div>
+				</Col>
+				<Col
+					xl="6"
+					lg="6"
+					md="8"
+					sm="8"
+					className="intro-title-container pt-lg-5"
+				>
+					<h1 className="hvr-grow">Select your partner</h1>
+					<p className="hvr-grow w-75 text-center">
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut aliquip ex ea commodo consequat is aute irure
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut aliquip ex ea commodo consequat is aute irure
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut aliquip ex ea commodo consequat is aute irure
+					</p>
 				</Col>
 			</Row>
 		</Container>
@@ -163,12 +264,22 @@ const Intro = () => (
 );
 const NewArrival = () => (
 	<Container className="section-padding">
-		<Row className="section-title-container">
-			<h2 className="section-title">New Arrivals</h2>
+		<Row className="w-100 section-title-container">
+			<h2 style={{ textAlign: 'center', fontWeight: '600' }}>
+				New Arrivals
+			</h2>
+		</Row>
+		<Row className="w-100 justify-content-center align-items-center mb-5">
+			<p className="text-center w-75" style={{ fontWeight: '200' }}>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit fugit,
+				error amet numquam iure provident voluptate esse quasi nostrum
+				quisquam eum porro a pariatur veniam.
+			</p>
 		</Row>
 		<Row>
 			<Col xl="4" lg="4" md="6" sm="6">
 				<div
+					className="container-box-shadow"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -180,6 +291,7 @@ const NewArrival = () => (
 			</Col>
 			<Col xl="4" lg="4" md="6" sm="6">
 				<div
+					className="container-box-shadow"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -191,6 +303,7 @@ const NewArrival = () => (
 			</Col>
 			<Col xl="4" lg="4" md="6" sm="6">
 				<div
+					className="container-box-shadow"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -204,7 +317,19 @@ const NewArrival = () => (
 	</Container>
 );
 const Gallery = () => (
-	<Container fluid className="gallery-area p-0 fix">
+	<Container className="gallery-area p-0 fix mt-5">
+		<Row className="w-100 section-title-container">
+			<h2 style={{ textAlign: 'center', fontWeight: '600' }}>
+				Our Best Seller
+			</h2>
+		</Row>
+		<Row className="w-100 justify-content-center align-items-center mb-5">
+			<p className="text-center w-75" style={{ fontWeight: '200' }}>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit fugit,
+				error amet numquam iure provident voluptate esse quasi nostrum
+				quisquam eum porro a pariatur veniam.
+			</p>
+		</Row>
 		<Row className="gallery-container">
 			<Col
 				xl="6"
@@ -214,6 +339,7 @@ const Gallery = () => (
 				className="justify-content-center align-items-center"
 			>
 				<div
+					className="container-box-shadow"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -225,6 +351,7 @@ const Gallery = () => (
 			</Col>
 			<Col xl="3" lg="4" md="6" sm="6">
 				<div
+					className="container-box-shadow"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -241,6 +368,7 @@ const Gallery = () => (
 				className="d-flex flex-column justify-content-around"
 			>
 				<div
+					className="container-box-shadow"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -250,6 +378,7 @@ const Gallery = () => (
 					<div className="gallery3 hvr-shrink" />
 				</div>
 				<div
+					className="container-box-shadow"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -267,12 +396,17 @@ const Popular = () => (
 	<Container className="popular-section-padding">
 		<Col className="popular-section-title-container">
 			<div className="popular-section-title">
-				<h2 className="popular-section-big-title">Popular Items</h2>
+				<h4
+					className="popular-section-big-title mb-3"
+					style={{ fontSize: 40 }}
+				>
+					Popular Items
+				</h4>
 				<p
 					style={{
 						textAlign: 'center',
 						color: '#777777',
-						fontWeight: '500',
+						fontWeight: '300',
 						fontSize: '16px',
 					}}
 				>
@@ -287,19 +421,22 @@ const Popular = () => (
 			style={{
 				justifyContent: 'center',
 				alignItems: 'center',
-				marginTop: '30px',
+				marginTop: '50px',
 			}}
 		>
-			<div className="view-more-button hvr-sweep-to-right">
+			<Button
+				className="view-more-button container-box-shadow w-25"
+				style={{ borderWidth: 0, width: 150, height: 70, borderRadius: 35 }}
+			>
 				<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
 					View more product
 				</h4>
-			</div>
+			</Button>
 		</Row>
 	</Container>
 );
 const VideoArea = () => (
-	<Container fluid className="video-area p-0 my-5">
+	<Container fluid className="video-area p-0 my-5 pt-5">
 		<div className="video-background">
 			<div className="play-button border">
 				<Icon style={{ fontSize: 50 }}>play_arrow_rounded</Icon>
@@ -313,7 +450,7 @@ const VideoArea = () => (
 );
 const ChoseWatchAd = () => (
 	<Container className="watch-area-padding">
-		<Row className="choice-container">
+		<Row className="choice-container shadow-1 p-5">
 			<Col lg="5" md="6" className="px-5">
 				<h2 className="choice-title">Watch of Choice</h2>
 				<p>
@@ -321,17 +458,20 @@ const ChoseWatchAd = () => (
 					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
 					reprehenderit in voluptate velit esse.
 				</p>
-				<div className="view-more-button hvr-sweep-to-right">
+				<Button
+					style={{ borderWidth: 0, borderRadius: 50 }}
+					className="view-more-button container-box-shadow"
+				>
 					<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
-						Show Watch
+						View more product
 					</h4>
-				</div>
+				</Button>
 			</Col>
 			<Col lg="6" md="6" sm="10">
 				<div className="choice-watch-img1" />
 			</Col>
 		</Row>
-		<Row className="choice-container">
+		<Row className="choice-container shadow-1 p-5">
 			<Col lg="6" md="6" sm="10">
 				<div className="choice-watch-img2" />
 			</Col>
@@ -342,11 +482,20 @@ const ChoseWatchAd = () => (
 					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
 					reprehenderit in voluptate velit esse.
 				</p>
-				<div className="view-more-button hvr-sweep-to-right">
-					<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
-						Show Watch
+				<Button
+					style={{ borderWidth: 0, borderRadius: 50 }}
+					className="view-more-button container-box-shadow"
+				>
+					<h4
+						style={{
+							textAlign: 'center',
+
+							fontSize: 20,
+						}}
+					>
+						View more product
 					</h4>
-				</div>
+				</Button>
 			</Col>
 		</Row>
 	</Container>
@@ -355,13 +504,15 @@ const Home = memo(() => {
 	console.log('homepage render ne');
 
 	return (
-		<Container fluid className="p-0 gradient-background">
+		<Container fluid className="p-0 gradient-background ">
 			{/* <CustomCarousel fluid className = "large-margin" /> */}
 			<Intro />
 			<NewArrival />
+
+			<CustomCarousel />
 			<Gallery />
 			<Popular />
-			<VideoArea />
+
 			<ChoseWatchAd />
 			<Container>
 				<ShopMethod />

@@ -20,7 +20,9 @@ import {
 } from 'reactstrap';
 import { CITY, DISTRICTS } from '../constants/constants';
 import '../styles/pageTitle.css';
-
+import '../styles/checkout.css';
+import '../styles/forAll.css';
+import { MyStepper } from '../components';
 const Checkout = () => {
 	let { state } = useLocation();
 
@@ -35,12 +37,13 @@ const Checkout = () => {
 			<Row className="title-container">
 				<p class="page-title">Checkout</p>
 			</Row>
+			<MyStepper activeStep={1} />
 			<Row className="mt-5 d-flex justify-content-center align-items-center">
 				<h2>Checkout Form</h2>
 			</Row>
 			<Container>
 				<Row className="mt-3 px-5">
-					<Col md="7" className=" box-shadow mb-5 mr-5">
+					<Col md="7" className=" shadow1 mb-5 mr-5">
 						<form className="m-5">
 							<Row className="pl-0 justify-content-between">
 								<Col md="6" className="m-0 p-0 pr-5">
@@ -59,6 +62,9 @@ const Checkout = () => {
 									className="w-100"
 								/>
 							</Row>
+							<Row className="d-flex justify-content-around align-items-center mt-5">
+								<TextField label="Phone Number" className="w-100" />
+							</Row>
 							<Row className="mt-5">
 								<MyDropdownPicker title="City" items={CITY} />
 								<MyDropdownPicker
@@ -66,27 +72,30 @@ const Checkout = () => {
 									title="District"
 								/>
 							</Row>
+
 							<Row className="my-3">
 								<Divider className="w-100" />
 							</Row>
-							<Row className="p-0">
-								<MyRadioButton />
-							</Row>
 							<Row>
 								<Button
+									className="button-thin-shadow"
 									style={{
 										marginTop: 10,
 										color: 'white',
-										backgroundColor: '#ff0020',
+										backgroundColor: '#4285f4',
 										color: 'white',
 										borderWidth: 0,
-										borderRadius: 0,
+										borderRadius: 25,
 										width: '100%',
+										height: 50,
 									}}
 								>
 									<NavLink
 										exact
-										to="/confirmation"
+										to={{
+											pathname: '/confirmation',
+											state: { data },
+										}}
 										style={{ color: 'white', textDecoration: 'none' }}
 									>
 										CONTINUE TO CHECKOUT
@@ -105,7 +114,7 @@ const DetailsCheckout = ({ items }) => {
 	console.log('items ne', items);
 	return (
 		<Col md="4" className="p-0">
-			<Col className="box-shadow m-0 py-3">
+			<Col className="shadow1 m-0 py-3">
 				<h4 style={{ textAlign: 'start' }}>Your Cart (3)</h4>
 
 				<h6 class="mb-3 mt-3">The total amount of</h6>
@@ -125,19 +134,6 @@ const DetailsCheckout = ({ items }) => {
 									</small>
 								</Row>
 							))}
-
-							{/* <Row className="justify-content-between align-items-center mb-2">
-							<small style={{ fontSize: 16 }} className="h-25">
-								Second
-							</small>
-							<small style={{ fontSize: 16 }}>456</small>
-						</Row>
-						<Row className="justify-content-between align-items-center mb-2">
-							<small style={{ fontSize: 16 }} className="h-25">
-								Third
-							</small>
-							<small style={{ fontSize: 16 }}>456</small>
-						</Row> */}
 						</Col>
 					</ListGroupItem>
 

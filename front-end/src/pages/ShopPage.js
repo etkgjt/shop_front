@@ -1,4 +1,12 @@
-import { AppBar, makeStyles, Tab, Tabs } from '@material-ui/core';
+import {
+	AppBar,
+	Checkbox,
+	makeStyles,
+	Slide,
+	Slider,
+	Tab,
+	Tabs,
+} from '@material-ui/core';
 
 import React, { useCallback, memo, useState, useEffect } from 'react';
 
@@ -10,6 +18,8 @@ import {
 	DropdownItem,
 	DropdownMenu,
 	DropdownToggle,
+	ListGroup,
+	ListGroupItem,
 	Navbar,
 	NavItem,
 	Row,
@@ -17,13 +27,23 @@ import {
 } from 'reactstrap';
 
 import moment from 'moment';
-import { CustomCarousel } from '../components';
+import { CustomCarousel, MyCheckboxList } from '../components';
 import '../styles/pageTitle.css';
 import '../styles/shopPage.css';
 import Icon from '@material-ui/core/Icon';
 
 import { useSelector } from 'react-redux';
 import { Rating } from '@material-ui/lab';
+import Category from './Category';
+import { MDBContainer, MDBInput } from 'mdbreact';
+import {
+	CATEGORY_LIST,
+	ITEMS_ORDER_LIST,
+	PHONE_BRAND_LIST,
+	ITEM_COLORS,
+} from '../constants/constants';
+import '../styles/forAll.css';
+import CustomRadioButton from '../components/CustomRadioButton';
 
 const TabBar = ({ onChecked }) => {
 	const [value, setValue] = useState(0);
@@ -51,6 +71,7 @@ const TabBar = ({ onChecked }) => {
 							<p
 								style={{
 									fontSize: 16,
+									fontWeight: '300',
 									color: 'black',
 								}}
 							>
@@ -63,6 +84,7 @@ const TabBar = ({ onChecked }) => {
 							<p
 								style={{
 									fontSize: 16,
+									fontWeight: '300',
 									color: 'black',
 								}}
 							>
@@ -75,6 +97,7 @@ const TabBar = ({ onChecked }) => {
 							<p
 								style={{
 									fontSize: 16,
+									fontWeight: '300',
 									color: 'black',
 								}}
 							>
@@ -93,41 +116,6 @@ const MyRating = ({ value }) => {
 	);
 };
 const ShopMethod = () => (
-	// <Row className="shop_method_container box-shadow">
-	// 	<Col xl="4" lg="4" md="6" className="p-2 text-white">
-	// 		<Row className="px-5 mt-2">
-	// 			<Icon style={{ fontSize: 50 }}>local_shipping_rounded</Icon>
-	// 		</Row>
-	// 		<Row className="px-5 mt-4">
-	// 			<h5>Free Shipping Method</h5>
-	// 		</Row>
-	// 		<Row className="px-5 mt-2">
-	// 			<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-	// 		</Row>
-	// 	</Col>
-	// 	<Col xl="4" lg="4" md="6" className="p-2 text-white">
-	// 		<Row className="px-5 mt-2">
-	// 			<Icon style={{ fontSize: 50 }}>verified_user</Icon>
-	// 		</Row>
-	// 		<Row className="px-5 mt-4">
-	// 			<h5>Secure Payment</h5>
-	// 		</Row>
-	// 		<Row className="px-5 mt-2">
-	// 			<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-	// 		</Row>
-	// 	</Col>
-	// 	<Col xl="4" lg="4" md="6" className="p-2 text-white">
-	// 		<Row className="px-5 mt-2">
-	// 			<Icon style={{ fontSize: 50 }}>cached_two_tone</Icon>
-	// 		</Row>
-	// 		<Row className="px-5 mt-4">
-	// 			<h5>Refunds and Exchanges</h5>
-	// 		</Row>
-	// 		<Row className="px-5 mt-2">
-	// 			<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-	// 		</Row>
-	// 	</Col>
-	// </Row>
 	<Container className="mt-5 pt-5 justify-content-center">
 		<h3 className="text-center">Our services</h3>
 		<h4 className="text-center my-4">
@@ -280,9 +268,10 @@ const ShopPage = memo(() => {
 
 		return tempArr.splice(0, numOfItems * 10).map((item, idx) => (
 			<Col
-				className="px-5 my-1 mt-5"
+				className="px-3 mb-3 mt-1"
 				xl="4"
-				lg="4"
+				xs="4"
+				lg="6"
 				md="6"
 				sm="6"
 				key={`${item.name}-${idx}`}
@@ -300,6 +289,7 @@ const ShopPage = memo(() => {
 						<MyRating value={item?.rating} />
 						<Row className="justify-content-center mt-2">
 							<Button
+								className="button-thin-shadow"
 								style={{
 									borderRadius: 20,
 									backgroundColor: '#4285F4',
@@ -312,6 +302,7 @@ const ShopPage = memo(() => {
 								Buy Now
 							</Button>
 							<Button
+								className="button-thin-shadow"
 								style={{
 									borderRadius: 20,
 									borderWidth: 2,
@@ -331,24 +322,188 @@ const ShopPage = memo(() => {
 	};
 	return (
 		<Container fluid className="gradient-background">
-			{/* <Row className="title-container">
+			<Row className="title-container">
 				<p class="page-title">Shop Page</p>
-			</Row> */}
-			<CustomCarousel />
+			</Row>
+			{/* <CustomCarousel /> */}
 			<section className="shop-container">
-				<Container>
-					<Container fluid className="tabbar_container">
-						<TabBar onChecked={setShowType} />
-						<DropDownPicker
-							initNumber={numOfItems}
-							setNumOfItems={(num) => _handleSetNumOfItems(num)}
-						/>
-					</Container>
-					<Row className="mt-5">{_renderItems()}</Row>
+				<Container fluid className="w-75">
+					<Row>
+						<Col lg="3" md="3">
+							<FilterPanel />
+						</Col>
+						<Col lg="9" md="9" classNam="p-0">
+							<Row className="m-0 p-0 pt-5">{_renderItems()}</Row>
+						</Col>
+					</Row>
 					<ShopMethod />
 				</Container>
 			</section>
 		</Container>
 	);
 });
+const FilterPanel = () => {
+	return (
+		<Col className="pt-2">
+			<h3>Filter By</h3>
+			<ListGroup className="filter-panel-shadow">
+				<ListGroupItem
+					style={{
+						fontSize: 15,
+						margin: 0,
+						justifyContent: 'center',
+						alignItems: 'center',
+						backgroundColor: '#F5F5F5',
+						color: '#4285F4',
+					}}
+				>
+					<h6 className="text-start p-0 m-0">Order by</h6>
+				</ListGroupItem>
+				<CustomRadioButton items={ITEMS_ORDER_LIST} />
+			</ListGroup>
+			<ListGroup className="mt-3 filter-panel-shadow">
+				<ListGroupItem
+					style={{
+						fontSize: 15,
+						margin: 0,
+						justifyContent: 'center',
+						alignItems: 'center',
+						backgroundColor: '#F5F5F5',
+						color: '#4285F4',
+					}}
+				>
+					<h6 className="text-start p-0 m-0">Category</h6>
+				</ListGroupItem>
+				{/* <ListGroupItem style={{ fontSize: 15, margin: 0 }}>
+					Laptop
+				</ListGroupItem>
+				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
+					Smart Phone
+				</ListGroupItem>
+				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
+					Smart Watch
+				</ListGroupItem>
+				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
+					Televison
+				</ListGroupItem> */}
+				<MyCheckboxList items={CATEGORY_LIST} />
+			</ListGroup>
+			<ListGroup className="mt-3 filter-panel-shadow">
+				<ListGroupItem
+					style={{
+						fontSize: 15,
+						margin: 0,
+						justifyContent: 'center',
+						alignItems: 'center',
+						backgroundColor: '#F5F5F5',
+						color: '#4285F4',
+					}}
+				>
+					<h6 className="text-start p-0 m-0">Brand</h6>
+				</ListGroupItem>
+				<MyCheckboxList items={PHONE_BRAND_LIST} />
+			</ListGroup>
+
+			<ListGroup className="mt-3 filter-panel-shadow">
+				<ListGroupItem
+					style={{
+						fontSize: 15,
+						margin: 0,
+						justifyContent: 'center',
+						alignItems: 'center',
+						backgroundColor: '#F5F5F5',
+						color: '#4285F4',
+					}}
+				>
+					<h6 className="text-start p-0 m-0">Price</h6>
+				</ListGroupItem>
+
+				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
+					<Slider
+						valueLabelDisplay="on"
+						aria-labelledby="range-slider"
+						defaultValue={[10, 50]}
+						max={2000}
+					/>
+				</ListGroupItem>
+			</ListGroup>
+			<ListGroup className="mt-3 filter-panel-shadow">
+				<ListGroupItem
+					style={{
+						fontSize: 15,
+						margin: 0,
+						flexDirection: 'row',
+						justifyContent: 'space-around',
+						alignItems: 'center',
+						backgroundColor: '#F5F5F5',
+						color: '#4285F4',
+					}}
+				>
+					<h6 className="text-start p-0 m-0">Color</h6>
+				</ListGroupItem>
+				<MyCheckboxList items={ITEM_COLORS} />
+			</ListGroup>
+			<ListGroup className="mt-3 filter-panel-shadow">
+				<ListGroupItem
+					style={{
+						fontSize: 15,
+						margin: 0,
+						flexDirection: 'row',
+						justifyContent: 'space-around',
+						alignItems: 'center',
+						backgroundColor: '#F5F5F5',
+						color: '#4285F4',
+					}}
+				>
+					<h6 className="text-start p-0 m-0">Rating</h6>
+				</ListGroupItem>
+				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
+					<Row className="align-items-center pl-3 pt-0">
+						<MyRating value={5} />
+						<p
+							style={{
+								fontSize: 12,
+								textAlign: 'center',
+
+								marginLeft: 10,
+								paddingTop: 10,
+							}}
+						>
+							4 start and more
+						</p>
+					</Row>
+					<Row className="align-items-center pl-3 pt-0">
+						<MyRating value={4} />
+						<p
+							style={{
+								fontSize: 12,
+								textAlign: 'center',
+
+								marginLeft: 10,
+								paddingTop: 10,
+							}}
+						>
+							3 to 3.99
+						</p>
+					</Row>
+					<Row className="align-items-center pl-3 pt-0">
+						<MyRating value={3} />
+						<p
+							style={{
+								fontSize: 12,
+								textAlign: 'center',
+
+								marginLeft: 10,
+								paddingTop: 10,
+							}}
+						>
+							3.00 and less
+						</p>
+					</Row>
+				</ListGroupItem>
+			</ListGroup>
+		</Col>
+	);
+};
+
 export default ShopPage;

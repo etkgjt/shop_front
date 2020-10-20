@@ -7,6 +7,7 @@ import '../styles/pageTitle.css';
 import '../styles/confirmation.css';
 import { Col } from 'reactstrap';
 import { Table } from 'reactstrap';
+import { MyStepper } from '../components';
 const ConfirmationDetails = {
 	orderInfo: [
 		{ label: 'Order Number', value: '0332511060' },
@@ -123,6 +124,7 @@ const Confirmation = memo(() => {
 			<Row className="title-container mt-5">
 				<p class="page-title">Confirmation</p>
 			</Row>
+			<MyStepper activeStep={2} />
 			<section class="confirmation-container">
 				<Container>
 					<Row>

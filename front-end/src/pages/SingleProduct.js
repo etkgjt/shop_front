@@ -1,4 +1,4 @@
-import React, { useCallback, memo, useState } from 'react';
+import React, { useCallback, memo, useState, useEffect } from 'react';
 import { Container, Row, Col, ButtonGroup, Input, Button } from 'reactstrap';
 import '../styles/pageTitle.css';
 import { Icon } from '@material-ui/core';
@@ -30,7 +30,35 @@ const SingleProduct = memo(() => {
 		</Container>
 	);
 });
+
+const ProductImage = ({ data }) => {
+	return (
+		<Col lg="6" md="6" className="pr-2 ">
+			<img
+				className="img-fluid w-100 item-container-box-shadow"
+				src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
+			/>
+			<Row className="p-2 mt-4 justify-content-between">
+				{data.map((v, i) => (
+					<img
+						key={`${i}`}
+						style={{ width: 130, height: 150 }}
+						className="item-container-box-shadow mt-2"
+						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
+					/>
+				))}
+			</Row>
+		</Col>
+	);
+};
+
 const ProductDetails = ({ productInfo }) => {
+	let data = [
+		'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
+		'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
+		'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
+		'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
+	];
 	const {
 		name,
 		category,
@@ -42,34 +70,7 @@ const ProductDetails = ({ productInfo }) => {
 	} = productInfo;
 	return (
 		<Row className="pt-4">
-			<Col lg="6" md="6" className="pr-2 ">
-				<img
-					className="img-fluid w-100 item-container-box-shadow"
-					src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-				/>
-				<Row className="p-2 mt-4 justify-content-between">
-					<img
-						style={{ width: 130, height: 150 }}
-						className="item-container-box-shadow mt-2"
-						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-					/>
-					<img
-						style={{ width: 130, height: 150 }}
-						className="item-container-box-shadow mt-2"
-						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-					/>
-					<img
-						style={{ width: 130, height: 150 }}
-						className="item-container-box-shadow mt-2"
-						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-					/>
-					<img
-						style={{ width: 130, height: 150 }}
-						className="item-container-box-shadow mt-2"
-						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-					/>
-				</Row>
-			</Col>
+			<ProductImage data={data} />
 			<Col lg="6" md="6" className="item">
 				<p className="mb-2" style={{ fontSize: 20, fontWeight: '700' }}>
 					{name}
@@ -181,8 +182,11 @@ const ProductDetails = ({ productInfo }) => {
 					<Button
 						className="mr-2 d-flex flex-row justify-content-center align-content-between button-shadow"
 						style={{
-							backgroundColor: '#ff0020',
-							borderRadius: 0,
+							backgroundColor: '#4285F4',
+
+							width: 150,
+							height: 50,
+							borderRadius: 25,
 						}}
 					>
 						<p className="m-0" style={{ fontSize: 10 }}>
@@ -193,7 +197,9 @@ const ProductDetails = ({ productInfo }) => {
 					<Button
 						style={{
 							backgroundColor: '#F2F2F2',
-							borderRadius: 0,
+							width: 150,
+							height: 50,
+							borderRadius: 25,
 						}}
 						className="d-flex flex-row justify-content-center align-content-between button-shadow"
 					>
@@ -218,6 +224,9 @@ const ProductDetails = ({ productInfo }) => {
 
 const MyRadioButton = () => {
 	const [radio, setRadio] = useState(1);
+	useEffect(() => {
+		console.log('radio thay dooi ne');
+	}, [radio]);
 	return (
 		<MDBContainer className="m-0 pl-0 d-flex flex-row justify-content-around">
 			<Row className="ml-1 align-items-center">

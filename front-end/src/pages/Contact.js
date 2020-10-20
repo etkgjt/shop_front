@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import TitleBackground from '../assets/slider_background.png';
 import '../styles/pageTitle.css';
 import '../styles/contact.css';
-import { TextField } from '@material-ui/core';
+import { Icon, TextField } from '@material-ui/core';
 
 const Contact = memo(() => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -18,11 +18,11 @@ const Contact = memo(() => {
 					fluid
 					className="top-layer p-0 m-0 align-items-center justify-content-center d-flex flex-column"
 				>
-					<Row className="justify-content-center align-items-center text-white pt-5 w-100 mb-5">
-						<h1>Contact Us</h1>
+					<Row className="justify-content-center align-items-center pt-5 w-100 mb-5">
+						<h1 style={{ color: 'black' }}>Contact Us</h1>
 					</Row>
-					<Row className="justify-content-around  w-75">
-						<Col lg="4" md="4" className="p-5 contact-form">
+					<Row className="justify-content-around  w-50 contact-form box-shadow">
+						<Col lg="9" md="9" className="p-5 ">
 							<Row className="d-flex justify-content-center align-items-center mt-3">
 								<TextField
 									label="Your Email"
@@ -51,8 +51,9 @@ const Contact = memo(() => {
 								<Button
 									className="w-100"
 									style={{
-										backgroundColor: '#ff0020',
+										backgroundColor: '#2296F3',
 										borderWidth: 0,
+										height: 50,
 									}}
 								>
 									Send Inquiry
@@ -61,11 +62,20 @@ const Contact = memo(() => {
 						</Col>
 
 						<Col
-							lg="5"
-							md="5"
-							className="d-flex flex-column align-items-start justify-content-center text-white "
+							lg="3"
+							md="3"
+							className="d-flex flex-column align-items-start justify-content-center text-black "
 						>
-							<p style={{ fontWeight: 'bold', fontSize: 30 }}>Address</p>
+							<Icon
+								style={{
+									fontSize: 50,
+									color: '#2296F3',
+									justifyContent: 'center',
+									alignItems: 'center',
+								}}
+							>
+								room
+							</Icon>
 							<p
 								style={{
 									fontSize: 20,
@@ -94,15 +104,16 @@ const Contact = memo(() => {
 							>
 								United States
 							</p>
-							<p
+							<Icon
 								style={{
-									fontWeight: 'bold',
-									fontSize: 30,
-									marginTop: 10,
+									fontSize: 50,
+									color: '#2296F3',
+									justifyContent: 'center',
+									alignItems: 'center',
 								}}
 							>
-								Phone
-							</p>
+								phone
+							</Icon>
 							<p
 								style={{
 									fontSize: 20,
@@ -113,15 +124,16 @@ const Contact = memo(() => {
 								+ 01 234 567 89
 							</p>
 
-							<p
+							<Icon
 								style={{
-									fontWeight: 'bold',
-									fontSize: 30,
-									marginTop: 10,
+									fontSize: 50,
+									color: '#2296F3',
+									justifyContent: 'center',
+									alignItems: 'center',
 								}}
 							>
-								Email
-							</p>
+								mail
+							</Icon>
 							<p
 								style={{
 									fontSize: 20,
@@ -138,4 +150,5 @@ const Contact = memo(() => {
 		</Container>
 	);
 });
+
 export default Contact;

@@ -10,6 +10,8 @@ import {
 	ListGroup,
 	ListGroupItem,
 	Fade,
+	Carousel,
+	CarouselItem,
 } from 'reactstrap';
 import '../styles/pageTitle.css';
 import '../styles/cart.css';
@@ -24,6 +26,8 @@ import {
 import useDebounce from '../untils/debounce';
 import _ from 'lodash';
 import { NavLink } from 'react-router-dom';
+import '../styles/forAll.css';
+import { MyStepper } from '../components';
 
 const Cart = memo(() => {
 	const [cartData, setCartData] = useState([]);
@@ -38,6 +42,7 @@ const Cart = memo(() => {
 			<Row className="title-container mt-5">
 				<p class="page-title">Cart List</p>
 			</Row>
+			<MyStepper activeStep={0} />
 			<Container>
 				<Row className="mt-5">
 					<Col lg="7" className="container-shadow mr-5">
@@ -299,13 +304,16 @@ const SumaryCheckout = ({ items }) => {
 					</ListGroupItem>
 
 					<Button
+						className="button-thin-shadow"
 						style={{
 							marginTop: 10,
 							color: 'white',
-							backgroundColor: '#ff0020',
+							backgroundColor: '#4285f4',
 							color: 'white',
 							borderWidth: 0,
-							borderRadius: 0,
+							width: '100%',
+							height: 50,
+							borderRadius: 25,
 						}}
 					>
 						<NavLink
@@ -316,7 +324,10 @@ const SumaryCheckout = ({ items }) => {
 								state: { data },
 							}}
 							className="w-100"
-							style={{ color: 'white', textDecoration: 'none' }}
+							style={{
+								color: 'white',
+								textDecoration: 'none',
+							}}
 						>
 							Go to checkout
 						</NavLink>
@@ -325,14 +336,16 @@ const SumaryCheckout = ({ items }) => {
 					<Button
 						outline
 						color="primary"
-						className="mt-4"
+						className="mt-4 button-thin-shadow"
 						onClick={() => setIsFaded(!isFaded)}
 						style={{
 							color: 'white',
-							color: '#ff0020',
+							color: '#4285f4',
 							backgroundColor: 'white',
-							borderColor: '#ff0020',
-							borderRadius: 0,
+							borderColor: '#4285f4',
+							width: '100%',
+							height: 50,
+							borderRadius: 25,
 						}}
 					>
 						Add a discount code (optional)
