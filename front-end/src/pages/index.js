@@ -6,6 +6,7 @@ import ShopPage from './ShopPage';
 import Category from './Category';
 import Confirmation from './Confirmation';
 import Checkout from './Checkout';
+import PaymentMethod from './PaymentMethod';
 export {
 	Cart,
 	Category,
@@ -15,4 +16,5 @@ export {
 	Contact,
 	Confirmation,
 	Checkout,
+	PaymentMethod,
 };

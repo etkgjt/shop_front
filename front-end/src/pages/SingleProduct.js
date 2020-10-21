@@ -5,6 +5,7 @@ import { Icon } from '@material-ui/core';
 
 import { MDBContainer, MDBInput, MDBRating } from 'mdbreact';
 import '../styles/singleProduct.css';
+import '../styles/material.css';
 import { Rating } from '@material-ui/lab';
 const SingleProduct = memo(() => {
 	console.log('product render ne');
@@ -35,7 +36,7 @@ const ProductImage = ({ data }) => {
 	return (
 		<Col lg="6" md="6" className="pr-2 ">
 			<img
-				className="img-fluid w-100 item-container-box-shadow"
+				className="img-fluid w-100 z-depth2"
 				src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
 			/>
 			<Row className="p-2 mt-4 justify-content-between">
@@ -43,7 +44,7 @@ const ProductImage = ({ data }) => {
 					<img
 						key={`${i}`}
 						style={{ width: 130, height: 150 }}
-						className="item-container-box-shadow mt-2"
+						className="z-depth2 mt-2"
 						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
 					/>
 				))}

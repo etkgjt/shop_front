@@ -22,6 +22,7 @@ import { CITY, DISTRICTS } from '../constants/constants';
 import '../styles/pageTitle.css';
 import '../styles/checkout.css';
 import '../styles/forAll.css';
+import '../styles/material.css';
 import { MyStepper } from '../components';
 const Checkout = () => {
 	let { state } = useLocation();
@@ -33,7 +34,7 @@ const Checkout = () => {
 		setItems(data);
 	}, [data]);
 	return (
-		<Container fluid>
+		<Container fluid style={{ backgroundColor: '#E5F2FF' }}>
 			<Row className="title-container">
 				<p class="page-title">Checkout</p>
 			</Row>
@@ -43,7 +44,7 @@ const Checkout = () => {
 			</Row>
 			<Container>
 				<Row className="mt-3 px-5">
-					<Col md="7" className=" shadow1 mb-5 mr-5">
+					<Col md="7" className=" z-depth2 mb-5 mr-5 bg-white">
 						<form className="m-5">
 							<Row className="pl-0 justify-content-between">
 								<Col md="6" className="m-0 p-0 pr-5">
@@ -76,31 +77,64 @@ const Checkout = () => {
 							<Row className="my-3">
 								<Divider className="w-100" />
 							</Row>
-							<Row>
-								<Button
-									className="button-thin-shadow"
-									style={{
-										marginTop: 10,
-										color: 'white',
-										backgroundColor: '#4285f4',
-										color: 'white',
-										borderWidth: 0,
-										borderRadius: 25,
-										width: '100%',
-										height: 50,
-									}}
-								>
-									<NavLink
-										exact
-										to={{
-											pathname: '/confirmation',
-											state: { data },
+
+							<Row className="justify-content-around align-items-center">
+								<Col lg="5" md="5">
+									<Button
+										className="button-container-box-shadow"
+										style={{
+											marginTop: 10,
+											color: 'white',
+											backgroundColor: '#fff',
+											borderColor: '#4285f4',
+
+											borderWidth: 2,
+											borderRadius: 25,
+											width: '100%',
+											height: 50,
 										}}
-										style={{ color: 'white', textDecoration: 'none' }}
 									>
-										CONTINUE TO CHECKOUT
-									</NavLink>
-								</Button>
+										<NavLink
+											exact
+											to="/cart"
+											style={{
+												color: '#4285f4',
+												textDecoration: 'none',
+											}}
+										>
+											Back
+										</NavLink>
+									</Button>
+								</Col>
+								<Col lg="5" md="5">
+									<Button
+										className="button-container-box-shadow"
+										style={{
+											marginTop: 10,
+											color: 'white',
+											backgroundColor: '#4285f4',
+											color: 'white',
+											borderWidth: 0,
+											borderRadius: 25,
+											width: '100%',
+											height: 50,
+										}}
+									>
+										<NavLink
+											exact
+											to={{
+												pathname: '/confirmation',
+												state: { data },
+											}}
+											style={{
+												color: 'white',
+												textDecoration: 'none',
+											}}
+										>
+											Next step
+										</NavLink>
+									</Button>
+								</Col>
 							</Row>
 						</form>
 					</Col>
@@ -114,7 +148,7 @@ const DetailsCheckout = ({ items }) => {
 	console.log('items ne', items);
 	return (
 		<Col md="4" className="p-0">
-			<Col className="shadow1 m-0 py-3">
+			<Col className="z-depth2 m-0 py-3 bg-white">
 				<h4 style={{ textAlign: 'start' }}>Your Cart (3)</h4>
 
 				<h6 class="mb-3 mt-3">The total amount of</h6>

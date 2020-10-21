@@ -22,6 +22,7 @@ import {
 import '../styles/pageTitle.css';
 import '../styles/home.css';
 import '../styles/shopPage.css';
+import '../styles/material.css';
 import Icon from '@material-ui/core/Icon';
 import { Rating } from '@material-ui/lab';
 import { useSelector } from 'react-redux';
@@ -84,7 +85,7 @@ const ShopMethod = () => (
 		<Row className="my-5 py-5">
 			<Col xl="3" lg="6" className="px-3">
 				<Col
-					className="service-box-shadow pt-3"
+					className="button-hover-depth3 pt-3"
 					style={{ backgroundColor: '#00C851', color: 'white' }}
 				>
 					<Row className="px-5 mt-2 justify-content-center ">
@@ -104,7 +105,7 @@ const ShopMethod = () => (
 			</Col>
 			<Col xl="3" lg="6" className="px-3">
 				<Col
-					className="service-box-shadow pt-3"
+					className="button-hover-depth3 pt-3"
 					style={{ backgroundColor: '#ff4444', color: 'white' }}
 				>
 					<Row className="px-5 mt-2 justify-content-center">
@@ -122,7 +123,7 @@ const ShopMethod = () => (
 			</Col>
 			<Col xl="3" lg="6" className="px-3">
 				<Col
-					className="service-box-shadow pt-3"
+					className="button-hover-depth3 pt-3"
 					style={{ color: 'white', backgroundColor: '#ffbb33' }}
 				>
 					<Row className="px-5 mt-2 justify-content-center">
@@ -140,7 +141,7 @@ const ShopMethod = () => (
 			</Col>
 			<Col xl="3" lg="6" className="px-3">
 				<Col
-					className="service-box-shadow pt-3"
+					className="button-hover-depth3 pt-3"
 					style={{ backgroundColor: '#7E57C3', color: 'white' }}
 				>
 					<Row className="px-5 mt-2 justify-content-center">
@@ -279,7 +280,7 @@ const NewArrival = () => (
 		<Row>
 			<Col xl="4" lg="4" md="6" sm="6">
 				<div
-					className="container-box-shadow"
+					className="z-depth5"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -291,7 +292,7 @@ const NewArrival = () => (
 			</Col>
 			<Col xl="4" lg="4" md="6" sm="6">
 				<div
-					className="container-box-shadow"
+					className="z-depth5"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -303,7 +304,7 @@ const NewArrival = () => (
 			</Col>
 			<Col xl="4" lg="4" md="6" sm="6">
 				<div
-					className="container-box-shadow"
+					className="z-depth5"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -339,7 +340,7 @@ const Gallery = () => (
 				className="justify-content-center align-items-center"
 			>
 				<div
-					className="container-box-shadow"
+					className="z-depth5"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -351,7 +352,7 @@ const Gallery = () => (
 			</Col>
 			<Col xl="3" lg="4" md="6" sm="6">
 				<div
-					className="container-box-shadow"
+					className="z-depth5"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -368,7 +369,7 @@ const Gallery = () => (
 				className="d-flex flex-column justify-content-around"
 			>
 				<div
-					className="container-box-shadow"
+					className="z-depth5"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -378,7 +379,7 @@ const Gallery = () => (
 					<div className="gallery3 hvr-shrink" />
 				</div>
 				<div
-					className="container-box-shadow"
+					className="z-depth5"
 					style={{
 						width: '100%',
 						height: '100%',
@@ -450,7 +451,7 @@ const VideoArea = () => (
 );
 const ChoseWatchAd = () => (
 	<Container className="watch-area-padding">
-		<Row className="choice-container shadow-1 p-5">
+		<Row className="choice-container z-depth3 p-5">
 			<Col lg="5" md="6" className="px-5">
 				<h2 className="choice-title">Watch of Choice</h2>
 				<p>
@@ -471,7 +472,7 @@ const ChoseWatchAd = () => (
 				<div className="choice-watch-img1" />
 			</Col>
 		</Row>
-		<Row className="choice-container shadow-1 p-5">
+		<Row className="choice-container z-depth3 p-5">
 			<Col lg="6" md="6" sm="10">
 				<div className="choice-watch-img2" />
 			</Col>

@@ -39,7 +39,7 @@ const SingleConfirmationDetails = ({ title, details = [] }) => {
 	console.log('long details', details);
 	return (
 		<Col lg="6" lx="4" className="single_confirmation_container ">
-			<div class="sigle_confirmation_details box-shadow">
+			<div class="sigle_confirmation_details shadow1">
 				<Col>
 					<Row className="mb-3">
 						<h4>{title}</h4>
@@ -59,7 +59,7 @@ const SingleConfirmationDetails = ({ title, details = [] }) => {
 	);
 };
 const TableDetails = memo(({ data }) => (
-	<Row className="box-shadow">
+	<Row className="shadow1">
 		<Col lg="12">
 			<div className="table_container">
 				<div>
@@ -120,7 +120,7 @@ const Confirmation = memo(() => {
 	console.log('load ne');
 	const toggle = () => setIsOpen(!isOpen);
 	return (
-		<Container fluid>
+		<Container fluid style={{ backgroundColor: '#E5F2FF' }}>
 			<Row className="title-container mt-5">
 				<p class="page-title">Confirmation</p>
 			</Row>

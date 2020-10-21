@@ -22,6 +22,7 @@ import {
 import mainLogo from '../assets/timezone-logo.png';
 import { Badge, Icon } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import '../styles/material.css';
 const data = [
 	{
 		path: '/',
@@ -147,7 +148,7 @@ const Header = memo(() => {
 	return (
 		<Container
 			fluid
-			className="header-area header-container slideIn header-gradient-bg"
+			className="header-area header-container slideIn header-gradient-bg z-depth3"
 			style={{ color: 'white' }}
 		>
 			<div>

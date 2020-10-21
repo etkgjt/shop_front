@@ -17,7 +17,7 @@ const MyCheckboxList = ({ items, onCheckedFunc = () => {} }) => {
 		}
 	};
 	return (
-		<Col className="m-0 pl-0 pt-3">
+		<Col className="m-0 pl-0 pt-3 bg-white">
 			{items && items.length ? (
 				items.map((val, idx) => (
 					<Row className="ml-3 mt-1 align-items-center">

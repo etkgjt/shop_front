@@ -221,14 +221,15 @@ h1 {
 	font-weight: 700;
 }
 .gradient-background {
-	background: rgb(252, 253, 254);
+	/* background: rgb(252, 253, 254);
 	background: linear-gradient(
 		90deg,
 		rgba(252, 253, 254, 1) 0%,
 		rgba(242, 250, 255, 1) 33%,
 		rgba(255, 255, 255, 1) 65%,
 		rgba(230, 239, 241, 1) 100%
-	);
+	); */
+	background: #e3f2fd;
 }
 .container-box-shadow {
 	/* background-color: #fff; */

@@ -53,6 +53,7 @@ import '../styles/carousel.css';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import '../styles/forAll.css';
+import '../styles/material.css';
 const items = [
 	{
 		src:
@@ -143,7 +144,7 @@ const CustomCarouselItem = ({ item }) => {
 				fluid
 				className="carousel-item-container pt-3"
 			>
-				<Col className="p-2 pt-5 carousel-item-shadow h-100 border justify-content-center">
+				<Col className="p-2 pt-5 shadow4dp h-100 border justify-content-center">
 					<Col className="carousel-item-container mt-3">
 						<Row className="justify-content-center align-items-center mt-4 w-100 m-0">
 							<p
@@ -174,7 +175,7 @@ const CustomCarouselItem = ({ item }) => {
 					</Col>
 				</Col>
 				<img
-					className="carousel-item-image"
+					className="carousel-item-image shadow9dp"
 					src={
 						'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/16.jpg'
 					}
@@ -189,7 +190,7 @@ const CustomCarouselItem = ({ item }) => {
 				fluid
 				className="carousel-item-container pt-3"
 			>
-				<Col className="p-2 pt-5 carousel-item-shadow h-100 border justify-content-center">
+				<Col className="p-2 pt-5 shadow4dp h-100 border justify-content-center">
 					<Col className="carousel-item-container mt-3">
 						<Row className="justify-content-center align-items-center mt-4 w-100 m-0">
 							<p
@@ -220,7 +221,7 @@ const CustomCarouselItem = ({ item }) => {
 					</Col>
 				</Col>
 				<img
-					className="carousel-item-image"
+					className="carousel-item-image shadow9dp"
 					src={
 						'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/16.jpg'
 					}
@@ -235,7 +236,7 @@ const CustomCarouselItem = ({ item }) => {
 				fluid
 				className="carousel-item-container pt-3"
 			>
-				<Col className="p-2 pt-5 carousel-item-shadow h-100 border justify-content-center">
+				<Col className="p-2 pt-5 shadow4dp h-100 border justify-content-center">
 					<Col className="carousel-item-container mt-3">
 						<Row className="justify-content-center align-items-center mt-4 w-100 m-0">
 							<p
@@ -266,7 +267,7 @@ const CustomCarouselItem = ({ item }) => {
 					</Col>
 				</Col>
 				<img
-					className="carousel-item-image"
+					className="carousel-item-image shadow9dp"
 					src={
 						'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/16.jpg'
 					}
@@ -308,7 +309,7 @@ const CustomCarousetButton = ({ onNextPress, onPreviousPress }) => {
 		<Row className="justify-content-center">
 			<Button
 				onClick={onPreviousPress}
-				className="mx-3 button-shadow-hovers"
+				className="mx-3 shadow6dp"
 				style={{
 					width: 50,
 					height: 50,
@@ -332,7 +333,7 @@ const CustomCarousetButton = ({ onNextPress, onPreviousPress }) => {
 			</Button>
 			<Button
 				onClick={onNextPress}
-				className="mx-3 rotate-icon button-shadow-hovers"
+				className="mx-3 rotate-icon shadow6dp"
 				style={{
 					width: 50,
 					height: 50,

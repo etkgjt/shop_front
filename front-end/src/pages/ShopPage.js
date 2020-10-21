@@ -124,8 +124,8 @@ const ShopMethod = () => (
 		<Row className="my-5 py-5">
 			<Col xl="3" lg="6" className="px-3">
 				<Col
-					className="service-box-shadow pt-3"
-					style={{ backgroundColor: '#00C851', color: 'white' }}
+					className="button-container-box-shadow pt-3"
+					style={{ backgroundColor: '#1E88E5', color: 'white' }}
 				>
 					<Row className="px-5 mt-2 justify-content-center ">
 						<Icon style={{ fontSize: 70, color: 'white' }}>
@@ -144,8 +144,8 @@ const ShopMethod = () => (
 			</Col>
 			<Col xl="3" lg="6" className="px-3">
 				<Col
-					className="service-box-shadow pt-3"
-					style={{ backgroundColor: '#ff4444', color: 'white' }}
+					className="button-container-box-shadow pt-3"
+					style={{ backgroundColor: '#1E88E5', color: 'white' }}
 				>
 					<Row className="px-5 mt-2 justify-content-center">
 						<Icon style={{ fontSize: 70 }}>verified_user</Icon>
@@ -162,8 +162,8 @@ const ShopMethod = () => (
 			</Col>
 			<Col xl="3" lg="6" className="px-3">
 				<Col
-					className="service-box-shadow pt-3"
-					style={{ color: 'white', backgroundColor: '#ffbb33' }}
+					className="button-container-box-shadow pt-3"
+					style={{ color: 'white', backgroundColor: '#1E88E5' }}
 				>
 					<Row className="px-5 mt-2 justify-content-center">
 						<Icon style={{ fontSize: 70 }}>headset_mic_rounded</Icon>
@@ -180,8 +180,8 @@ const ShopMethod = () => (
 			</Col>
 			<Col xl="3" lg="6" className="px-3">
 				<Col
-					className="service-box-shadow pt-3"
-					style={{ backgroundColor: '#7E57C3', color: 'white' }}
+					className="button-container-box-shadow pt-3"
+					style={{ backgroundColor: '#1E88E5', color: 'white' }}
 				>
 					<Row className="px-5 mt-2 justify-content-center">
 						<Icon style={{ fontSize: 70 }}>cached_two_tone</Icon>
@@ -346,7 +346,7 @@ const FilterPanel = () => {
 	return (
 		<Col className="pt-2">
 			<h3>Filter By</h3>
-			<ListGroup className="filter-panel-shadow">
+			<ListGroup className="z-depth1">
 				<ListGroupItem
 					style={{
 						fontSize: 15,
@@ -361,7 +361,7 @@ const FilterPanel = () => {
 				</ListGroupItem>
 				<CustomRadioButton items={ITEMS_ORDER_LIST} />
 			</ListGroup>
-			<ListGroup className="mt-3 filter-panel-shadow">
+			<ListGroup className="mt-3 z-depth1">
 				<ListGroupItem
 					style={{
 						fontSize: 15,
@@ -374,21 +374,10 @@ const FilterPanel = () => {
 				>
 					<h6 className="text-start p-0 m-0">Category</h6>
 				</ListGroupItem>
-				{/* <ListGroupItem style={{ fontSize: 15, margin: 0 }}>
-					Laptop
-				</ListGroupItem>
-				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
-					Smart Phone
-				</ListGroupItem>
-				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
-					Smart Watch
-				</ListGroupItem>
-				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
-					Televison
-				</ListGroupItem> */}
+
 				<MyCheckboxList items={CATEGORY_LIST} />
 			</ListGroup>
-			<ListGroup className="mt-3 filter-panel-shadow">
+			<ListGroup className="mt-3 z-depth1">
 				<ListGroupItem
 					style={{
 						fontSize: 15,
@@ -404,7 +393,7 @@ const FilterPanel = () => {
 				<MyCheckboxList items={PHONE_BRAND_LIST} />
 			</ListGroup>
 
-			<ListGroup className="mt-3 filter-panel-shadow">
+			<ListGroup className="mt-3 z-depth1">
 				<ListGroupItem
 					style={{
 						fontSize: 15,
@@ -427,7 +416,7 @@ const FilterPanel = () => {
 					/>
 				</ListGroupItem>
 			</ListGroup>
-			<ListGroup className="mt-3 filter-panel-shadow">
+			<ListGroup className="mt-3 z-depth1">
 				<ListGroupItem
 					style={{
 						fontSize: 15,
@@ -443,7 +432,7 @@ const FilterPanel = () => {
 				</ListGroupItem>
 				<MyCheckboxList items={ITEM_COLORS} />
 			</ListGroup>
-			<ListGroup className="mt-3 filter-panel-shadow">
+			<ListGroup className="mt-3 z-depth1">
 				<ListGroupItem
 					style={{
 						fontSize: 15,

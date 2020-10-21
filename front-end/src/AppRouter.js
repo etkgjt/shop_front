@@ -15,6 +15,7 @@ import {
 	SingleProduct,
 	Checkout,
 	Confirmation,
+	PaymentMethod,
 } from './pages';
 
 import { Provider } from 'react-redux';
@@ -61,6 +62,7 @@ const AppRoute = () => {
 					<Route path="/shop_page" component={ShopPage} />
 					<Route path="/confirmation" component={Confirmation} />
 					<Route path="/checkout" component={Checkout} />
+					<Route path="/payment" component={PaymentMethod} />
 				</Switch>
 
 				<footer

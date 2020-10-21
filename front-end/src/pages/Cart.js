@@ -27,6 +27,7 @@ import useDebounce from '../untils/debounce';
 import _ from 'lodash';
 import { NavLink } from 'react-router-dom';
 import '../styles/forAll.css';
+import '../styles/material.css';
 import { MyStepper } from '../components';
 
 const Cart = memo(() => {
@@ -38,14 +39,14 @@ const Cart = memo(() => {
 	}, [data]);
 	console.log('cart render ne');
 	return (
-		<Container fluid className="mb-5">
+		<Container fluid className="mb-5" style={{ backgroundColor: '#e4f2fe' }}>
 			<Row className="title-container mt-5">
 				<p class="page-title">Cart List</p>
 			</Row>
 			<MyStepper activeStep={0} />
 			<Container>
 				<Row className="mt-5">
-					<Col lg="7" className="container-shadow mr-5">
+					<Col lg="7" className="z-depth2 mr-5 bg-white">
 						<h6 style={{ fontSize: 20 }} className="m-3">
 							{`Cart ${cartData?.length} items`}
 						</h6>
@@ -283,7 +284,7 @@ const SumaryCheckout = ({ items }) => {
 	};
 	return (
 		<Col lg="4">
-			<div className="p-4 container-shadow">
+			<div className="p-4 z-depth2 bg-white">
 				<h6 class="mb-3">The total amount of</h6>
 				<ListGroup flush>
 					<ListGroupItem className="d-flex justify-content-between align-items-center">
@@ -304,7 +305,7 @@ const SumaryCheckout = ({ items }) => {
 					</ListGroupItem>
 
 					<Button
-						className="button-thin-shadow"
+						className="button-container-box-shadow"
 						style={{
 							marginTop: 10,
 							color: 'white',
@@ -329,14 +330,14 @@ const SumaryCheckout = ({ items }) => {
 								textDecoration: 'none',
 							}}
 						>
-							Go to checkout
+							Next Step
 						</NavLink>
 					</Button>
 
 					<Button
 						outline
 						color="primary"
-						className="mt-4 button-thin-shadow"
+						className="mt-4 button-container-box-shadow"
 						onClick={() => setIsFaded(!isFaded)}
 						style={{
 							color: 'white',

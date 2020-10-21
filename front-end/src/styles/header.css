@@ -60,9 +60,6 @@
 	align-items: center;
 	display: flex;
 	background-color: #fff;
-	-webkit-box-shadow: 0px 9px 16px 2px rgba(0, 0, 0, 0.19);
-	-moz-box-shadow: 0px 9px 16px 2px rgba(0, 0, 0, 0.19);
-	box-shadow: 0px 9px 16px 2px rgba(0, 0, 0, 0.19);
 }
 .toggler-button {
 	color: red;
@@ -75,7 +72,7 @@
 	color: #ff003c;
 }
 .header-gradient-bg {
-	background: #0085f4;
+	background: #2962ff;
 }
 
 .scrolled {

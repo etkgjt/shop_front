@@ -6,7 +6,7 @@ import TitleBackground from '../assets/slider_background.png';
 import '../styles/pageTitle.css';
 import '../styles/contact.css';
 import { Icon, TextField } from '@material-ui/core';
-
+import '../styles/material.css';
 const Contact = memo(() => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -14,14 +14,14 @@ const Contact = memo(() => {
 	return (
 		<Container fluid className="p-0 mb-5">
 			<Container fluid className="background p-0 m-0">
-				<Container
+				<Container	
 					fluid
 					className="top-layer p-0 m-0 align-items-center justify-content-center d-flex flex-column"
 				>
 					<Row className="justify-content-center align-items-center pt-5 w-100 mb-5">
 						<h1 style={{ color: 'black' }}>Contact Us</h1>
 					</Row>
-					<Row className="justify-content-around  w-50 contact-form box-shadow">
+					<Row className="justify-content-around  w-50 contact-form z-depth2">
 						<Col lg="9" md="9" className="p-5 ">
 							<Row className="d-flex justify-content-center align-items-center mt-3">
 								<TextField
@@ -47,7 +47,7 @@ const Contact = memo(() => {
 									className="w-100"
 								/>
 							</Row>
-							<Row className="box-shadow mt-3">
+							<Row className="z-depth2 mt-3">
 								<Button
 									className="w-100"
 									style={{
