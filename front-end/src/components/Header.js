@@ -18,11 +18,13 @@ import {
 	DropdownToggle,
 	DropdownItem,
 	DropdownMenu,
+	Button,
 } from 'reactstrap';
 import mainLogo from '../assets/timezone-logo.png';
 import { Badge, Icon } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import '../styles/material.css';
+import reducers from '../redux/reducer/index';
 const data = [
 	{
 		path: '/',
@@ -52,13 +54,36 @@ const _renderNavItem = (data) => (
 			exact
 			to={data?.path}
 			className="nav-link-title hvr-grow"
-			activeStyle={{
-				color: '#fff',
-				fontWeight: '900',
-				fontSize: '18px',
+			style={{
+				justifyContent: 'center',
+				alignItems: 'center',
+				height: 25,
+				padding: 0,
+				paddingBottom: 10,
 			}}
 		>
-			{data?.title}
+			<Button
+				activeStyle={{ borderColor: 'white' }}
+				className="header-button button-hover-depth0"
+				style={{
+					backgroundColor: 'transparent',
+				}}
+				color="white"
+			>
+				<p
+					className="button-hover-depth0"
+					style={{
+						margin: 0,
+						fontSize: 16,
+
+						textAlign: 'center',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}
+				>
+					{data?.title}
+				</p>
+			</Button>
 		</NavLink>
 	</NavItem>
 );
@@ -87,7 +112,9 @@ const _renderDropDownItems = (data) => (
 const NavigationBar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [cartBadgeNum, setCartBadgeNum] = useState(0);
-	const numOfItems = useSelector((state) => state?.cartReducer?.items?.length);
+	const numOfItems = useSelector((state) =>
+		state?.cartReducer?.items?.reduce((x, y) => (x += y?.amount), 0)
+	);
 	useEffect(() => {
 		if (numOfItems) setCartBadgeNum(numOfItems);
 	}, [numOfItems]);
@@ -117,7 +144,7 @@ const NavigationBar = () => {
 				>
 					<Badge
 						badgeContent={cartBadgeNum}
-						color="error"
+						color="secondary"
 						style={{ marginRight: '20px' }}
 					>
 						<Icon

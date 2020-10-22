@@ -30,16 +30,21 @@ import '../styles/forAll.css';
 import '../styles/material.css';
 import { MyStepper } from '../components';
 
-const Cart = memo(() => {
-	const [cartData, setCartData] = useState([]);
+const Cart = () => {
 	const data = useSelector((state) => state?.cartReducer?.items);
+	const [cartData, setCartData] = useState(data ? [...data] : []);
+
 	useEffect(() => {
 		console.log('data redux thay doi ne', data);
 		setCartData(data);
 	}, [data]);
 	console.log('cart render ne');
 	return (
-		<Container fluid className="mb-5" style={{ backgroundColor: '#e4f2fe' }}>
+		<Container
+			fluid
+			className="mb-5"
+			style={{ backgroundColor: '#e3f2fd66' }}
+		>
 			<Row className="title-container mt-5">
 				<p class="page-title">Cart List</p>
 			</Row>
@@ -55,7 +60,7 @@ const Cart = memo(() => {
 							cartData.map((item, idx) => (
 								<ItemDetails
 									product={item}
-									key={`${item?.name}-${idx}`}
+									key={`${item?.name}-${idx}-${item?.id}`}
 								/>
 							))
 						) : (
@@ -67,8 +72,8 @@ const Cart = memo(() => {
 			</Container>
 		</Container>
 	);
-});
-const ItemDetails = memo(({ product }) => {
+};
+const ItemDetails = ({ product }) => {
 	const dispatch = useDispatch();
 	const { name, color, brand, size, amount, price, id } = product;
 	const [amountOfItem, setAmountOfItem] = useState(amount ? amount : 0);
@@ -266,14 +271,14 @@ const ItemDetails = memo(({ product }) => {
 			</Row>
 		</Col>
 	);
-});
+};
 const SumaryCheckout = ({ items }) => {
 	const [isFaded, setIsFaded] = useState(false);
 	const [data, setData] = useState(items ? items : []);
 	const ship = 10;
 	const discount = 0;
 	useEffect(() => {
-		setData(items);
+		if (items && items.length) setData(items);
 	}, [items]);
 	const _caculateTotal = () => {
 		if (data && data.length) {

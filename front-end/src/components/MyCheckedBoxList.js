@@ -1,11 +1,10 @@
 import { Checkbox } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'reactstrap';
-const MyCheckboxList = ({ items, onCheckedFunc = () => {} }) => {
-	const [checked, setChecked] = useState([]);
+const MyCheckboxList = ({ items, initValues, onCheckedFunc = () => {} }) => {
+	const [checked, setChecked] = useState(initValues ? [...initValues] : []);
 	const _handleCheck = (val) => {
 		let idx = checked.findIndex((v) => val.value === v.value);
-		console.log('index ne', idx);
 		if (idx === -1) {
 			setChecked([...checked, val]);
 			onCheckedFunc([...checked, val]);

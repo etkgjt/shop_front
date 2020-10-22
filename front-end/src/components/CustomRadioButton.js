@@ -1,10 +1,10 @@
 import { MDBContainer } from 'mdbreact';
 import React, { useEffect, useState } from 'react';
 import { Button, Row } from 'reactstrap';
-const CustomRadioButton = ({ items, checkedFunc = () => {} }) => {
-	const [radio, setRadio] = useState(1);
+const CustomRadioButton = ({ items, initValue, checkedFunc = () => {} }) => {
+	const [radio, setRadio] = useState(initValue ? initValue : 0);
 	useEffect(() => {
-		checkedFunc ?? checkedFunc(radio);
+		checkedFunc && checkedFunc(radio);
 	}, [radio]);
 	return (
 		<MDBContainer className="m-0 pl-0 pt-3 d-flex flex-column justify-content-around bg-white">
@@ -20,7 +20,7 @@ const CustomRadioButton = ({ items, checkedFunc = () => {} }) => {
 								outline: 'none',
 								marginRight: 10,
 							}}
-							onClick={() => setRadio(v?.value)}
+							onClick={() => radio !== v?.value && setRadio(v?.value)}
 						/>
 						<p style={{ fontSize: 14 }}>{v.label}</p>
 					</Row>

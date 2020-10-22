@@ -130,20 +130,20 @@ const DISTRICTS = [
 	],
 ];
 const PHONE_BRAND_LIST = [
-	{ label: 'Apple', value: 'apple' },
-	{ label: 'Samsung', value: 'samsung' },
-	{ label: 'Opple', value: 'opple' },
-	{ label: 'Sony', value: 'sony' },
-	{ label: 'Nokia', value: 'nokia' },
-	{ label: 'Vismarth', value: 'vismart' },
-	{ label: 'BKAV', value: 'bkav' },
+	{ label: 'Apple', value: 0 },
+	{ label: 'Samsung', value: 1 },
+	{ label: 'Opple', value: 2 },
+	{ label: 'Sony', value: 3 },
+	{ label: 'Nokia', value: 4 },
+	{ label: 'Vismarth', value: 5 },
+	{ label: 'BKAV', value: 6 },
 ];
 const CATEGORY_LIST = [
-	{ label: 'Laptop', value: 'laptop' },
-	{ label: 'Smart Phone', value: 'smarth_phone' },
-	{ label: 'TV', value: 'tv' },
-	{ label: 'Smart Watch', value: 'smart_watch' },
-	{ label: 'Orthers', value: 'orthers' },
+	{ label: 'Laptop', value: 0 },
+	{ label: 'Smart Phone', value: 1 },
+	{ label: 'TV', value: 2 },
+	{ label: 'Smart Watch', value: 3 },
+	{ label: 'Orthers', value: 4 },
 ];
 const ITEMS_ORDER_LIST = [
 	{ label: 'Price High To Low', value: 0 },
@@ -158,6 +158,7 @@ const ITEM_COLORS = [
 	{ label: 'Blue', value: 3 },
 	{ label: 'Yellow', value: 4 },
 ];
+
 export {
 	BASE_URL,
 	CITY,

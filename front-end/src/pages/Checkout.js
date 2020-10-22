@@ -34,7 +34,7 @@ const Checkout = () => {
 		setItems(data);
 	}, [data]);
 	return (
-		<Container fluid style={{ backgroundColor: '#E5F2FF' }}>
+		<Container fluid style={{ backgroundColor: '#E5F2FFA1' }}>
 			<Row className="title-container">
 				<p class="page-title">Checkout</p>
 			</Row>

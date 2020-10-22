@@ -144,7 +144,7 @@ const CustomCarouselItem = ({ item }) => {
 				fluid
 				className="carousel-item-container pt-3"
 			>
-				<Col className="p-2 pt-5 shadow4dp h-100 border justify-content-center">
+				<Col className="p-2 pt-5 shadow4dp h-100 border justify-content-center bg-white">
 					<Col className="carousel-item-container mt-3">
 						<Row className="justify-content-center align-items-center mt-4 w-100 m-0">
 							<p
@@ -190,7 +190,7 @@ const CustomCarouselItem = ({ item }) => {
 				fluid
 				className="carousel-item-container pt-3"
 			>
-				<Col className="p-2 pt-5 shadow4dp h-100 border justify-content-center">
+				<Col className="p-2 pt-5 shadow4dp h-100 border justify-content-center bg-white">
 					<Col className="carousel-item-container mt-3">
 						<Row className="justify-content-center align-items-center mt-4 w-100 m-0">
 							<p
@@ -236,7 +236,7 @@ const CustomCarouselItem = ({ item }) => {
 				fluid
 				className="carousel-item-container pt-3"
 			>
-				<Col className="p-2 pt-5 shadow4dp h-100 border justify-content-center">
+				<Col className="p-2 pt-5 shadow4dp h-100 border justify-content-center bg-white">
 					<Col className="carousel-item-container mt-3">
 						<Row className="justify-content-center align-items-center mt-4 w-100 m-0">
 							<p
@@ -280,7 +280,7 @@ const CustomCarouselItem = ({ item }) => {
 };
 
 const CustomIndicator = ({ onSelected, value }) => {
-	console.log('value ne', value);
+	// console.log('value ne', value);
 	return (
 		<Row className="justify-content-center align-items-center mt-5 h-25">
 			<Button
