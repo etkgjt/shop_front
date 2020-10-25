@@ -3,21 +3,21 @@ const initialState = {
 	loggedIn: false,
 	userInfo: {
 		email: '',
-		token: '',
 		name: '',
 		id: '',
+		token: '',
 	},
 };
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case REDUX.LOG_IN: {
-			return { ...state };
+			return { ...state, userInfo: action.payload, loggedIn: true };
 		}
 		case REDUX.LOG_OUT: {
-			return { ...state };
+			return { ...state, loggedIn: false };
 		}
 		case REDUX.CLEAR_DATA: {
-			return { ...state };
+			return initialState;
 		}
 		default: {
 			return state;

@@ -29,6 +29,7 @@ import { NavLink } from 'react-router-dom';
 import '../styles/forAll.css';
 import '../styles/material.css';
 import { MyStepper } from '../components';
+import { login } from '../redux/actions/userAction';
 
 const Cart = () => {
 	const data = useSelector((state) => state?.cartReducer?.items);
@@ -83,6 +84,7 @@ const ItemDetails = ({ product }) => {
 	const _handleSubItem = () => {
 		setAmountOfItem((amount) => amount - 1);
 	};
+	const modalRef = useRef();
 
 	useEffect(
 		useDebounce(() => {
@@ -96,7 +98,7 @@ const ItemDetails = ({ product }) => {
 		}, 0),
 		[amountOfItem]
 	);
-
+	const _handleModalPress = () => {};
 	return (
 		<Col>
 			<Row className="mb-4 pt-4">
@@ -120,13 +122,13 @@ const ItemDetails = ({ product }) => {
 									className="mb-3 text-muted text-uppercase small"
 									style={{ fontSize: 12 }}
 								>
-									{`BRAND: ${brand?.toUpperCase()}`}
+									{`BRAND: ${brand?.toString().toUpperCase()}`}
 								</p>
 								<p
 									className="mb-2 text-muted text-uppercase small"
 									style={{ fontSize: 12 }}
 								>
-									{`COLOR: ${color?.toUpperCase()}`}
+									{`COLOR: ${color?.toString().toUpperCase()}`}
 								</p>
 								<p
 									className="mb-3 text-muted text-uppercase small"
@@ -202,6 +204,7 @@ const ItemDetails = ({ product }) => {
 							</div>
 						</div>
 					</div>
+
 					<div class="d-flex justify-content-between align-items-center">
 						<div>
 							<Button
@@ -233,6 +236,7 @@ const ItemDetails = ({ product }) => {
 								</div>
 							</Button>
 							<Button
+								onClick={_handleModalPress}
 								color="secondary"
 								style={{
 									backgroundColor: 'transparent',

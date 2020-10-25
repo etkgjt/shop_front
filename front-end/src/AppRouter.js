@@ -16,6 +16,9 @@ import {
 	Checkout,
 	Confirmation,
 	PaymentMethod,
+	SignIn,
+	SignUp,
+	UserInfo,
 } from './pages';
 
 import { Provider } from 'react-redux';
@@ -25,6 +28,7 @@ import { Container, Row } from 'reactstrap';
 import './styles/footer.css';
 import './styles/appRoute.css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import MyModal from './components/MyModal';
 
 const AppRoute = () => {
 	let location = useLocation();
@@ -63,8 +67,11 @@ const AppRoute = () => {
 					<Route path="/confirmation" component={Confirmation} />
 					<Route path="/checkout" component={Checkout} />
 					<Route path="/payment" component={PaymentMethod} />
+					<Route path="/sign_in" component={SignIn} />
+					<Route path="/sign_up" component={SignUp} />
+					<Route path="/user_info" component={UserInfo} />
 				</Switch>
-
+				{/* <MyModal /> */}
 				<footer
 					className="box-shadow footer-background"
 					style={{ color: 'white' }}

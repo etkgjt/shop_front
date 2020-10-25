@@ -7,6 +7,7 @@ import '../styles/pageTitle.css';
 import '../styles/contact.css';
 import { Icon, TextField } from '@material-ui/core';
 import '../styles/material.css';
+import FullWidthTabs from './UserInfo';
 const Contact = memo(() => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -14,7 +15,7 @@ const Contact = memo(() => {
 	return (
 		<Container fluid className="p-0 mb-5">
 			<Container fluid className="background p-0 m-0">
-				<Container	
+				<Container
 					fluid
 					className="top-layer p-0 m-0 align-items-center justify-content-center d-flex flex-column"
 				>
@@ -145,6 +146,7 @@ const Contact = memo(() => {
 							</p>
 						</Col>
 					</Row>
+					
 				</Container>
 			</Container>
 		</Container>

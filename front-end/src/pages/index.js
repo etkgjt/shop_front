@@ -7,6 +7,9 @@ import Category from './Category';
 import Confirmation from './Confirmation';
 import Checkout from './Checkout';
 import PaymentMethod from './PaymentMethod';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import UserInfo from './UserInfo'
 export {
 	Cart,
 	Category,
@@ -17,4 +20,7 @@ export {
 	Confirmation,
 	Checkout,
 	PaymentMethod,
+	SignIn,
+	SignUp,
+	UserInfo
 };

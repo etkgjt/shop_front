@@ -26,6 +26,7 @@ import '../styles/material.css';
 import Icon from '@material-ui/core/Icon';
 import { Rating } from '@material-ui/lab';
 import { useSelector } from 'react-redux';
+import MyModal from '../components/MyModal';
 const data = [
 	{
 		name: 'Thermo Ball Etip Gloves',
@@ -509,7 +510,7 @@ const Home = memo(() => {
 			{/* <CustomCarousel fluid className = "large-margin" /> */}
 			<Intro />
 			<NewArrival />
-
+			<MyModal />
 			<CustomCarousel />
 			<Gallery />
 			<Popular />

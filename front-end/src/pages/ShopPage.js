@@ -46,6 +46,8 @@ import '../styles/forAll.css';
 import CustomRadioButton from '../components/CustomRadioButton';
 import { addToCart } from '../redux/actions/cartAction';
 
+import MyModal from '../components/MyModal';
+
 const MyRating = ({ value }) => {
 	return (
 		<Rating size="large" name="size-large" precision={0.5} value={value} />
@@ -142,7 +144,7 @@ const _renderItems = (dispatch, data) => {
 		<Col
 			className="px-3 mb-3 mt-1"
 			xl="4"
-			xs="4"
+			xs="6"
 			lg="6"
 			md="6"
 			sm="6"
@@ -158,6 +160,10 @@ const _renderItems = (dispatch, data) => {
 				>
 					<p className="text-center m-0 my-1">{item?.name}</p>
 					<p className="text-center m-0 my-1">{`$${item?.price}`}</p>
+					<p className="text-center m-0 my-1">{`Brand-${item?.brand}`}</p>
+					<p className="text-center m-0 my-1">{`Category-${item?.category}`}</p>
+					<p className="text-center m-0 my-1">{`Color-${item?.color}`}</p>
+
 					<MyRating value={item?.rating} />
 					<Row className="justify-content-center mt-2">
 						<Button
@@ -228,25 +234,29 @@ const ShopPage = memo(() => {
 			'colorFilter',
 			colorFilter
 		);
-		let tmp = [...productsDataRedux];
+		let tmp = [...data];
 		if (categoryFilter.length) {
-			let oldData = [...tmp];
+			tmp = [];
 			for (let i = 0; i < categoryFilter.length; i++) {
-				tmp = [
-					...oldData.filter((v) => v.category === categoryFilter[i].value),
-				];
+				tmp.push(
+					...[...data].filter(
+						(v) => v.category === categoryFilter[i].value
+					)
+				);
 			}
 		}
 		if (brandFilter.length) {
-			let oldData = [...tmp];
 			for (let i = 0; i < brandFilter.length; i++) {
-				tmp = [...oldData.filter((v) => v.brand === brandFilter[i].value)];
+				tmp.push(
+					...[...data].filter((v) => v.brand === brandFilter[i].value)
+				);
 			}
 		}
 		if (colorFilter.length) {
-			let oldData = [...tmp];
 			for (let i = 0; i < colorFilter.length; i++) {
-				tmp = [...oldData.filter((v) => v.color === colorFilter[i].value)];
+				tmp.push(
+					...[...data].filter((v) => v.color === colorFilter[i].value)
+				);
 			}
 		}
 		setData([...tmp]);
@@ -255,6 +265,7 @@ const ShopPage = memo(() => {
 	return (
 		<Container fluid className="gradient-background p-0">
 			{/* <CustomCarousel /> */}
+			<MyModal />
 			<TopAdCarousel />
 			<section className="shop-container">
 				<Container fluid className="w-75">

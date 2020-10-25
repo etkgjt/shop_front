@@ -7,7 +7,7 @@ const Category = memo(() => {
 	return (
 		<Container fluid>
 			<Row className="title-container">
-				<p class="page-title">Category</p>
+				<p className="page-title">Category</p>
 			</Row>
 		</Container>
 	);

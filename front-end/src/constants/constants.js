@@ -1,4 +1,4 @@
-const BASE_URL = 'www.abc.com'; //API url
+const BASE_URL = 'https://webbanhangapi.herokuapp.com/api'; //API url
 const CITY = [
 	'Hồ Chí Minh',
 	'Hà Nội',

@@ -25,6 +25,10 @@ import { Badge, Icon } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import '../styles/material.css';
 import reducers from '../redux/reducer/index';
+import { login } from '../redux/actions/userAction';
+import MyModal from '../components/MyModal';
+
+import SearchBar from './SearchBar';
 const data = [
 	{
 		path: '/',
@@ -109,7 +113,7 @@ const _renderDropDownItems = (data) => (
 		</NavLink>
 	</DropdownItem>
 );
-const NavigationBar = () => {
+const NavigationBar = ({ setShow }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [cartBadgeNum, setCartBadgeNum] = useState(0);
 	const numOfItems = useSelector((state) =>
@@ -119,6 +123,9 @@ const NavigationBar = () => {
 		if (numOfItems) setCartBadgeNum(numOfItems);
 	}, [numOfItems]);
 	const toggle = () => setIsOpen(!isOpen);
+	const { loggedIn } = useSelector((state) => state.userReducer);
+	console.log('loggedIn', loggedIn);
+
 	return (
 		<Navbar expand="md" light>
 			<NavbarBrand to="/">
@@ -130,12 +137,48 @@ const NavigationBar = () => {
 				</div>
 			</Collapse>
 			<Container className="icon_wrapper">
-				<Icon className="_icon" style={{ fontSize: 30 }}>
+				<Icon
+					onClick={() => setShow(true)}
+					className="_icon"
+					style={{ fontSize: 30 }}
+				>
 					search
 				</Icon>
-				<Icon className="_icon" style={{ fontSize: 30 }}>
-					person
-				</Icon>
+				{loggedIn ? (
+					<NavLink
+						exact
+						to="/user_info"
+						style={{ color: 'white' }}
+						activeStyle={{ color: 'black' }}
+					>
+						<Icon
+							// onClick={() =>
+							// 	MyModal.show(
+							// 		() => console.log('show ne'),
+							// 		<LoginRequestModal />
+							// 	)
+							// }
+							className="_icon"
+							style={{ fontSize: 30 }}
+						>
+							person
+						</Icon>
+					</NavLink>
+				) : (
+					<Icon
+						onClick={() =>
+							MyModal.show(
+								() => console.log('show ne'),
+								<LoginRequestModal />
+							)
+						}
+						className="_icon"
+						style={{ fontSize: 30 }}
+					>
+						person
+					</Icon>
+				)}
+
 				<NavLink
 					exact
 					to="/cart"
@@ -169,20 +212,67 @@ const NavigationBar = () => {
 		</Navbar>
 	);
 };
-const Header = memo(() => {
-	console.log('header render ??');
+const LoginRequestModal = () => {
+	return (
+		<Container
+			fluid
+			className="justify-content-center align-items-center d-flex flex-column"
+		>
+			<Row className="justify-content-center mt-5 mb-3">
+				<h4>Sign In</h4>
+			</Row>
+			<Row className="justify-content-center align-items-center d-flex w-75">
+				<p className="text-center">
+					Sign in to enjoy the benefits of shop account. If you haven’t
+					already created an account, you will be prompted to do so after
+					signing in.
+				</p>
+			</Row>
 
+			<NavLink
+				exact
+				// to="/checkout"
+				to={{
+					pathname: '/sign_in',
+					state: { data },
+				}}
+				className="w-100"
+				style={{
+					color: 'white',
+					textDecoration: 'none',
+				}}
+			>
+				<Button
+					className="button-container-box-shadow mb-5"
+					style={{
+						marginTop: 10,
+						color: 'white',
+						backgroundColor: '#4285f4',
+						color: 'white',
+						borderWidth: 0,
+						width: '100%',
+						height: 50,
+						borderRadius: 25,
+					}}
+				>
+					Sign In
+				</Button>
+			</NavLink>
+		</Container>
+	);
+};
+const Header = () => {
+	console.log('header render ??');
+	const [show, setShow] = useState(false);
 	return (
 		<Container
 			fluid
 			className="header-area header-container slideIn header-gradient-bg z-depth3"
 			style={{ color: 'white' }}
 		>
-			<div>
-				<NavigationBar />
-			</div>
+			<div>{show ? <SearchBar /> : <NavigationBar setShow={setShow} />}</div>
 		</Container>
 	);
-});
+};
 
 export default Header;
