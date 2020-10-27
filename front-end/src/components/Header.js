@@ -26,7 +26,7 @@ import { useSelector } from 'react-redux';
 import '../styles/material.css';
 import reducers from '../redux/reducer/index';
 import { login } from '../redux/actions/userAction';
-import MyModal from '../components/MyModal';
+import { MyModal, LoginRequestModal, SignInModal } from '../components';
 
 import SearchBar from './SearchBar';
 const data = [
@@ -167,10 +167,7 @@ const NavigationBar = ({ setShow }) => {
 				) : (
 					<Icon
 						onClick={() =>
-							MyModal.show(
-								() => console.log('show ne'),
-								<LoginRequestModal />
-							)
+							MyModal.show(() => console.log('show ne'), <SignInModal />)
 						}
 						className="_icon"
 						style={{ fontSize: 30 }}
@@ -212,55 +209,7 @@ const NavigationBar = ({ setShow }) => {
 		</Navbar>
 	);
 };
-const LoginRequestModal = () => {
-	return (
-		<Container
-			fluid
-			className="justify-content-center align-items-center d-flex flex-column"
-		>
-			<Row className="justify-content-center mt-5 mb-3">
-				<h4>Sign In</h4>
-			</Row>
-			<Row className="justify-content-center align-items-center d-flex w-75">
-				<p className="text-center">
-					Sign in to enjoy the benefits of shop account. If you haven’t
-					already created an account, you will be prompted to do so after
-					signing in.
-				</p>
-			</Row>
 
-			<NavLink
-				exact
-				// to="/checkout"
-				to={{
-					pathname: '/sign_in',
-					state: { data },
-				}}
-				className="w-100"
-				style={{
-					color: 'white',
-					textDecoration: 'none',
-				}}
-			>
-				<Button
-					className="button-container-box-shadow mb-5"
-					style={{
-						marginTop: 10,
-						color: 'white',
-						backgroundColor: '#4285f4',
-						color: 'white',
-						borderWidth: 0,
-						width: '100%',
-						height: 50,
-						borderRadius: 25,
-					}}
-				>
-					Sign In
-				</Button>
-			</NavLink>
-		</Container>
-	);
-};
 const Header = () => {
 	console.log('header render ??');
 	const [show, setShow] = useState(false);

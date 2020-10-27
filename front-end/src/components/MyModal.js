@@ -7,7 +7,7 @@ import { Container } from '@material-ui/core';
 
 class MyModal extends React.PureComponent {
 	static instance = null;
-	static show = (cb, children = {}) => {
+	static show = (cb = () => {}, children = {}) => {
 		cb();
 		if (MyModal.instance) {
 			console.log('Modal show ne');
@@ -18,8 +18,9 @@ class MyModal extends React.PureComponent {
 	};
 	static hide = (onHideCb = () => {}) => {
 		if (MyModal.instance) {
-			onHideCb();
 			MyModal.instance.setState({ visible: false });
+			console.log('modal hide ne');
+			onHideCb();
 		}
 	};
 
@@ -48,15 +49,13 @@ class MyModal extends React.PureComponent {
 				className="justify-content-center align-items-center d-flex"
 			>
 				<Fade in={MyModal?.instance?.state?.visible || false}>
-					<Container className="justify-content-center align-items-center bg-white w-25">
-						{MyModal?.instance?.state?.children ? (
-							MyModal?.instance?.state?.children
-						) : (
-							<div>
-								<h1>This not have children to render</h1>
-							</div>
-						)}
-					</Container>
+					{MyModal?.instance?.state?.children ? (
+						MyModal?.instance?.state?.children
+					) : (
+						<div>
+							<h1>This not have children to render</h1>
+						</div>
+					)}
 				</Fade>
 			</Modal>
 		);

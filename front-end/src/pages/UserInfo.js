@@ -9,6 +9,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import { Button, Container, Divider, TextField } from '@material-ui/core';
 import { Col, Row } from 'reactstrap';
+import { useSelector } from 'react-redux';
 
 function a11yProps(index) {
 	return {
@@ -32,44 +33,50 @@ export default function FullWidthTabs() {
 	const handleChangeIndex = (index) => {
 		setValue(index);
 	};
-
+	const { loggedIn } = useSelector((state) => state.userReducer);
 	return (
 		<Container className="mt-5">
-			<Container className="my-5 pb-5">
-				<Row className="my-5" />
-				<Row className="my-5">
-					<img
-						src="https://plus24h.com/upload/images/t%E1%BA%A3i%20xu%E1%BB%91ng%20(1).png"
-						style={{ width: 300, height: 300 }}
-					/>
-				</Row>
-				<AppBar position="static" color="transparent">
-					<Tabs
-						value={value}
-						onChange={handleChange}
-						indicatorColor="primary"
-						textColor="primary"
-						variant="fullWidth"
+			{loggedIn ? (
+				<Container className="my-5 pb-5">
+					<Row className="my-5" />
+					<Row className="my-5">
+						<img
+							src="https://plus24h.com/upload/images/t%E1%BA%A3i%20xu%E1%BB%91ng%20(1).png"
+							style={{ width: 300, height: 300 }}
+						/>
+					</Row>
+					<AppBar position="static" color="transparent">
+						<Tabs
+							value={value}
+							onChange={handleChange}
+							indicatorColor="primary"
+							textColor="primary"
+							variant="fullWidth"
+						>
+							<Tab label="Profile" {...a11yProps(0)} />
+							<Tab label="History" {...a11yProps(1)} />
+							{/* <Tab label="Item Three" {...a11yProps(2)} /> */}
+						</Tabs>
+					</AppBar>
+					<SwipeableViews
+						axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+						index={value}
+						onChangeIndex={handleChangeIndex}
+						className="z-depth2"
 					>
-						<Tab label="Profile" {...a11yProps(0)} />
-						<Tab label="History" {...a11yProps(1)} />
-						{/* <Tab label="Item Three" {...a11yProps(2)} /> */}
-					</Tabs>
-				</AppBar>
-				<SwipeableViews
-					axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-					index={value}
-					onChangeIndex={handleChangeIndex}
-					className="z-depth2"
-				>
-					<TabPanel value={value} index={0} dir={theme.direction}>
-						<UserInfoTable />
-					</TabPanel>
-					<TabPanel value={value} index={1} dir={theme.direction}>
-						<h1>Item 1</h1>
-					</TabPanel>
-				</SwipeableViews>
-			</Container>
+						<TabPanel value={value} index={0} dir={theme.direction}>
+							<UserInfoTable />
+						</TabPanel>
+						<TabPanel value={value} index={1} dir={theme.direction}>
+							<h1>Item 1</h1>
+						</TabPanel>
+					</SwipeableViews>
+				</Container>
+			) : (
+				<h1 className="mt-5 pt-5 text-center w-100">
+					You must to loggin to use this feature
+				</h1>
+			)}
 		</Container>
 	);
 }

@@ -510,7 +510,6 @@ const Home = memo(() => {
 			{/* <CustomCarousel fluid className = "large-margin" /> */}
 			<Intro />
 			<NewArrival />
-			<MyModal />
 			<CustomCarousel />
 			<Gallery />
 			<Popular />

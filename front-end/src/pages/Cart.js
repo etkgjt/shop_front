@@ -25,10 +25,15 @@ import {
 } from '../redux/actions/cartAction';
 import useDebounce from '../untils/debounce';
 import _ from 'lodash';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import '../styles/forAll.css';
 import '../styles/material.css';
-import { MyStepper } from '../components';
+import {
+	LoginRequestModal,
+	MyStepper,
+	MyModal,
+	SignInModal,
+} from '../components';
 import { login } from '../redux/actions/userAction';
 
 const Cart = () => {
@@ -279,6 +284,8 @@ const ItemDetails = ({ product }) => {
 const SumaryCheckout = ({ items }) => {
 	const [isFaded, setIsFaded] = useState(false);
 	const [data, setData] = useState(items ? items : []);
+	const { loggedIn } = useSelector((state) => state.userReducer);
+	const history = useHistory();
 	const ship = 10;
 	const discount = 0;
 	useEffect(() => {
@@ -312,23 +319,9 @@ const SumaryCheckout = ({ items }) => {
 							{_caculateTotal() + ship}
 						</small>
 					</ListGroupItem>
-
-					<Button
-						className="button-container-box-shadow"
-						style={{
-							marginTop: 10,
-							color: 'white',
-							backgroundColor: '#4285f4',
-							color: 'white',
-							borderWidth: 0,
-							width: '100%',
-							height: 50,
-							borderRadius: 25,
-						}}
-					>
+					{loggedIn ? (
 						<NavLink
 							exact
-							// to="/checkout"
 							to={{
 								pathname: '/checkout',
 								state: { data },
@@ -339,9 +332,43 @@ const SumaryCheckout = ({ items }) => {
 								textDecoration: 'none',
 							}}
 						>
-							Next Step
+							<Button
+								className="button-container-box-shadow"
+								style={{
+									marginTop: 10,
+									color: 'white',
+									backgroundColor: '#4285f4',
+									color: 'white',
+									borderWidth: 0,
+									width: '100%',
+									height: 50,
+									borderRadius: 25,
+								}}
+							>
+								Next Step
+							</Button>
 						</NavLink>
-					</Button>
+					) : (
+						<Button
+							onClick={() =>
+								MyModal.show(() => {},
+								<SignInModal onSignInSuccess={() => history.push('/checkout', { data })} />)
+							}
+							className="button-container-box-shadow"
+							style={{
+								marginTop: 10,
+								color: 'white',
+								backgroundColor: '#4285f4',
+								color: 'white',
+								borderWidth: 0,
+								width: '100%',
+								height: 50,
+								borderRadius: 25,
+							}}
+						>
+							Next Step
+						</Button>
+					)}
 
 					<Button
 						outline

@@ -10,7 +10,7 @@ const CustomRadioButton = ({ items, initValue, checkedFunc = () => {} }) => {
 		<MDBContainer className="m-0 pl-0 pt-3 d-flex flex-column justify-content-around bg-white">
 			{items && items.length ? (
 				items.map((v, i) => (
-					<Row className="ml-1 pl-3 mt-1">
+					<Row className="ml-1 pl-3 mt-1" key={`${i}-${v?.value}`}>
 						<Button
 							className="custom-radio-button"
 							style={{

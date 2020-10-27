@@ -14,6 +14,7 @@ import '../styles/material.css';
 import { login, saveUserInfoRedux } from '../redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { MyModal, IndicatorModal } from '../components';
 
 const SignIn = () => {
 	const dispatch = useDispatch();
@@ -22,11 +23,14 @@ const SignIn = () => {
 	const history = useHistory();
 	const _handleSignInClick = async () => {
 		try {
+			MyModal.show(() => {}, <IndicatorModal />);
 			const token = await login(email, password);
 			saveUserInfoRedux(dispatch, {});
 			console.log('long token', token);
-			gotoProfile();
+
+			MyModal.hide(gotoProfile());
 		} catch (err) {
+			MyModal.hide(() => alert('wrong'));
 			console.log('long signin err', err);
 		}
 	};
@@ -101,12 +105,21 @@ const SignIn = () => {
 						<Row className="justify-content-around align-items-center">
 							<Col lg="5" md="5">
 								<Button
+									// disabled={
+									// 	validateEmail(email) && validatePassword(password)
+									// 		? false
+									// 		: true
+									// }
 									onClick={_handleSignInClick}
 									className="button-container-box-shadow"
 									style={{
 										marginTop: 10,
 										color: 'white',
-										backgroundColor: '#4285f4',
+										backgroundColor:
+											validateEmail(email) &&
+											validatePassword(password)
+												? '#4285f4'
+												: '#7a7a7a',
 										color: 'white',
 										borderWidth: 0,
 										borderRadius: 25,

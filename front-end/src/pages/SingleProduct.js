@@ -7,6 +7,7 @@ import { MDBContainer, MDBInput, MDBRating } from 'mdbreact';
 import '../styles/singleProduct.css';
 import '../styles/material.css';
 import { Rating } from '@material-ui/lab';
+import { MyModal } from '../components';
 const SingleProduct = memo(() => {
 	console.log('product render ne');
 	const info = {
@@ -22,7 +23,7 @@ const SingleProduct = memo(() => {
 	return (
 		<Container fluid className="gradient-background mb-5">
 			<Row className="title-container mt-5">
-				<p class="page-title">Product Details</p>
+				<p className="page-title">Product Details</p>
 			</Row>
 			<Container>
 				<h2 className="mt-5">Main Section</h2>

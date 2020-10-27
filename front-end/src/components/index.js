@@ -5,6 +5,11 @@ import CustomCarousel from './CustomCarousel';
 import MyCheckboxList from './MyCheckedBoxList';
 import MyStepper from './MyStepper';
 import TopAdCarousel from './TopAdCarousel';
+import MyModal from './MyModal';
+import SearchBar from './SearchBar';
+import LoginRequestModal from './LoginRequestModal';
+import IndicatorModal from './IndicatorModal';
+import SignInModal from './SignInModal';
 export {
 	Footer,
 	Header,
@@ -13,4 +18,9 @@ export {
 	MyCheckboxList,
 	MyStepper,
 	TopAdCarousel,
+	MyModal,
+	SearchBar,
+	LoginRequestModal,
+	IndicatorModal,
+	SignInModal,
 };

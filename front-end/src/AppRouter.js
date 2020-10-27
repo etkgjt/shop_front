@@ -57,6 +57,7 @@ const AppRoute = () => {
 						</Switch>
 					</CSSTransition>
 				</TransitionGroup> */}
+				<MyModal />
 				<Switch>
 					<Route exact={true} path="/" component={Home} />
 					<Route path="/single_product" component={SingleProduct} />
@@ -71,7 +72,7 @@ const AppRoute = () => {
 					<Route path="/sign_up" component={SignUp} />
 					<Route path="/user_info" component={UserInfo} />
 				</Switch>
-				{/* <MyModal /> */}
+
 				<footer
 					className="box-shadow footer-background"
 					style={{ color: 'white' }}

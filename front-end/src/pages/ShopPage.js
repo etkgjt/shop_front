@@ -46,8 +46,6 @@ import '../styles/forAll.css';
 import CustomRadioButton from '../components/CustomRadioButton';
 import { addToCart } from '../redux/actions/cartAction';
 
-import MyModal from '../components/MyModal';
-
 const MyRating = ({ value }) => {
 	return (
 		<Rating size="large" name="size-large" precision={0.5} value={value} />
@@ -142,12 +140,11 @@ const _renderItems = (dispatch, data) => {
 
 	return tempArr.map((item, idx) => (
 		<Col
-			className="px-3 mb-3 mt-1"
+			className="p-3 mt-1"
 			xl="4"
-			xs="6"
-			lg="6"
-			md="6"
-			sm="6"
+			lg="12"
+			md="12"
+			sm="12"
 			key={`${item.name}-${idx}`}
 		>
 			<Col className="button-container-box-shadow">
@@ -165,36 +162,41 @@ const _renderItems = (dispatch, data) => {
 					<p className="text-center m-0 my-1">{`Color-${item?.color}`}</p>
 
 					<MyRating value={item?.rating} />
-					<Row className="justify-content-center mt-2">
-						<Button
-							className="button-thin-shadow"
-							style={{
-								borderRadius: 20,
-								backgroundColor: '#4285F4',
-								color: 'white',
-								borderWidth: 0,
-								marginRight: 20,
-								width: 100,
-								fontSize: 13,
-							}}
-							onClick={() => addToCart(dispatch, item)}
-						>
-							Add to cart
-						</Button>
-						<Button
-							className="button-thin-shadow"
-							style={{
-								borderRadius: 20,
-								borderWidth: 2,
-								borderColor: '#4285F4',
-								backgroundColor: 'white',
-								color: '#4285F4',
-								width: 100,
-								fontSize: 13,
-							}}
-						>
-							Detail
-						</Button>
+					<Row className="justify-content-around p-0 w-100">
+						<Col lg="5" md="12" sm="12" className="w-100 p-0">
+							<Button
+								className="button-thin-shadow w-100"
+								style={{
+									borderRadius: 20,
+									backgroundColor: '#4285F4',
+									color: 'white',
+									borderWidth: 0,
+									width: '100%',
+									fontSize: 13,
+									height: 40,
+								}}
+								onClick={() => addToCart(dispatch, item)}
+							>
+								Add to cart
+							</Button>
+						</Col>
+						<Col lg="5" md="12" sm="12" className="p-0 w-100">
+							<Button
+								className="button-thin-shadow"
+								style={{
+									borderRadius: 20,
+									borderWidth: 2,
+									borderColor: '#4285F4',
+									backgroundColor: 'white',
+									color: '#4285F4',
+									width: '100%',
+									height: 40,
+									fontSize: 13,
+								}}
+							>
+								Detail
+							</Button>
+						</Col>
 					</Row>
 				</Col>
 			</Col>
@@ -265,12 +267,12 @@ const ShopPage = memo(() => {
 	return (
 		<Container fluid className="gradient-background p-0">
 			{/* <CustomCarousel /> */}
-			<MyModal />
+
 			<TopAdCarousel />
 			<section className="shop-container">
 				<Container fluid className="w-75">
 					<Row>
-						<Col lg="3" md="3">
+						<Col lg="3" md="6">
 							<FilterPanel
 								orderBy={orderBy}
 								categoryFilter={categoryFilter}
@@ -284,7 +286,7 @@ const ShopPage = memo(() => {
 								setColorFilter={setColorFilter}
 							/>
 						</Col>
-						<Col lg="9" md="9" classNam="p-0">
+						<Col lg="9" md="6" classNam="p-0">
 							<Row className="m-0 p-0 pt-5">
 								{_renderItems(dispatch, data)}
 							</Row>

@@ -8,6 +8,8 @@ import '../styles/contact.css';
 import { Icon, TextField } from '@material-ui/core';
 import '../styles/material.css';
 import FullWidthTabs from './UserInfo';
+import { MyModal } from '../components';
+
 const Contact = memo(() => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -146,9 +148,9 @@ const Contact = memo(() => {
 							</p>
 						</Col>
 					</Row>
-					
 				</Container>
 			</Container>
+			{/* <MyModal /> */}
 		</Container>
 	);
 });
