@@ -8,147 +8,149 @@ import '../styles/confirmation.css';
 import { Col } from 'reactstrap';
 import { Table } from 'reactstrap';
 import { MyStepper } from '../components';
-const ConfirmationDetails = {
-	orderInfo: [
-		{ label: 'Order Number', value: '0332511060' },
-		{ label: 'Data', value: 'Oct 03, 2017' },
-		{ label: 'Total', value: 'USD 2210' },
-		{ label: 'Payment Method', value: 'Visa' },
-	],
-	billAddress: [
-		{ label: 'Street', value: 'Pham Van Dong' },
-		{ label: 'City', value: 'Ho Chi Minh City' },
-		{ label: 'Country', value: 'Viet Nam' },
-		{ label: 'Postcode', value: '22789' },
-	],
-	shipAddress: [
-		{ label: 'Street', value: 'Dien Bien Phu' },
-		{ label: 'City', value: 'Ho Chi Minh City' },
-		{ label: 'Country', value: 'Viet Nam' },
-		{ label: 'Postcode', value: '22789' },
-	],
-};
-const dataTable = [
-	{ product: 'Iphone 7', price: 100, amount: 2 },
-	{ product: 'Iphone 8', price: 200, amount: 3 },
-	{ product: 'Iphone 10', price: 300, amount: 1 },
-	{ product: 'Iphone XR', price: 400, amount: 2 },
-	{ product: 'Iphone XS', price: 500, amount: 2 },
-];
-const SingleConfirmationDetails = ({ title, details = [] }) => {
-	console.log('long details', details);
-	return (
-		<Col lg="6" lx="4" className="single_confirmation_container">
-			<div class="sigle_confirmation_details shadow1 bg-white">
-				<Col>
-					<Row className="mb-3">
-						<h4>{title}</h4>
-					</Row>
-					{details?.map((item, index) => (
-						<Row
-							className="details_row"
-							key={`${item?.label}${item?.value}-${index}`}
-						>
-							<p class="details_label">{item?.label}</p>
-							<span>{item?.value}</span>
-						</Row>
-					))}
-				</Col>
-			</div>
-		</Col>
-	);
-};
-const TableDetails = memo(({ data }) => (
-	<Row className="shadow1 bg-white">
-		<Col lg="12">
-			<div className="table_container">
-				<div>
-					<h4>Order Details</h4>
-				</div>
-
-				<Table borderless striped className="details_table">
-					<thead>
-						<tr>
-							<th className="column_title">Product</th>
-							<th className="column_title">Quantity</th>
-							<th className="column_title">Total</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						{data?.map((item, index) => (
-							<tr>
-								<td className="product_name">{item?.product}</td>
-								<td>x{item?.amount}</td>
-								<td className="product_name">
-									{item?.price * item?.amount}
-								</td>
-							</tr>
-						))}
-						<tr>
-							<td className="column_title">Subtotal</td>
-							<td></td>
-							<td className="product_name">
-								{data.reduce((x, y) => {
-									return (x += y.amount * y.price);
-								}, 0)}
-							</td>
-						</tr>
-						<tr>
-							<td className="column_title">Shipping</td>
-							<td></td>
-							<td className="product_name">$1.000</td>
-						</tr>
-						<tr>
-							<td className="column_title">Quantity</td>
-							<td></td>
-							<td className="product_name">
-								$
-								{data.reduce((x, y) => {
-									return (x += y.amount * y.price);
-								}, 0) + 1000}
-							</td>
-						</tr>
-					</tbody>
-				</Table>
-			</div>
-		</Col>
-	</Row>
-));
+import '../styles/material.css';
+import { Divider } from '@material-ui/core';
 const Confirmation = memo(() => {
 	const [isOpen, setIsOpen] = useState(false);
 	console.log('load ne');
 	const toggle = () => setIsOpen(!isOpen);
 	return (
-		<Container fluid style={{ backgroundColor: '#e3f2fd66' }}>
+		<Container fluid style={{ backgroundColor: '#F4FAFE' }} className="pb-5">
 			<Row className="title-container mt-5">
 				<p class="page-title">Confirmation</p>
 			</Row>
-			<MyStepper activeStep={2} />
-			<section class="confirmation-container">
-				<Container>
+			<MyStepper activeStep={3} />
+			<Container className="pb-5">
+				<Row className="w-100 justify-content-center">
+					<h3>Order Confirmation</h3>
+				</Row>
+				<Container className="z-depth2 p-5 bg-white">
 					<Row>
-						<Col lg="12">
-							<div className="confirmation_title">
-								<span>Thank you. Your order has been received.</span>
-							</div>
+						<Col lg="6" md="10">
+							<Row className="justify-content-between px-4">
+								<h6>Your Infomation</h6>
+								<p style={{ color: '#4489FD' }}>Edit</p>
+							</Row>
+							<p
+								style={{
+									letterSpacing: 8,
+									color: '#D1D6DA',
+									fontWeight: 'bold',
+									overflow: 'hidden',
+									display: 'block',
+									lineHeight: '0.5 rem',
+									textAlign: 'center',
+								}}
+							>
+								----------------------------------
+							</p>
+							<Row className="justify-content-between px-4">
+								<h6>Name: </h6>
+								<p>Join Doe</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Email: </h6>
+								<p>OurCompany@gmail.com</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Phone Number: </h6>
+								<p>+20 019 823 2332</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Name: </h6>
+								<p>Join Doe</p>
+							</Row>
 						</Col>
-						<SingleConfirmationDetails
-							title="Order Info"
-							details={ConfirmationDetails.orderInfo}
-						/>
-						<SingleConfirmationDetails
-							title="Billing Address"
-							details={ConfirmationDetails.billAddress}
-						/>
-						<SingleConfirmationDetails
-							title="Shipping Address"
-							details={ConfirmationDetails.shipAddress}
-						/>
+						<Col lg="6" md="10">
+							<Row className="justify-content-between px-4">
+								<h6>Shipping Address</h6>
+								<p style={{ color: '#4489FD' }}>Edit</p>
+							</Row>
+							<p
+								style={{
+									letterSpacing: 8,
+									color: '#D1D6DA',
+									fontWeight: 'bold',
+									overflow: 'hidden',
+									display: 'block',
+									lineHeight: '0.5 rem',
+									textAlign: 'center',
+								}}
+							>
+								--------------------------------
+							</p>
+							<Row className="justify-content-between px-4">
+								<h6>City: </h6>
+								<p>Ho Chi Minh</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>District: </h6>
+								<p>Quan 1</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Address </h6>
+								<p>127/135A Dien Bien Phu</p>
+							</Row>
+						</Col>
 					</Row>
-					<TableDetails data={dataTable} />
+					<Row className="mt-3">
+						<Col lg="6" md="10">
+							<Row className="justify-content-between px-4">
+								<h6>Payment</h6>
+								<p style={{ color: '#4489FD' }}>Edit</p>
+							</Row>
+							<p
+								style={{
+									letterSpacing: 8,
+									color: '#D1D6DA',
+									fontWeight: 'bold',
+									overflow: 'hidden',
+									display: 'block',
+									lineHeight: '0.5 rem',
+									textAlign: 'center',
+								}}
+							>
+								--------------------------------
+							</p>
+						</Col>
+						<Col lg="6" md="10">
+							<Row className="justify-content-between px-4">
+								<h6>Order Details</h6>
+								<p style={{ color: '#4489FD' }}>Edit</p>
+							</Row>
+							<p
+								style={{
+									letterSpacing: 8,
+									color: '#D1D6DA',
+									fontWeight: 'bold',
+									overflow: 'hidden',
+									display: 'block',
+									lineHeight: '0.5 rem',
+									textAlign: 'center',
+								}}
+							>
+								--------------------------------
+							</p>
+							<Row className="justify-content-between px-4">
+								<h6>Name: </h6>
+								<p>Join Doe</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Email: </h6>
+								<p>OurCompany@gmail.com</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Phone Number: </h6>
+								<p>+20 019 823 2332</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Name: </h6>
+								<p>Join Doe</p>
+							</Row>
+						</Col>
+					</Row>
 				</Container>
-			</section>
+			</Container>
 		</Container>
 	);
 });

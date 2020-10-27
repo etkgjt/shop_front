@@ -2,25 +2,33 @@ import Cart from './Cart';
 import Home from './Home';
 import SingleProduct from './SingleProduct';
 import Contact from './Contact';
-import ShopPage from './ShopPage';
+
 import Category from './Category';
 import Confirmation from './Confirmation';
 import Checkout from './Checkout';
 import PaymentMethod from './PaymentMethod';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import UserInfo from './UserInfo'
+import UserInfo from './UserInfo';
+import Accessories from './Accessories';
+import Laptop from './Laptop';
+import SmartPhone from './SmartPhone';
+import Tablet from './Tablet';
+
 export {
 	Cart,
 	Category,
 	Home,
 	SingleProduct,
-	ShopPage,
 	Contact,
 	Confirmation,
 	Checkout,
 	PaymentMethod,
 	SignIn,
 	SignUp,
-	UserInfo
+	UserInfo,
+	Accessories,
+	Laptop,
+	SmartPhone,
+	Tablet,
 };

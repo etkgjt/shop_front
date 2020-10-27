@@ -110,9 +110,9 @@ export default function CustomizedSteppers({ activeStep }) {
 	const classes = useStyles();
 	const steps = getSteps();
 	return (
-		<div className={classes.root} style={{ backgroundColor: '#f4fafe66' }}>
+		<div className={classes.root} style={{ backgroundColor: '#F4FAFE' }}>
 			<Stepper
-				style={{ backgroundColor: '#f4f3fe66' }}
+				style={{ backgroundColor: '#F4FAFE' }}
 				alternativeLabel
 				activeStep={activeStep}
 				connector={<QontoConnector />}

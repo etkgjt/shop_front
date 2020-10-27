@@ -27,14 +27,14 @@ import { MyStepper } from '../components';
 const Checkout = () => {
 	let { state } = useLocation();
 
-	let { data } = state;
+	let { data } = state ? state : {};
 	console.log('state', data);
 	const [items, setItems] = useState(data ? data : []);
 	useEffect(() => {
 		setItems(data);
 	}, [data]);
 	return (
-		<Container fluid style={{ backgroundColor: '#E5F2FFA1' }}>
+		<Container fluid style={{ backgroundColor: '#F4FAFE' }}>
 			<Row className="title-container">
 				<p class="page-title">Checkout</p>
 			</Row>
@@ -80,60 +80,60 @@ const Checkout = () => {
 
 							<Row className="justify-content-around align-items-center">
 								<Col lg="5" md="5">
-									<Button
-										className="button-container-box-shadow"
+									<NavLink
+										exact
+										to="/cart"
 										style={{
-											marginTop: 10,
-											color: 'white',
-											backgroundColor: '#fff',
-											borderColor: '#4285f4',
-
-											borderWidth: 2,
-											borderRadius: 25,
-											width: '100%',
-											height: 50,
+											color: '#4285f4',
+											textDecoration: 'none',
 										}}
 									>
-										<NavLink
-											exact
-											to="/cart"
+										<Button
+											className="button-container-box-shadow"
 											style={{
+												marginTop: 10,
 												color: '#4285f4',
-												textDecoration: 'none',
+												backgroundColor: '#fff',
+												borderColor: '#4285f4',
+
+												borderWidth: 2,
+												borderRadius: 25,
+												width: '100%',
+												height: 50,
 											}}
 										>
 											Back
-										</NavLink>
-									</Button>
+										</Button>
+									</NavLink>
 								</Col>
 								<Col lg="5" md="5">
-									<Button
-										className="button-container-box-shadow"
+									<NavLink
+										exact
+										to={{
+											pathname: '/payment',
+											state: { data },
+										}}
 										style={{
-											marginTop: 10,
 											color: 'white',
-											backgroundColor: '#4285f4',
-											color: 'white',
-											borderWidth: 0,
-											borderRadius: 25,
-											width: '100%',
-											height: 50,
+											textDecoration: 'none',
 										}}
 									>
-										<NavLink
-											exact
-											to={{
-												pathname: '/confirmation',
-												state: { data },
-											}}
+										<Button
+											className="button-container-box-shadow"
 											style={{
+												marginTop: 10,
 												color: 'white',
-												textDecoration: 'none',
+												backgroundColor: '#4285f4',
+												color: 'white',
+												borderWidth: 0,
+												borderRadius: 25,
+												width: '100%',
+												height: 50,
 											}}
 										>
 											Next step
-										</NavLink>
-									</Button>
+										</Button>
+									</NavLink>
 								</Col>
 							</Row>
 						</form>

@@ -506,7 +506,7 @@ const Home = memo(() => {
 	console.log('homepage render ne');
 
 	return (
-		<Container fluid className="p-0 gradient-background ">
+		<Container fluid className="p-0 pb-5 gradient-background ">
 			{/* <CustomCarousel fluid className = "large-margin" /> */}
 			<Intro />
 			<NewArrival />

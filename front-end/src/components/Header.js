@@ -35,21 +35,24 @@ const data = [
 		title: 'Home',
 	},
 	{
-		path: '/shop_page',
-		title: 'Shop',
+		path: '/laptop',
+		title: 'Laptop',
 	},
 	{
-		path: '/single_product',
-		title: 'Product',
+		path: '/smart_phone',
+		title: 'Smart Phone',
+	},
+	{
+		path: '/tablet',
+		title: 'Tablet',
+	},
+	{
+		path: '/accessories',
+		title: 'Accessories',
 	},
 	{
 		path: '/contact',
 		title: 'Contact',
-	},
-
-	{
-		path: '/category',
-		title: 'Category',
 	},
 ];
 const _renderNavItem = (data) => (

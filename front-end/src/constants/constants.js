@@ -129,14 +129,27 @@ const DISTRICTS = [
 		'Phú Nhuận',
 	],
 ];
-const PHONE_BRAND_LIST = [
-	{ label: 'Apple', value: 0 },
+const LAPTOP_BRAND = [
+	{ label: 'Asus', value: 0 },
+	{ label: 'MSI', value: 1 },
+	{ label: 'Dell', value: 2 },
+	{ lebel: 'HPAA', value: 3 },
+];
+const SMART_PHONE_BRAND = [
+	{ label: 'Iphone', value: 0 },
+	{ label: 'OPPO', value: 1 },
+	{ label: 'Xiaomi', value: 2 },
+	{ label: 'realme', value: 3 },
+];
+const TABLET_BRAND = [
+	{ label: 'IPad', value: 0 },
 	{ label: 'Samsung', value: 1 },
-	{ label: 'Opple', value: 2 },
-	{ label: 'Sony', value: 3 },
-	{ label: 'Nokia', value: 4 },
-	{ label: 'Vismarth', value: 5 },
-	{ label: 'BKAV', value: 6 },
+	{ label: 'Lennnovo', value: 2 },
+];
+const ACCESSORIES_BRAND = [
+	{ label: 'SDP', value: 0 },
+	{ label: 'Cap', value: 1 },
+	{ label: 'Tainghe', value: 2 },
 ];
 const CATEGORY_LIST = [
 	{ label: 'Laptop', value: 0 },
@@ -163,7 +176,10 @@ export {
 	BASE_URL,
 	CITY,
 	DISTRICTS,
-	PHONE_BRAND_LIST,
+	LAPTOP_BRAND,
+	SMART_PHONE_BRAND,
+	TABLET_BRAND,
+	ACCESSORIES_BRAND,
 	CATEGORY_LIST,
 	ITEMS_ORDER_LIST,
 	ITEM_COLORS,

@@ -48,7 +48,7 @@ const Cart = () => {
 	return (
 		<Container
 			fluid
-			className="mb-5"
+			className="pb-5"
 			style={{ backgroundColor: '#e3f2fd66' }}
 		>
 			<Row className="title-container mt-5">
@@ -81,7 +81,7 @@ const Cart = () => {
 };
 const ItemDetails = ({ product }) => {
 	const dispatch = useDispatch();
-	const { name, color, brand, size, amount, price, id } = product;
+	const { name, color, brand, size, amount, price, id, img } = product;
 	const [amountOfItem, setAmountOfItem] = useState(amount ? amount : 0);
 	const _handleAddItem = () => {
 		setAmountOfItem((amount) => amount + 1);
@@ -108,10 +108,7 @@ const ItemDetails = ({ product }) => {
 		<Col>
 			<Row className="mb-4 pt-4">
 				<Col md="5" lg="3" xl="3">
-					<img
-						className="img-fluid w-100"
-						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-					/>
+					<img className="img-fluid w-100" src={img?.[0]} />
 				</Col>
 				<Col md="7" lg="9" xl="9">
 					<div className="mb-0 pl-1">

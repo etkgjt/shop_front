@@ -2,6 +2,7 @@ import {
 	Button,
 	Divider,
 	FormControl,
+	Icon,
 	InputLabel,
 	MenuItem,
 	Select,
@@ -48,6 +49,19 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 	return (
 		<Container className="d-flex justify-content-center align-items-center w-75">
 			<Col lg="5" md="10" sm="10" className="mt-5 z-depth3 bg-white w-50">
+				<Icon
+					onClick={() => MyModal.hide()}
+					className="_icon"
+					style={{
+						fontSize: 30,
+						position: 'absolute',
+						right: -30,
+						top: -30,
+						color: 'white',
+					}}
+				>
+					highlight_off_outlined
+				</Icon>
 				<form className="m-5">
 					<Row className="justify-content-center p-0 m-0">
 						<h3 style={{ color: '#4F4F4F' }}>Sign In</h3>
@@ -128,7 +142,7 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 						<p style={{ color: '#949494', fontWeight: '300' }}>
 							Not a member ?{' '}
 						</p>
-						<NavLink exact to="/sign_up">
+						<NavLink exact to="/sign_up" onClick={() => MyModal.hide()}>
 							<p
 								style={{
 									marginLeft: 10,

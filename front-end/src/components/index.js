@@ -10,7 +10,16 @@ import SearchBar from './SearchBar';
 import LoginRequestModal from './LoginRequestModal';
 import IndicatorModal from './IndicatorModal';
 import SignInModal from './SignInModal';
+import MyFilterPanel from './MyFilterPanel';
+import MyRating from './MyRating';
+
+import ShopMethod from './ShopMethod';
+import ShopItem from './ShopItem';
 export {
+	ShopItem,
+	ShopMethod,
+	MyRating,
+	MyFilterPanel,
 	Footer,
 	Header,
 	Layout,

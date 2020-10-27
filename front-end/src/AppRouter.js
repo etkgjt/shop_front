@@ -9,7 +9,6 @@ import {
 import {
 	Home,
 	Contact,
-	ShopPage,
 	Category,
 	Cart,
 	SingleProduct,
@@ -19,6 +18,10 @@ import {
 	SignIn,
 	SignUp,
 	UserInfo,
+	SmartPhone,
+	Laptop,
+	Accessories,
+	Tablet,
 } from './pages';
 
 import { Provider } from 'react-redux';
@@ -64,13 +67,16 @@ const AppRoute = () => {
 					<Route path="/cart" component={Cart} />
 					<Route path="/contact" component={Contact} />
 					<Route path="/category" component={Category} />
-					<Route path="/shop_page" component={ShopPage} />
 					<Route path="/confirmation" component={Confirmation} />
 					<Route path="/checkout" component={Checkout} />
 					<Route path="/payment" component={PaymentMethod} />
 					<Route path="/sign_in" component={SignIn} />
 					<Route path="/sign_up" component={SignUp} />
 					<Route path="/user_info" component={UserInfo} />
+					<Route path="/smart_phone" component={SmartPhone} />
+					<Route path="/laptop" component={Laptop} />
+					<Route path="/tablet" component={Tablet} />
+					<Route path="/accessories" component={Accessories} />
 				</Switch>
 
 				<footer

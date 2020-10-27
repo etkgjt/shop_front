@@ -59,24 +59,24 @@
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root"></div>
 		<script>
-			let oldOffset = 0;
+			// let oldOffset = 0;
 
-			$(window).scroll(function () {
-				var scroll = $(window).scrollTop();
+			// $(window).scroll(function () {
+			// 	var scroll = $(window).scrollTop();
 
-				if (scroll - oldOffset >= 50) {
-					oldOffset = scroll;
-					// console.log('scroll to bottom');
-					$('.header-area').addClass('scrolled');
-				} else if (scroll - oldOffset <= -50) {
-					oldOffset = scroll;
-					// console.log('ko scroll ne');
-					$('.header-area').removeClass('scrolled');
-				} else if (scroll === 0) {
-					// console.log('ko scroll ne');
-					$('.header-area').removeClass('scrolled');
-				}
-			});
+			// 	if (scroll - oldOffset >= 50) {
+			// 		oldOffset = scroll;
+			// 		// console.log('scroll to bottom');
+			// 		$('.header-area').addClass('scrolled');
+			// 	} else if (scroll - oldOffset <= -50) {
+			// 		oldOffset = scroll;
+			// 		// console.log('ko scroll ne');
+			// 		$('.header-area').removeClass('scrolled');
+			// 	} else if (scroll === 0) {
+			// 		// console.log('ko scroll ne');
+			// 		$('.header-area').removeClass('scrolled');
+			// 	}
+			// });
 		</script>
 		<!--
       This HTML file is a template.

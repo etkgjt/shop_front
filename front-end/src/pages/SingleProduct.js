@@ -3,23 +3,44 @@ import { Container, Row, Col, ButtonGroup, Input, Button } from 'reactstrap';
 import '../styles/pageTitle.css';
 import { Icon } from '@material-ui/core';
 
-import { MDBContainer, MDBInput, MDBRating } from 'mdbreact';
+import { MDBContainer, MDBInput } from 'mdbreact';
+import { MyRating } from '../components';
+
 import '../styles/singleProduct.css';
 import '../styles/material.css';
-import { Rating } from '@material-ui/lab';
-import { MyModal } from '../components';
+import { useLocation, useHistory } from 'react-router-dom';
+import { addToCart } from '../redux/actions/cartAction';
+import { useDispatch } from 'react-redux';
+
 const SingleProduct = memo(() => {
 	console.log('product render ne');
-	const info = {
-		name: 'Fantasy T-shirt',
-		category: 'Shirt',
-		price: 122,
-		model: 'Shirt 5407X',
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio, officia quis dolore quos sapiente tempore alias',
-		color: 'Black',
-		delivery: 'USE, Europe',
-	};
+	let { state } = useLocation();
+	console.log('state ne', state);
+	const [itemInfo, setItemInfo] = useState(
+		state
+			? state
+			: {
+					name: 'Fantasy T-shirt',
+					category: 'Shirt',
+					price: 122,
+					model: 'Shirt 5407X',
+					description:
+						'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio, officia quis dolore quos sapiente tempore alias',
+					color: 'Black',
+					delivery: 'USE, Europe',
+					rating: 4.5,
+					img: [
+						'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
+						'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
+						'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
+						'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
+					],
+			  }
+	);
+	useEffect(() => {
+		setItemInfo(state);
+	}, [state]);
+
 	return (
 		<Container fluid className="gradient-background mb-5">
 			<Row className="title-container mt-5">
@@ -27,7 +48,7 @@ const SingleProduct = memo(() => {
 			</Row>
 			<Container>
 				<h2 className="mt-5">Main Section</h2>
-				<ProductDetails productInfo={info} />
+				<ProductDetails productInfo={itemInfo} />
 			</Container>
 		</Container>
 	);
@@ -35,19 +56,24 @@ const SingleProduct = memo(() => {
 
 const ProductImage = ({ data }) => {
 	return (
-		<Col lg="6" md="6" className="pr-2 ">
-			<img
-				className="img-fluid w-100 z-depth2"
-				src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-			/>
-			<Row className="p-2 mt-4 justify-content-between">
+		<Col lg="6" md="6" className="pr-2 mb-5 ">
+			<Row
+				className="m-0 p-0 z-depth1"
+				style={{
+					height: '500px',
+					backgroundColor: 'white',
+					alignItems: 'center',
+					justifyContent: 'center',
+					display: 'flex',
+				}}
+			>
+				<img className="item-image w-100 " src={data?.[0]} />
+			</Row>
+			<Row className="p-0 m-0 mt-2">
 				{data.map((v, i) => (
-					<img
-						key={`${i}`}
-						style={{ width: 130, height: 150 }}
-						className="z-depth2 mt-2"
-						src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-					/>
+					<Col lg="3" md="6" className="m-0 p-1" style={{ height: 100 }}>
+						<img key={`${i}`} className="z-depth1 h-100" src={v} />
+					</Col>
 				))}
 			</Row>
 		</Col>
@@ -55,13 +81,8 @@ const ProductImage = ({ data }) => {
 };
 
 const ProductDetails = ({ productInfo }) => {
-	let data = [
-		'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
-		'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
-		'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
-		'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg',
-	];
 	const {
+		rating,
 		name,
 		category,
 		price,
@@ -69,16 +90,26 @@ const ProductDetails = ({ productInfo }) => {
 		description,
 		color,
 		delivery,
+		img = [],
 	} = productInfo;
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const [amount, setAmount] = useState(1);
+	const _add = () => {
+		setAmount(amount + 1);
+	};
+	const _sub = () => {
+		if (amount !== 0) setAmount(amount - 1);
+	};
 	return (
 		<Row className="pt-4">
-			<ProductImage data={data} />
+			<ProductImage data={img} />
 			<Col lg="6" md="6" className="item">
 				<p className="mb-2" style={{ fontSize: 20, fontWeight: '700' }}>
 					{name}
 				</p>
 				<Row className="pl-3">
-					<MyRating />
+					<MyRating readOnly={false} value={rating ?? 4} />
 				</Row>
 				<small className="mb-2" style={{ fontSize: 16 }}>
 					{category}
@@ -105,13 +136,13 @@ const ProductDetails = ({ productInfo }) => {
 					<p style={{ fontWeight: 'bold' }}>Color</p>
 					<p style={{ fontWeight: '300' }}>{color}</p>
 				</Row>
-				<Row
+				{/* <Row
 					className="d-flex justify-content-between align-items-center mb-2 px-3"
 					style={{ width: '60%' }}
 				>
 					<p style={{ fontWeight: 'bold' }}>Delivery</p>
 					<p style={{ fontWeight: '300' }}>{delivery}</p>
-				</Row>
+				</Row> */}
 				<div
 					style={{
 						width: '100%',
@@ -125,6 +156,7 @@ const ProductDetails = ({ productInfo }) => {
 
 						<ButtonGroup className="mt-2">
 							<Button
+								onClick={_sub}
 								style={{
 									width: 50,
 									height: 40,
@@ -141,7 +173,7 @@ const ProductDetails = ({ productInfo }) => {
 										color: '#C4D4DA',
 									}}
 								>
-									add
+									remove
 								</Icon>
 							</Button>
 							<Input
@@ -150,8 +182,10 @@ const ProductDetails = ({ productInfo }) => {
 									borderRadius: 0,
 									height: 40,
 								}}
+								value={amount ? amount : 0}
 							/>
 							<Button
+								onClick={_add}
 								style={{
 									width: 50,
 									height: 40,
@@ -168,20 +202,19 @@ const ProductDetails = ({ productInfo }) => {
 										color: '#CED4DA',
 									}}
 								>
-									remove
+									add
 								</Icon>
 							</Button>
 						</ButtonGroup>
 					</Col>
-					<Col className="p-0 align-items-start justify-content-center">
-						<p className="m-0 pl-3" style={{ textAlign: 'start' }}>
-							Select Size
-						</p>
-						<MyRadioButton />
-					</Col>
 				</Row>
 				<Row className="p-3">
 					<Button
+						onClick={() => {
+							for (let i = 0; i < amount; i++)
+								addToCart(dispatch, productInfo);
+							history.push('/cart');
+						}}
 						className="mr-2 d-flex flex-row justify-content-center align-content-between button-shadow"
 						style={{
 							backgroundColor: '#4285F4',
@@ -197,6 +230,10 @@ const ProductDetails = ({ productInfo }) => {
 					</Button>
 
 					<Button
+						onClick={() => {
+							for (let i = 0; i < amount; i++)
+								addToCart(dispatch, productInfo);
+						}}
 						style={{
 							backgroundColor: '#F2F2F2',
 							width: 150,
@@ -259,18 +296,5 @@ const MyRadioButton = () => {
 		</MDBContainer>
 	);
 };
-const MyRating = () => {
-	const [value, setValue] = useState(3);
-	return (
-		<Rating
-			size="large"
-			name="size-large"
-			precision={0.5}
-			value={value}
-			onChange={(event, newValue) => {
-				setValue(newValue);
-			}}
-		/>
-	);
-};
+
 export default SingleProduct;
