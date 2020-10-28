@@ -16,6 +16,21 @@ import { login, saveUserInfoRedux } from '../redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { MyModal, IndicatorModal } from '../components';
+import axios from 'axios';
+function parseJwt(token) {
+	var base64Url = token.split('.')[1];
+	var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+	var jsonPayload = decodeURIComponent(
+		atob(base64)
+			.split('')
+			.map(function (c) {
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+			})
+			.join('')
+	);
+
+	return JSON.parse(jsonPayload);
+}
 
 const SignInModal = ({ onSignInSuccess = () => {} }) => {
 	const dispatch = useDispatch();
@@ -25,9 +40,10 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 	const _handleSignInClick = async () => {
 		try {
 			MyModal.show(() => {}, <IndicatorModal />);
-			const token = await login(email, password);
+			const { access_token } = await login(email, password);
+			console.log('token', access_token);
 			saveUserInfoRedux(dispatch, {});
-			console.log('long token', token);
+			console.log('long token', parseJwt(access_token));
 			onSignInSuccess();
 			MyModal.hide();
 		} catch (err) {

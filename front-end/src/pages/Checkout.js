@@ -1,6 +1,7 @@
 import {
 	Divider,
 	FormControl,
+	Input,
 	InputLabel,
 	MenuItem,
 	Select,
@@ -24,12 +25,50 @@ import '../styles/checkout.css';
 import '../styles/forAll.css';
 import '../styles/material.css';
 import { MyStepper } from '../components';
+import { updateShippingInfo } from '../redux/actions/cartAction';
+import { useDispatch } from 'react-redux';
 const Checkout = () => {
 	let { state } = useLocation();
 
 	let { data } = state ? state : {};
+	const dispatch = useDispatch();
 	console.log('state', data);
 	const [items, setItems] = useState(data ? data : []);
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [address, setAddress] = useState('');
+	const [secondAddr, setSecondAddr] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState('');
+	const [city, setCity] = useState(0);
+	const [district, setDistrict] = useState(0);
+
+	const _onCheckoutPress = () => {
+		if (
+			!firstName ||
+			!lastName ||
+			!address ||
+			!phoneNumber ||
+			!city ||
+			!district
+		) {
+			console.log('thieu thong tin');
+		} else {
+			console.log('success');
+			updateShippingInfo(dispatch, {
+				firstName,
+				lastName,
+				address,
+				secondAddr,
+				phoneNumber,
+				city,
+				district,
+			});
+		}
+	};
+	const validatePhoneNumber = (phone) => {
+		const regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+		return regex.match(phone);
+	};
 	useEffect(() => {
 		setItems(data);
 	}, [data]);
@@ -48,29 +87,52 @@ const Checkout = () => {
 						<form className="m-5">
 							<Row className="pl-0 justify-content-between">
 								<Col md="6" className="m-0 p-0 pr-5">
-									<TextField label="FirstName" className="w-100" />
+									<TextField
+										label="FirstName"
+										className="w-100"
+										onChange={(e) => setFirstName(e?.target?.value)}
+										color="success"
+									/>
 								</Col>
 								<Col md="6" className="p-0">
-									<TextField label="FirstName" className="w-100" />
+									<TextField
+										label="FirstName"
+										className="w-100"
+										onChange={(e) => setLastName(e?.target?.value)}
+									/>
 								</Col>
 							</Row>
 							<Row className="d-flex justify-content-around align-items-center mt-3">
-								<TextField label="Address" className="w-100" />
+								<TextField
+									label="Address"
+									className="w-100"
+									onChange={(e) => setAddress(e?.target?.value)}
+								/>
 							</Row>
 							<Row className="d-flex justify-content-around align-items-center mt-5">
 								<TextField
+									onChange={(e) => setSecondAddr(e?.target?.value)}
 									label="Address 2 (optional)"
 									className="w-100"
 								/>
 							</Row>
 							<Row className="d-flex justify-content-around align-items-center mt-5">
-								<TextField label="Phone Number" className="w-100" />
+								<TextField
+									label="Phone Number"
+									className="w-100"
+									onChange={(e) => setPhoneNumber(e?.target?.value)}
+								/>
 							</Row>
 							<Row className="mt-5">
-								<MyDropdownPicker title="City" items={CITY} />
+								<MyDropdownPicker
+									title="City"
+									items={CITY}
+									onSubmit={(val) => setCity(val)}
+								/>
 								<MyDropdownPicker
 									items={DISTRICTS[0]}
 									title="District"
+									onSubmit={(val) => setDistrict(val)}
 								/>
 							</Row>
 
@@ -119,6 +181,15 @@ const Checkout = () => {
 										}}
 									>
 										<Button
+											onClick={_onCheckoutPress}
+											// disabled={
+											// 	!firstName ||
+											// 	!lastName ||
+											// 	!address ||
+											// 	!phoneNumber ||
+											// 	!city ||
+											// 	!district
+											// }
 											className="button-container-box-shadow"
 											style={{
 												marginTop: 10,
@@ -189,8 +260,11 @@ const DetailsCheckout = ({ items }) => {
 		</Col>
 	);
 };
-const MyDropdownPicker = ({ items, title }) => {
+const MyDropdownPicker = ({ items, title, onSubmit }) => {
 	const [value, setValue] = useState(0);
+	useEffect(() => {
+		onSubmit(value);
+	}, [value]);
 	return (
 		<Col
 			md="6"
@@ -214,36 +288,4 @@ const MyDropdownPicker = ({ items, title }) => {
 	);
 };
 
-const MyRadioButton = () => {
-	const [radio, setRadio] = useState(1);
-	return (
-		<MDBContainer className="m-0 pl-0 d-flex flex-row justify-content-start">
-			<Row className="ml-1 mr-4 align-items-center">
-				<MDBInput
-					checked={radio === 0}
-					onClick={() => setRadio(0)}
-					type="radio"
-				></MDBInput>
-				<p className="ml-2">Credit card</p>
-			</Row>
-			<Row className="ml-1 mr-4  align-items-center">
-				<MDBInput
-					id="radio1"
-					checked={radio === 1}
-					onClick={() => setRadio(1)}
-					type="radio"
-				/>
-				<p className="ml-2">Paypal</p>
-			</Row>
-			<Row className="ml-1  align-items-center">
-				<MDBInput
-					checked={radio === 2}
-					onClick={() => setRadio(2)}
-					type="radio"
-				/>
-				<p className="ml-2">Visa</p>
-			</Row>
-		</MDBContainer>
-	);
-};
 export default Checkout;

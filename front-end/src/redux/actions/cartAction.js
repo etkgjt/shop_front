@@ -12,3 +12,9 @@ export const updateItem = (dispatch, item) => {
 export const clearCart = (dispatch) => {
 	dispatch({ type: REDUX.CLEAR_CART });
 };
+export const updatePaymentMethod = (dispatch, method) => {
+	dispatch({ type: REDUX.UPDATE_PAYMENT_METHOD, payload: method });
+};
+export const updateShippingInfo = (dispatch, info) => {
+	dispatch({ type: REDUX.UPDATE_SHIPPING_INFO, payload: info });
+};

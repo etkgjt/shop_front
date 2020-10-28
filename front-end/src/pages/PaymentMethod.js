@@ -29,7 +29,19 @@ import paypal from '../assets/paypal.svg';
 import pay from '../assets/pay.svg';
 const PaymentMethod = () => {
 	console.log('cart render ne');
+	const [cardName, setCardName] = useState('');
+	const [cardNumber, setCardNumber] = useState('');
+	const [cvv, setCVV] = useState('');
+
+	const [expireDate, setExpireDate] = useState('');
 	const [method, setMethod] = useState('credit');
+	useEffect(() => {
+		setCardName('');
+		setCardNumber('');
+		setCVV('');
+
+		setExpireDate('');
+	}, [method]);
 	return (
 		<Container fluid className="pb-5" style={{ backgroundColor: '#F9F9FF' }}>
 			<Row className="title-container mt-5">
@@ -108,6 +120,7 @@ const PaymentMethod = () => {
 								label="Name on Card"
 								className="w-100"
 								variant="outlined"
+								onChange={(e) => setCardName(e?.target?.value)}
 							/>
 						</Row>
 						<Row className="pl-0 justify-content-between align-items-center justify-content-center mt-3">
@@ -116,6 +129,7 @@ const PaymentMethod = () => {
 									label="Card Number"
 									className="w-100"
 									variant="outlined"
+									onChange={(e) => setCardNumber(e?.target?.value)}
 								/>
 							</Col>
 							<Col md="6" className="p-0">
@@ -123,11 +137,13 @@ const PaymentMethod = () => {
 									label="CVV"
 									className="w-100"
 									variant="outlined"
+									onChange={(e) => setCVV(e?.target?.value)}
 								/>
 							</Col>
 						</Row>
 						<Row className="d-flex justify-content-around align-items-center mt-1">
 							<TextField
+								onChange={(e) => setExpireDate(e?.target?.value)}
 								label="Expiration Date"
 								className="w-100"
 								variant="outlined"
@@ -150,6 +166,10 @@ const PaymentMethod = () => {
 					}}
 				>
 					<Button
+						disabled={
+							method !== 'delivery' &&
+							(!cardName || !cardNumber || !cvv || !expireDate)
+						}
 						className="button-container-box-shadow"
 						style={{
 							marginTop: 10,

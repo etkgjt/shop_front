@@ -805,7 +805,7 @@ const initialState = {
 			name: 'Laptop asus 2',
 			price: 201,
 			img: [
-				'//cdn.tgdd.vn/Products/Images/44/191993/asus-x441ma-ga024t-1-1-org.jpg',
+			'//cdn.tgdd.vn/Products/Images/44/191993/asus-x441ma-ga024t-1-1-org.jpg',
 				'//cdn.tgdd.vn/Products/Images/44/191993/asus-x441ma-ga024t-2-org.jpg',
 				'https://cdn.tgdd.vn/Products/Images/44/191993/asus-x441ma-ga024t-3-org.jpg',
 			],

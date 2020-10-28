@@ -10,13 +10,9 @@ function useDebounce(cb = () => {}, delay = 0) {
 	useEffect(() => {
 		inputsRef.current = { cb, delay };
 	});
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	return useCallback(
 		_.debounce(
 			(...args) => {
-				// Don't execute callback, if (1) component in the meanwhile
-				// has been unmounted or (2) delay has changed
 				if (inputsRef.current.delay === delay && isMounted())
 					inputsRef.current.cb(...args);
 			},

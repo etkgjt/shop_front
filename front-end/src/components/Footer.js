@@ -4,7 +4,7 @@ import { Row } from 'reactstrap';
 import { Col } from 'reactstrap';
 import Alert from 'reactstrap/lib/Alert';
 import Container from 'reactstrap/lib/Container';
-import mainLogo from '../assets/timezone-logo.png';
+import mainLogo from '../assets/newLogo6.png';
 
 import '../styles/footer.css';
 const Footer = () => {

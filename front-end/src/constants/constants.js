@@ -133,7 +133,7 @@ const LAPTOP_BRAND = [
 	{ label: 'Asus', value: 0 },
 	{ label: 'MSI', value: 1 },
 	{ label: 'Dell', value: 2 },
-	{ lebel: 'HPAA', value: 3 },
+	{ lebel: 'HP', value: 3 },
 ];
 const SMART_PHONE_BRAND = [
 	{ label: 'Iphone', value: 0 },
@@ -147,9 +147,9 @@ const TABLET_BRAND = [
 	{ label: 'Lennnovo', value: 2 },
 ];
 const ACCESSORIES_BRAND = [
-	{ label: 'SDP', value: 0 },
-	{ label: 'Cap', value: 1 },
-	{ label: 'Tainghe', value: 2 },
+	{ label: 'ANNKO', value: 0 },
+	{ label: 'Xiaomi', value: 1 },
+	{ label: 'Samsung', value: 2 },
 ];
 const CATEGORY_LIST = [
 	{ label: 'Laptop', value: 0 },

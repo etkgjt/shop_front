@@ -20,7 +20,7 @@ import {
 	DropdownMenu,
 	Button,
 } from 'reactstrap';
-import mainLogo from '../assets/timezone-logo.png';
+import mainLogo from '../assets/newLogo6.png';
 import { Badge, Icon } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import '../styles/material.css';
@@ -132,7 +132,11 @@ const NavigationBar = ({ setShow }) => {
 	return (
 		<Navbar expand="md" light>
 			<NavbarBrand to="/">
-				<img src={mainLogo} className="img-fluid"></img>
+				<img
+					src={mainLogo}
+					className="img-fluid"
+					style={{ height: 80, width: 120 }}
+				></img>
 			</NavbarBrand>
 			<Collapse navbar className="justify-content-center ">
 				<div className="ml-sm-auto navbar-nav main-menu">

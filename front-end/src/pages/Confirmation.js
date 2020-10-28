@@ -1,6 +1,6 @@
 import React, { useCallback, memo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Row } from 'reactstrap';
+import { Button, Container, Row } from 'reactstrap';
 import Header from '../components/Header';
 import TitleBackground from '../assets/slider_background.png';
 import '../styles/pageTitle.css';
@@ -10,9 +10,23 @@ import { Table } from 'reactstrap';
 import { MyStepper } from '../components';
 import '../styles/material.css';
 import { Divider } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+
 const Confirmation = memo(() => {
 	const [isOpen, setIsOpen] = useState(false);
-	console.log('load ne');
+	const { payment, shippingInfo, items } = useSelector(
+		(state) => state.cartReducer
+	);
+	const {
+		firstName,
+		lastName,
+		address,
+		secondAddr,
+		phoneNumber,
+		city,
+		district,
+	} = shippingInfo;
+	console.log('load ne', payment, shippingInfo, items);
 	const toggle = () => setIsOpen(!isOpen);
 	return (
 		<Container fluid style={{ backgroundColor: '#F4FAFE' }} className="pb-5">
@@ -46,7 +60,7 @@ const Confirmation = memo(() => {
 							</p>
 							<Row className="justify-content-between px-4">
 								<h6>Name: </h6>
-								<p>Join Doe</p>
+								<p>{`${firstName} ${lastName}`}</p>
 							</Row>
 							<Row className="justify-content-between px-4">
 								<h6>Email: </h6>
@@ -54,11 +68,7 @@ const Confirmation = memo(() => {
 							</Row>
 							<Row className="justify-content-between px-4">
 								<h6>Phone Number: </h6>
-								<p>+20 019 823 2332</p>
-							</Row>
-							<Row className="justify-content-between px-4">
-								<h6>Name: </h6>
-								<p>Join Doe</p>
+								<p>{`${phoneNumber}`}</p>
 							</Row>
 						</Col>
 						<Col lg="6" md="10">
@@ -81,15 +91,19 @@ const Confirmation = memo(() => {
 							</p>
 							<Row className="justify-content-between px-4">
 								<h6>City: </h6>
-								<p>Ho Chi Minh</p>
+								<p>{city}</p>
 							</Row>
 							<Row className="justify-content-between px-4">
 								<h6>District: </h6>
-								<p>Quan 1</p>
+								<p>{district}</p>
 							</Row>
 							<Row className="justify-content-between px-4">
 								<h6>Address </h6>
-								<p>127/135A Dien Bien Phu</p>
+								<p>{address}</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Second Address</h6>
+								<p>{secondAddr}</p>
 							</Row>
 						</Col>
 					</Row>
@@ -112,6 +126,10 @@ const Confirmation = memo(() => {
 							>
 								--------------------------------
 							</p>
+							<Row className="justify-content-between px-4">
+								<h6>Payment method: </h6>
+								<p>{payment}</p>
+							</Row>
 						</Col>
 						<Col lg="6" md="10">
 							<Row className="justify-content-between px-4">
@@ -131,11 +149,14 @@ const Confirmation = memo(() => {
 							>
 								--------------------------------
 							</p>
-							<Row className="justify-content-between px-4">
-								<h6>Name: </h6>
-								<p>Join Doe</p>
-							</Row>
-							<Row className="justify-content-between px-4">
+							{items?.map((v, i) => (
+								<Row className="justify-content-between px-4">
+									<h6>{`${v?.name}`} </h6>
+									<p>{`${v?.price * v?.amount}`}</p>
+								</Row>
+							))}
+
+							{/* <Row className="justify-content-between px-4">
 								<h6>Email: </h6>
 								<p>OurCompany@gmail.com</p>
 							</Row>
@@ -146,10 +167,38 @@ const Confirmation = memo(() => {
 							<Row className="justify-content-between px-4">
 								<h6>Name: </h6>
 								<p>Join Doe</p>
-							</Row>
+							</Row> */}
 						</Col>
 					</Row>
 				</Container>
+				<NavLink
+					exact
+					to={{
+						pathname: '/payment',
+						// state: { data },
+					}}
+					style={{
+						color: 'white',
+						textDecoration: 'none',
+					}}
+				>
+					<Button
+						// onClick={_onCheckoutPress}
+						className="button-container-box-shadow mt-5"
+						style={{
+							marginTop: 10,
+							color: 'white',
+							backgroundColor: '#4285f4',
+							color: 'white',
+							borderWidth: 0,
+							borderRadius: 25,
+							width: '100%',
+							height: 50,
+						}}
+					>
+						Place Order
+					</Button>
+				</NavLink>
 			</Container>
 		</Container>
 	);
