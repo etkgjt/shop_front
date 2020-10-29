@@ -33,6 +33,7 @@ export default function FullWidthTabs() {
 	const handleChangeIndex = (index) => {
 		setValue(index);
 	};
+	const userInfo = useSelector((state) => state.userReducer.userInfo);
 	const { loggedIn } = useSelector((state) => state.userReducer);
 	return (
 		<Container className="mt-5">
@@ -55,7 +56,6 @@ export default function FullWidthTabs() {
 						>
 							<Tab label="Profile" {...a11yProps(0)} />
 							<Tab label="History" {...a11yProps(1)} />
-							{/* <Tab label="Item Three" {...a11yProps(2)} /> */}
 						</Tabs>
 					</AppBar>
 					<SwipeableViews
@@ -65,7 +65,7 @@ export default function FullWidthTabs() {
 						className="z-depth2"
 					>
 						<TabPanel value={value} index={0} dir={theme.direction}>
-							<UserInfoTable />
+							<UserInfoTable data={userInfo} />
 						</TabPanel>
 						<TabPanel value={value} index={1} dir={theme.direction}>
 							<h1>Item 1</h1>
@@ -80,8 +80,11 @@ export default function FullWidthTabs() {
 		</Container>
 	);
 }
-const UserInfoTable = () => {
+const UserInfoTable = ({ data }) => {
 	const [isChangable, setIsChangable] = useState(-1);
+	const { address, id, fullname, username, phone, gender } = data;
+	console.log('data ', data);
+
 	return (
 		<Col className="w-100 d-flex flex-column justify-content-center align-items-center">
 			<form className="mt-3 w-50">
@@ -91,7 +94,7 @@ const UserInfoTable = () => {
 						className="w-100"
 						label="FirstName"
 						disabled
-						value="Nguyen"
+						value={fullname}
 					/>
 				</Row>
 				<Row className="mt-5 pl-0 justify-content-between">
@@ -100,7 +103,7 @@ const UserInfoTable = () => {
 						label="FirstName"
 						className="w-100"
 						disabled
-						value="Long"
+						value={fullname}
 					/>
 				</Row>
 				<Row className="d-flex justify-content-around align-items-center mt-5">
@@ -110,6 +113,7 @@ const UserInfoTable = () => {
 					<TextField
 						variant="outlined"
 						label="Address"
+						value={address ? address : 'Not have yet'}
 						className="w-100"
 					/>
 				</Row>
@@ -126,6 +130,7 @@ const UserInfoTable = () => {
 						variant="outlined"
 						label="Phone number"
 						className="w-100"
+						value={phone ? phone : 'Not have yet'}
 					/>
 				</Row>
 

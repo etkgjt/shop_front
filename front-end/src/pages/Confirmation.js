@@ -17,6 +17,7 @@ const Confirmation = memo(() => {
 	const { payment, shippingInfo, items } = useSelector(
 		(state) => state.cartReducer
 	);
+	const { method, cardName, cardNumber, cvv, expireDate } = payment;
 	const {
 		firstName,
 		lastName,
@@ -128,7 +129,23 @@ const Confirmation = memo(() => {
 							</p>
 							<Row className="justify-content-between px-4">
 								<h6>Payment method: </h6>
-								<p>{payment}</p>
+								<p>{method}</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Card Name: </h6>
+								<p>{cardName ? cardName : 'None'}</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Card Number: </h6>
+								<p>{cardNumber ? cardNumber : 'None'}</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>CVV: </h6>
+								<p>{cvv ? cvv : 'None'}</p>
+							</Row>
+							<Row className="justify-content-between px-4">
+								<h6>Expiration Date: </h6>
+								<p>{expireDate ? expireDate : 'None'}</p>
 							</Row>
 						</Col>
 						<Col lg="6" md="10">
@@ -155,26 +172,13 @@ const Confirmation = memo(() => {
 									<p>{`${v?.price * v?.amount}`}</p>
 								</Row>
 							))}
-
-							{/* <Row className="justify-content-between px-4">
-								<h6>Email: </h6>
-								<p>OurCompany@gmail.com</p>
-							</Row>
-							<Row className="justify-content-between px-4">
-								<h6>Phone Number: </h6>
-								<p>+20 019 823 2332</p>
-							</Row>
-							<Row className="justify-content-between px-4">
-								<h6>Name: </h6>
-								<p>Join Doe</p>
-							</Row> */}
 						</Col>
 					</Row>
 				</Container>
 				<NavLink
 					exact
 					to={{
-						pathname: '/payment',
+						pathname: '/finish',
 						// state: { data },
 					}}
 					style={{

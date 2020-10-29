@@ -2,7 +2,7 @@ import { REDUX } from '../../redux/store/type';
 const initialState = {
 	cartId: '',
 	items: [],
-	payment: 'delivery',
+	payment: {},
 	shippingInfo: {},
 };
 const cartReducer = (state = initialState, action) => {

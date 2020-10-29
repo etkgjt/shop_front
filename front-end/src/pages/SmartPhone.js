@@ -22,6 +22,7 @@ const _renderItems = (dispatch, data) => {
 
 	return tempArr.map((item, idx) => (
 		<ShopItem
+			key={`${idx}-${item?.name}`}
 			addToCart={addToCart}
 			item={item}
 			idx={idx}

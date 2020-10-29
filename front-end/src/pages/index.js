@@ -14,8 +14,10 @@ import Accessories from './Accessories';
 import Laptop from './Laptop';
 import SmartPhone from './SmartPhone';
 import Tablet from './Tablet';
+import Finish from './Finish';
 
 export {
+	Finish,
 	Cart,
 	Category,
 	Home,

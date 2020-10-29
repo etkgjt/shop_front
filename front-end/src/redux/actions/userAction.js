@@ -12,7 +12,20 @@ export const login = (userName, password) => {
 			.catch((err) => reject(err));
 	});
 };
-export const saveUserInfoRedux = (dispatch, payload) => {
-	dispatch({ type: REDUX.LOG_IN, payload });
+export const getUserInfo = (username, token) =>
+	new Promise((resolve, reject) => {
+		API.get(`/user/username?value=${username}`, {
+			headers: {
+				Authorization: token,
+			},
+		})
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});
+export const distpatchLoginToRedux = (dispatch) => {
+	dispatch({ type: REDUX.LOG_IN });
+};
+export const updateUserInfoRedux = (dispatch, payload) => {
+	dispatch({ type: REDUX.UPDATE_USER_INFO, payload: payload });
 };
 export const logout = () => {};

@@ -16,7 +16,7 @@ import {
 import '../styles/pageTitle.css';
 import '../styles/cart.css';
 import { Icon, TextField } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import useDebounce from '../untils/debounce';
 import _ from 'lodash';
@@ -27,8 +27,10 @@ import visa from '../assets/visa.svg';
 import mastercard from '../assets/mastercard.svg';
 import paypal from '../assets/paypal.svg';
 import pay from '../assets/pay.svg';
+import { updatePaymentMethod } from '../redux/actions/cartAction';
 const PaymentMethod = () => {
 	console.log('cart render ne');
+	const dispatch = useDispatch();
 	const [cardName, setCardName] = useState('');
 	const [cardNumber, setCardNumber] = useState('');
 	const [cvv, setCVV] = useState('');
@@ -166,6 +168,15 @@ const PaymentMethod = () => {
 					}}
 				>
 					<Button
+						onClick={() =>
+							updatePaymentMethod(dispatch, {
+								method,
+								cardName,
+								cardNumber,
+								cvv,
+								expireDate,
+							})
+						}
 						disabled={
 							method !== 'delivery' &&
 							(!cardName || !cardNumber || !cvv || !expireDate)

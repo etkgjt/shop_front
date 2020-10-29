@@ -11,13 +11,19 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case REDUX.LOG_IN: {
-			return { ...state, userInfo: action.payload, loggedIn: true };
+			return { ...state, loggedIn: true };
 		}
 		case REDUX.LOG_OUT: {
 			return { ...state, loggedIn: false };
 		}
 		case REDUX.CLEAR_DATA: {
 			return initialState;
+		}
+		case REDUX.UPDATE_USER_INFO: {
+			return {
+				...state,
+				userInfo: action.payload,
+			};
 		}
 		default: {
 			return state;

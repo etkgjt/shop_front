@@ -281,38 +281,51 @@ const NewArrival = () => (
 		<Row>
 			<Col xl="4" lg="4" md="6" sm="6">
 				<div
-					className="z-depth5"
+					className="z-depth5 p-5 bg-white"
 					style={{
 						width: '100%',
 						height: '100%',
 						overflow: 'hidden',
 					}}
 				>
-					<img src={newProduct1} className="hvr-grow" />
+					<img
+						src={
+							'https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-do-1-1-org.jpg'
+						}
+						style={{ backgroundSize: 'contain' }}
+						className="hvr-grow"
+					/>
 				</div>
 			</Col>
 			<Col xl="4" lg="4" md="6" sm="6">
 				<div
-					className="z-depth5"
+					className="z-depth5 p-5"
 					style={{
 						width: '100%',
 						height: '100%',
 						overflow: 'hidden',
+						backgroundColor: 'white',
 					}}
 				>
-					<img src={newProduct2} className="hvr-grow" />
+					<img
+						src={`https://cdn.tgdd.vn/Products/Images/44/220174/apple-macbook-air-2020-i3-1-5-org.jpg?fbclid=IwAR04zB163CLpT9Y7_PUWsWbMYIRRjn4ENeAHY9vLeWi-Kw9-hriBw-YzdNw`}
+						className="hvr-grow"
+					/>
 				</div>
 			</Col>
 			<Col xl="4" lg="4" md="6" sm="6">
 				<div
-					className="z-depth5"
+					className="z-depth5 p-5 bg-white"
 					style={{
 						width: '100%',
 						height: '100%',
 						overflow: 'hidden',
 					}}
 				>
-					<img src={newProduct3} className="hvr-grow" />
+					<img
+						src={`https://cdn.tgdd.vn/Products/Images/522/221776/ipad-pro-12-9-inch-wifi-cellular-128gb-2020-bac-1020x680-org.jpg?fbclid=IwAR30peiMHCqSXHGRxQKQaonrYZfvvzvkHBb_XRt7Jbvw6JirE56PGrV_b_s`}
+						className="hvr-grow"
+					/>
 				</div>
 			</Col>
 		</Row>
@@ -452,9 +465,9 @@ const VideoArea = () => (
 );
 const ChoseWatchAd = () => (
 	<Container className="watch-area-padding">
-		<Row className="choice-container z-depth3 p-5">
+		<Row className="choice-container z-depth3 p-5 bg-white">
 			<Col lg="5" md="6" className="px-5">
-				<h2 className="choice-title">Watch of Choice</h2>
+				<h2 className="choice-title">Choose Your Best</h2>
 				<p>
 					Enim ad minim veniam, quis nostrud exercitation ullamco laboris
 					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
@@ -473,12 +486,12 @@ const ChoseWatchAd = () => (
 				<div className="choice-watch-img1" />
 			</Col>
 		</Row>
-		<Row className="choice-container z-depth3 p-5">
+		<Row className="choice-container z-depth3 p-5 bg-white">
 			<Col lg="6" md="6" sm="10">
 				<div className="choice-watch-img2" />
 			</Col>
 			<Col lg="5" md="6" className="px-5">
-				<h2 className="choice-title">Watch of Choice</h2>
+				<h2 className="choice-title">Choose Your Best</h2>
 				<p>
 					Enim ad minim veniam, quis nostrud exercitation ullamco laboris
 					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in

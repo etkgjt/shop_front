@@ -22,6 +22,7 @@ import {
 	Laptop,
 	Accessories,
 	Tablet,
+	Finish,
 } from './pages';
 
 import { Provider } from 'react-redux';
@@ -77,6 +78,7 @@ const AppRoute = () => {
 					<Route path="/laptop" component={Laptop} />
 					<Route path="/tablet" component={Tablet} />
 					<Route path="/accessories" component={Accessories} />
+					<Route path="/finish" component={Finish} />
 				</Switch>
 
 				<footer

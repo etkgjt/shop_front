@@ -19,7 +19,10 @@ const MyCheckboxList = ({ items, initValues, onCheckedFunc = () => {} }) => {
 		<Col className="m-0 pl-0 pt-3 bg-white">
 			{items && items.length ? (
 				items.map((val, idx) => (
-					<Row className="ml-3 mt-1 align-items-center">
+					<Row
+						className="ml-3 mt-1 align-items-center"
+						key={`${val}-${idx}`}
+					>
 						<Checkbox
 							checked={
 								checked?.findIndex((v) => v.value === val.value) !== -1

@@ -12,7 +12,12 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
 import '../styles/material.css';
-import { login, saveUserInfoRedux } from '../redux/actions/userAction';
+import {
+	getUserInfo,
+	login,
+	updateUserInfoRedux,
+	distpatchLoginToRedux,
+} from '../redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { MyModal, IndicatorModal } from '../components';
@@ -42,13 +47,38 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 			MyModal.show(() => {}, <IndicatorModal />);
 			const { access_token } = await login(email, password);
 			console.log('token', access_token);
-			saveUserInfoRedux(dispatch, {});
+
 			console.log('long token', parseJwt(access_token));
+			const { sub } = parseJwt(access_token);
+			const res = await getUserInfo(sub, access_token);
+			const { address, id, fullname, username, phone, gender } = res;
+			const userEmail = res?.email;
+			console.log(
+				'user Info',
+				address,
+				id,
+				fullname,
+				username,
+				phone,
+				userEmail,
+				gender
+			);
+
+			distpatchLoginToRedux(dispatch);
+			updateUserInfoRedux(dispatch, {
+				address,
+				id,
+				fullname,
+				username,
+				phone,
+				userEmail,
+				gender,
+			});
 			onSignInSuccess();
 			MyModal.hide();
 		} catch (err) {
-			MyModal.hide(() => alert('wrong'));
 			console.log('long signin err', err);
+			MyModal.hide(() => alert('wrong'));
 		}
 	};
 	const validateEmail = (email) => {

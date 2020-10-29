@@ -24,9 +24,9 @@ const SignIn = () => {
 	const _handleSignInClick = async () => {
 		try {
 			MyModal.show(() => {}, <IndicatorModal />);
-			const token = await login(email, password);
-			saveUserInfoRedux(dispatch, {});
-			console.log('long token', token);
+			// const token = await login(email, password);
+			// saveUserInfoRedux(dispatch, {});
+			// console.log('long token', token);
 
 			MyModal.hide(gotoProfile());
 		} catch (err) {

@@ -64,25 +64,27 @@ h1 {
 	box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.29);
 }
 .gallery1 {
-	background-image: url('../assets/gallery1.png');
+	background-image: url('https://cdn.tgdd.vn/Products/Images/44/191993/asus-x441ma-ga024t-1-1-org.jpg?fbclid=IwAR0_t5iLaPlpHum2-i4vFsXcODH6FnFZZTTQdCR7auPt5PkxrxKxShJpsg8');
 	justify-content: center;
 	align-items: center;
 	height: 100%;
 	min-width: 100%;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-position: center;
 }
 .gallery2 {
-	background-image: url('../assets/gallery2.png');
+	background-image: url('https://cdn.tgdd.vn/Products/Images/42/200533/iphone-11-pro-max-xanh-11-org.jpg?fbclid=IwAR3seTSJgQ8IEenOHU-dRCnHLzsB1QZnjFwB7_j98uz1QDgowofam59lGtk');
 	justify-content: center;
 	align-items: center;
 	height: 100%;
 	min-width: 100%;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-position: center;
 }
 .gallery3 {
-	background-image: url('../assets/gallery3.png');
+	background-image: url('https://cdn.tgdd.vn/Products/Images/42/226099/samsung-galaxy-z-fold-2-den-8-org.jpg?fbclid=IwAR04zB163CLpT9Y7_PUWsWbMYIRRjn4ENeAHY9vLeWi-Kw9-hriBw-YzdNw');
 	justify-content: center;
 	align-items: center;
 	height: 100%;
@@ -91,7 +93,7 @@ h1 {
 	background-size: cover;
 }
 .gallery4 {
-	background-image: url('../assets/gallery4.png');
+	background-image: url('https://cdn.tgdd.vn/Products/Images/42/217936/samsung-galaxy-s20-plus-xanh-duong-5-org.jpg?fbclid=IwAR3Rps6dXBVo9uH9tjNp0S4lHZjsD7cIgiHDO7bpdXgwk8wbTVGCltVijl0');
 	justify-content: center;
 	align-items: center;
 	height: 100%;
@@ -202,14 +204,14 @@ h1 {
 	margin-bottom: 150px;
 }
 .choice-watch-img1 {
-	background-image: url('../assets/choce_watch1.png');
+	background-image: url('https://cdn.tgdd.vn/Products/Images/54/228486/tai-nghe-chup-tai-beats-studio3-mx422-mx432-1-org.jpg?fbclid=IwAR2mGcriFB8nLj-o_hI4tRfR7ZN677H2G5W-sObUQgUYyhQYxas2vsslbEs');
 	width: 100%;
 	height: 100%;
 	background-size: contain;
 	background-repeat: no-repeat;
 }
 .choice-watch-img2 {
-	background-image: url('../assets/choce_watch2.png');
+	background-image: url('https://cdn.tgdd.vn/Products/Images/42/222596/oppo-reno4-260720-040737-400x460.png?fbclid=IwAR2gk28uckQxtdhzfjj9EXNwxnMuFDNJbPeqc61N78E6_Q1GkNgMrzrTu9k');
 	width: 100%;
 	height: 100%;
 	background-size: contain;

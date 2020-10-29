@@ -316,7 +316,7 @@ const SumaryCheckout = ({ items }) => {
 							{_caculateTotal() + ship}
 						</small>
 					</ListGroupItem>
-					{loggedIn ? (
+					{loggedIn && data ? (
 						<NavLink
 							exact
 							to={{
