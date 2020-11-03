@@ -16,6 +16,16 @@ import '../styles/pageTitle.css';
 import '../styles/shopPage.css';
 import '../styles/forAll.css';
 import { SMART_PHONE_BRAND } from '../constants/constants';
+import { CircularProgress } from '@material-ui/core';
+import moment from 'moment';
+import {
+	dataSplitter,
+	getShopData,
+	updateReduxAccessoriesItems,
+	updateReduxLaptopItems,
+	updateReduxSmartPhoneItems,
+	updateReduxTabletItems,
+} from '../redux/actions/shopAction';
 
 const _renderItems = (dispatch, data) => {
 	let tempArr = [...data];
@@ -43,53 +53,75 @@ const SmartPhone = memo(() => {
 	const [brandFilter, setBrandFilter] = useState([]);
 	const [priceFilter, setPriceFilter] = useState({ min: -1, max: -1 });
 	const [colorFilter, setColorFilter] = useState([]);
+
+	const initialData = async () => {
+		try {
+			console.log('init data ne');
+			const data = await getShopData();
+			console.log('data lay duoc ne', data);
+			console.log(data);
+			const { smartPhone, laptop, tablet, accessories } = dataSplitter(data);
+			updateReduxLaptopItems(dispatch, laptop);
+			updateReduxSmartPhoneItems(dispatch, smartPhone);
+			updateReduxTabletItems(dispatch, tablet);
+			updateReduxAccessoriesItems(dispatch, accessories);
+		} catch (err) {
+			console.log('Sync data err', err);
+		}
+	};
+	useEffect(() => {
+		console.log('Long chay lan dau thoi ne', productsDataRedux);
+
+		if (!productsDataRedux || !productsDataRedux.length) {
+			initialData();
+		}
+	}, []);
 	useEffect(() => {
 		console.log('data ne', productsDataRedux);
 		if (productsDataRedux && productsDataRedux.length) {
 			setData(productsDataRedux);
 		}
 	}, [productsDataRedux]);
-	useEffect(() => {
-		console.log(
-			'filter',
-			'orderBy',
-			orderBy,
-			'categoryFilter',
-			categoryFilter,
-			'brandFilter',
-			brandFilter,
-			'priceFilter',
-			priceFilter,
-			'colorFilter',
-			colorFilter
-		);
-		let tmp = [...data];
-		if (categoryFilter.length) {
-			tmp = [];
-			for (let i = 0; i < categoryFilter.length; i++) {
-				tmp.push(
-					...[...data].filter(
-						(v) => v.category === categoryFilter[i].value
-					)
-				);
-			}
+
+	const _onFilterClick = () => {
+		console.log('Filte brand ne');
+		let temp = [...productsDataRedux];
+		if (brandFilter && brandFilter.length) {
+			let newBrandFilterList = brandFilter.reduce((a, b) => {
+				return [...a, ...temp.filter((v) => v.brand === b.value)];
+			}, []);
+			temp = newBrandFilterList;
 		}
-		if (brandFilter.length) {
-			for (let i = 0; i < brandFilter.length; i++) {
-				tmp.push(
-					...[...data].filter((v) => v.brand === brandFilter[i].value)
-				);
-			}
+		if (colorFilter && colorFilter.length) {
+			let newBrandFilterList = temp.reduce((a, b) => {
+				return [...a, ...temp.filter((v) => v.brand === b.value)];
+			}, []);
+			temp = newBrandFilterList;
 		}
-		if (colorFilter.length) {
-			for (let i = 0; i < colorFilter.length; i++) {
-				tmp.push(
-					...[...data].filter((v) => v.color === colorFilter[i].value)
-				);
-			}
+		switch (orderBy) {
+			case 0:
+				temp = temp.sort((a, b) => b.price * 1 - a.price * 1);
+				break;
+			case 1:
+				temp = temp.sort((a, b) => a.price * 1 - b.price * 1);
+				break;
+			case 2:
+				temp = temp.sort((a, b) => {
+					if (moment(a.dateArrive).isBefore(moment(b.dateArrive)))
+						return 1;
+					if (moment(a.dateArrive).isAfter(moment(b.dateArrive)))
+						return -1;
+					if (moment(a.dateArrive).isSame(moment(b.dateArrive))) return 0;
+				});
+				break;
+			case 3:
+				temp = temp.sort((a, b) => b.buyingTimes * 1 - a.buyingTimes * 1);
+				break;
+			default:
+				break;
 		}
-		setData([...tmp]);
-	}, [orderBy, categoryFilter, brandFilter, priceFilter, colorFilter]);
+		setData(temp);
+	};
 
 	return (
 		<Container fluid className="gradient-background p-0">
@@ -101,6 +133,7 @@ const SmartPhone = memo(() => {
 					<Row>
 						<Col lg="3" md="6">
 							<MyFilterPanel
+								onFilterClick={() => _onFilterClick()}
 								brands={SMART_PHONE_BRAND}
 								orderBy={orderBy}
 								brandFilter={brandFilter}
@@ -114,8 +147,12 @@ const SmartPhone = memo(() => {
 							/>
 						</Col>
 						<Col lg="9" md="6" classNam="p-0">
-							<Row className="m-0 p-0 pt-5">
-								{_renderItems(dispatch, data)}
+							<Row className="m-0 p-0 pt-5 justify-content-center">
+								{data && data.length ? (
+									_renderItems(dispatch, data)
+								) : (
+									<CircularProgress />
+								)}
 							</Row>
 						</Col>
 					</Row>

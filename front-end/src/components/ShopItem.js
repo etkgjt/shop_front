@@ -29,6 +29,8 @@ const ShopItem = ({ addToCart, item, idx, dispatch }) => {
 					<p className="text-center m-0 my-1">{`Brand-${item?.brand}`}</p>
 					<p className="text-center m-0 my-1">{`Category-${item?.category}`}</p>
 					<p className="text-center m-0 my-1">{`Color-${item?.color}`}</p>
+					<p className="text-center m-0 my-1">{`Date-${item?.dateArrive}`}</p>
+					<p className="text-center m-0 my-1">{`BuyingTimes-${item?.buyingTimes}`}</p>
 
 					<MyRating value={item?.rating} />
 					<Row className="justify-content-around p-0 w-100">

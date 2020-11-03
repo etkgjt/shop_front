@@ -16,6 +16,15 @@ import '../styles/pageTitle.css';
 import '../styles/shopPage.css';
 import '../styles/forAll.css';
 import { TABLET_BRAND } from '../constants/constants';
+import { CircularProgress } from '@material-ui/core';
+import {
+	dataSplitter,
+	getShopData,
+	updateReduxAccessoriesItems,
+	updateReduxLaptopItems,
+	updateReduxSmartPhoneItems,
+	updateReduxTabletItems,
+} from '../redux/actions/shopAction';
 
 const _renderItems = (dispatch, data) => {
 	let tempArr = [...data];
@@ -46,47 +55,65 @@ const Tablet = memo(() => {
 			setData(productsDataRedux);
 		}
 	}, [productsDataRedux]);
+	// useEffect(() => {
+	// 	console.log(
+	// 		'filter',
+	// 		'orderBy',
+	// 		orderBy,
+	// 		'categoryFilter',
+	// 		categoryFilter,
+	// 		'brandFilter',
+	// 		brandFilter,
+	// 		'priceFilter',
+	// 		priceFilter,
+	// 		'colorFilter',
+	// 		colorFilter
+	// 	);
+	// 	let tmp = [...data];
+	// 	if (categoryFilter.length) {
+	// 		tmp = [];
+	// 		for (let i = 0; i < categoryFilter.length; i++) {
+	// 			tmp.push(
+	// 				...[...data].filter(
+	// 					(v) => v.category === categoryFilter[i].value
+	// 				)
+	// 			);
+	// 		}
+	// 	}
+	// 	if (brandFilter.length) {
+	// 		for (let i = 0; i < brandFilter.length; i++) {
+	// 			tmp.push(
+	// 				...[...data].filter((v) => v.brand === brandFilter[i].value)
+	// 			);
+	// 		}
+	// 	}
+	// 	if (colorFilter.length) {
+	// 		for (let i = 0; i < colorFilter.length; i++) {
+	// 			tmp.push(
+	// 				...[...data].filter((v) => v.color === colorFilter[i].value)
+	// 			);
+	// 		}
+	// 	}
+	// 	setData([...tmp]);
+	// }, [orderBy, categoryFilter, brandFilter, priceFilter, colorFilter]);
+	const initialData = async () => {
+		try {
+			const dada = await getShopData();
+			console.log(data);
+			const { smartPhone, laptop, tablet, accessories } = dataSplitter(data);
+			updateReduxLaptopItems(dispatch, laptop);
+			updateReduxSmartPhoneItems(dispatch, smartPhone);
+			updateReduxTabletItems(dispatch, tablet);
+			updateReduxAccessoriesItems(dispatch, accessories);
+		} catch (err) {
+			console.log('Sync data err', err);
+		}
+	};
 	useEffect(() => {
-		console.log(
-			'filter',
-			'orderBy',
-			orderBy,
-			'categoryFilter',
-			categoryFilter,
-			'brandFilter',
-			brandFilter,
-			'priceFilter',
-			priceFilter,
-			'colorFilter',
-			colorFilter
-		);
-		let tmp = [...data];
-		if (categoryFilter.length) {
-			tmp = [];
-			for (let i = 0; i < categoryFilter.length; i++) {
-				tmp.push(
-					...[...data].filter(
-						(v) => v.category === categoryFilter[i].value
-					)
-				);
-			}
+		if (!productsDataRedux || !productsDataRedux.length) {
+			initialData();
 		}
-		if (brandFilter.length) {
-			for (let i = 0; i < brandFilter.length; i++) {
-				tmp.push(
-					...[...data].filter((v) => v.brand === brandFilter[i].value)
-				);
-			}
-		}
-		if (colorFilter.length) {
-			for (let i = 0; i < colorFilter.length; i++) {
-				tmp.push(
-					...[...data].filter((v) => v.color === colorFilter[i].value)
-				);
-			}
-		}
-		setData([...tmp]);
-	}, [orderBy, categoryFilter, brandFilter, priceFilter, colorFilter]);
+	}, []);
 
 	return (
 		<Container fluid className="gradient-background p-0">
@@ -111,8 +138,12 @@ const Tablet = memo(() => {
 							/>
 						</Col>
 						<Col lg="9" md="6" classNam="p-0">
-							<Row className="m-0 p-0 pt-5">
-								{_renderItems(dispatch, data)}
+							<Row className="m-0 p-0 pt-5 justify-content-center">
+								{data && data.length ? (
+									_renderItems(dispatch, data)
+								) : (
+									<CircularProgress />
+								)}
 							</Row>
 						</Col>
 					</Row>

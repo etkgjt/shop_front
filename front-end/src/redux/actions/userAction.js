@@ -14,7 +14,7 @@ export const login = (userName, password) => {
 };
 export const getUserInfo = (username, token) =>
 	new Promise((resolve, reject) => {
-		API.get(`/user/username?value=${username}`, {
+		API.get(`/user?value=${username}`, {
 			headers: {
 				Authorization: token,
 			},

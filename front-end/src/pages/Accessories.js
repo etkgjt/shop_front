@@ -16,6 +16,7 @@ import '../styles/pageTitle.css';
 import '../styles/shopPage.css';
 import '../styles/forAll.css';
 import { ACCESSORIES_BRAND } from '../constants/constants';
+import { CircularProgress } from '@material-ui/core';
 
 const _renderItems = (dispatch, data) => {
 	let tempArr = [...data];
@@ -113,8 +114,12 @@ const Accessories = memo(() => {
 							/>
 						</Col>
 						<Col lg="9" md="6" classNam="p-0">
-							<Row className="m-0 p-0 pt-5">
-								{_renderItems(dispatch, data)}
+							<Row className="m-0 p-0 pt-5 justify-content-center">
+								{data && data.length ? (
+									_renderItems(dispatch, data)
+								) : (
+									<CircularProgress />
+								)}
 							</Row>
 						</Col>
 					</Row>

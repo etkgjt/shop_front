@@ -1,6 +1,6 @@
 import { Slider } from '@material-ui/core';
 import React from 'react';
-import { Col, ListGroup, ListGroupItem, Row } from 'reactstrap';
+import { Button, Col, ListGroup, ListGroupItem, Row } from 'reactstrap';
 import {
 	CATEGORY_LIST,
 	ITEMS_ORDER_LIST,
@@ -10,6 +10,8 @@ import {
 import CustomRadioButton from './CustomRadioButton';
 import MyCheckboxList from './MyCheckedBoxList';
 import MyRating from './MyRating';
+import '../styles/material.css';
+
 const MyFilterPanel = ({
 	orderBy = 0,
 	categoryFilter = {},
@@ -22,6 +24,7 @@ const MyFilterPanel = ({
 	setPriceFilter = () => {},
 	setColorFilter = () => {},
 	brands,
+	onFilterClick = () => {},
 }) => {
 	return (
 		<Col className="pt-2">
@@ -165,6 +168,23 @@ const MyFilterPanel = ({
 					</Row>
 				</ListGroupItem>
 			</ListGroup>
+			<Button
+				onClick={() => {
+					console.log('filter click ne');
+					onFilterClick();
+				}}
+				className="mt-3 button-hover-depth3"
+				style={{
+					width: '100%',
+					height: 50,
+					backgroundColor: 'white',
+					borderColor: '#458AFF',
+					color: '#458AFF',
+					borderRadius: 25,
+				}}
+			>
+				Filter
+			</Button>
 		</Col>
 	);
 };
