@@ -57,10 +57,12 @@ const SmartPhone = memo(() => {
 	const initialData = async () => {
 		try {
 			console.log('init data ne');
-			const data = await getShopData();
-			console.log('data lay duoc ne', data);
-			console.log(data);
-			const { smartPhone, laptop, tablet, accessories } = dataSplitter(data);
+			const dataRes = await getShopData();
+			console.log('data lay duoc ne', dataRes);
+			const { smartPhone, laptop, tablet, accessories } = dataSplitter(
+				dataRes
+			);
+			console.log('smart phone ne', smartPhone);
 			updateReduxLaptopItems(dispatch, laptop);
 			updateReduxSmartPhoneItems(dispatch, smartPhone);
 			updateReduxTabletItems(dispatch, tablet);
@@ -69,6 +71,9 @@ const SmartPhone = memo(() => {
 			console.log('Sync data err', err);
 		}
 	};
+	useEffect(() => {
+		console.log('Price filter', priceFilter);
+	}, [priceFilter]);
 	useEffect(() => {
 		console.log('Long chay lan dau thoi ne', productsDataRedux);
 
@@ -97,6 +102,15 @@ const SmartPhone = memo(() => {
 				return [...a, ...temp.filter((v) => v.brand === b.value)];
 			}, []);
 			temp = newBrandFilterList;
+		}
+		const x =
+			priceFilter?.[0] <= priceFilter[1] ? priceFilter?.[0] : priceFilter[1];
+		const y =
+			priceFilter?.[0] >= priceFilter[1] ? priceFilter?.[0] : priceFilter[1];
+		if ((x && y) || x || y) {
+			temp = temp.filter(
+				(v) => v?.price >= x * 1000000 && v?.price <= y * 1000000
+			);
 		}
 		switch (orderBy) {
 			case 0:

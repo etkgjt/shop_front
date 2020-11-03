@@ -4,13 +4,19 @@ import '../styles/pageTitle.css';
 import { Icon } from '@material-ui/core';
 
 import { MDBContainer, MDBInput } from 'mdbreact';
-import { MyRating } from '../components';
+import {
+	MyRating,
+	MyModal,
+	SignInModal,
+	DescriptionDetailsForm,
+} from '../components';
 
 import '../styles/singleProduct.css';
 import '../styles/material.css';
 import { useLocation, useHistory } from 'react-router-dom';
 import { addToCart } from '../redux/actions/cartAction';
 import { useDispatch } from 'react-redux';
+import { getNumberWithDot } from '../untils/numberFormater';
 
 const SingleProduct = memo(() => {
 	console.log('product render ne');
@@ -38,6 +44,7 @@ const SingleProduct = memo(() => {
 			  }
 	);
 	useEffect(() => {
+		console.log('state ne', state, itemInfo);
 		setItemInfo(state);
 	}, [state]);
 
@@ -55,6 +62,7 @@ const SingleProduct = memo(() => {
 });
 
 const ProductImage = ({ data }) => {
+	const [activeImgIndex, setActiveImgIndex] = useState(0);
 	return (
 		<Col lg="6" md="6" className="pr-2 mb-5 ">
 			<Row
@@ -67,12 +75,25 @@ const ProductImage = ({ data }) => {
 					display: 'flex',
 				}}
 			>
-				<img className="item-image w-100 " src={data?.[0]} />
+				<img
+					className="item-image w-100 "
+					src={data?.[activeImgIndex]?.url}
+				/>
 			</Row>
 			<Row className="p-0 m-0 mt-2">
 				{data.map((v, i) => (
-					<Col lg="3" md="6" className="m-0 p-1" style={{ height: 100 }}>
-						<img key={`${i}`} className="z-depth1 h-100" src={v} />
+					<Col
+						lg="3"
+						md="6"
+						className="m-0 p-1"
+						style={{ height: 100 }}
+						onClick={() => setActiveImgIndex(i)}
+					>
+						<img
+							key={`${i}`}
+							className="z-depth1 h-100 img-fluid"
+							src={v?.url}
+						/>
 					</Col>
 				))}
 			</Row>
@@ -86,11 +107,11 @@ const ProductDetails = ({ productInfo }) => {
 		name,
 		category,
 		price,
-		model,
+		brand,
 		description,
 		color,
 		delivery,
-		img = [],
+		images = [],
 	} = productInfo;
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -103,7 +124,7 @@ const ProductDetails = ({ productInfo }) => {
 	};
 	return (
 		<Row className="pt-4">
-			<ProductImage data={img} />
+			<ProductImage data={images} />
 			<Col lg="6" md="6" className="item">
 				<p className="mb-2" style={{ fontSize: 20, fontWeight: '700' }}>
 					{name}
@@ -112,10 +133,10 @@ const ProductDetails = ({ productInfo }) => {
 					<MyRating readOnly={false} value={rating ?? 4} />
 				</Row>
 				<small className="mb-2" style={{ fontSize: 16 }}>
-					{category}
+					{category?.name}
 				</small>
 
-				<p className="mb-2">{`$${price}`}</p>
+				<p className="mb-2">{`${getNumberWithDot(price)} vnđ`}</p>
 				<p className="mb-2" style={{ fontWeight: '300' }}>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
 					sapiente illo. Sit error voluptas repellat rerum quidem, soluta
@@ -126,16 +147,40 @@ const ProductDetails = ({ productInfo }) => {
 					className="d-flex justify-content-between align-items-center mb-2 px-3"
 					style={{ width: '60%' }}
 				>
-					<p style={{ fontWeight: 'bold' }}>Model</p>
-					<p style={{ fontWeight: '300' }}>{model}</p>
+					<p style={{ fontWeight: 'bold' }}>Brand</p>
+					<p style={{ fontWeight: '300' }}>{brand?.name}</p>
 				</Row>
 				<Row
 					className="d-flex justify-content-between align-items-center mb-2 px-3"
 					style={{ width: '60%' }}
 				>
 					<p style={{ fontWeight: 'bold' }}>Color</p>
-					<p style={{ fontWeight: '300' }}>{color}</p>
+					<p style={{ fontWeight: '300' }}>{description?.color}</p>
 				</Row>
+				<Row
+					className="d-flex justify-content-between align-items-center mb-2 px-3"
+					style={{ width: '60%' }}
+				>
+					<Button
+						onClick={() =>
+							MyModal.show(
+								() => console.log('show ne'),
+								<DescriptionDetailsForm
+									description={description}
+									name={name}
+								/>
+							)
+						}
+						style={{
+							backgroundColor: '#458AFF',
+							color: 'white',
+							borderWidth: 0,
+						}}
+					>
+						Xem thêm cấu hình chi tiết
+					</Button>
+				</Row>
+
 				{/* <Row
 					className="d-flex justify-content-between align-items-center mb-2 px-3"
 					style={{ width: '60%' }}

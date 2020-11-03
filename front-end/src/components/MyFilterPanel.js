@@ -84,9 +84,9 @@ const MyFilterPanel = ({
 					<Slider
 						valueLabelDisplay="on"
 						aria-labelledby="range-slider"
-						defaultValue={[10, 50]}
-						max={2000}
-						onChangeCommitted={(value) => setPriceFilter(value)}
+						defaultValue={[0, 0]}
+						max={50}
+						onChangeCommitted={(e, v) => setPriceFilter(v)}
 					/>
 				</ListGroupItem>
 			</ListGroup>

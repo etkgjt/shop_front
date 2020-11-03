@@ -5,6 +5,7 @@ import '../styles/material.css';
 import '../styles/pageTitle.css';
 import '../styles/shopPage.css';
 import { useHistory } from 'react-router-dom';
+import { getNumberWithDot } from '../untils/numberFormater';
 const ShopItem = ({ addToCart, item, idx, dispatch }) => {
 	const history = useHistory();
 	return (
@@ -17,20 +18,27 @@ const ShopItem = ({ addToCart, item, idx, dispatch }) => {
 			key={`${item.name}-${idx}`}
 		>
 			<Col className="button-container-box-shadow">
-				<div className="mb-50 text-center single_items pt-5">
-					<img src={item.img?.[0]}></img>
+				<div
+					className="mb-50 text-center single_items pt-5"
+					style={{ maxHeight: '400px' }}
+				>
+					<img src={item.images?.[0]?.url}></img>
 				</div>
 				<Col
 					style={{ borderRadius: 5 }}
 					className="py-4 d-flex flex-column justify-content-center align-items-center mt-4"
 				>
-					<p className="text-center m-0 my-1">{item?.name}</p>
-					<p className="text-center m-0 my-1">{`$${item?.price}`}</p>
-					<p className="text-center m-0 my-1">{`Brand-${item?.brand}`}</p>
+					<p className="text-center m-0 my-1" style={{ fontSize: 16 }}>
+						{item?.name}
+					</p>
+					<p className="text-center m-0 my-1">{`${getNumberWithDot(
+						item?.price
+					)}`}</p>
+					{/* <p className="text-center m-0 my-1">{`Brand-${item?.brand}`}</p>
 					<p className="text-center m-0 my-1">{`Category-${item?.category}`}</p>
 					<p className="text-center m-0 my-1">{`Color-${item?.color}`}</p>
 					<p className="text-center m-0 my-1">{`Date-${item?.dateArrive}`}</p>
-					<p className="text-center m-0 my-1">{`BuyingTimes-${item?.buyingTimes}`}</p>
+					<p className="text-center m-0 my-1">{`BuyingTimes-${item?.buyingTimes}`}</p> */}
 
 					<MyRating value={item?.rating} />
 					<Row className="justify-content-around p-0 w-100">

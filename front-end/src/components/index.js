@@ -15,7 +15,9 @@ import MyRating from './MyRating';
 
 import ShopMethod from './ShopMethod';
 import ShopItem from './ShopItem';
+import DescriptionDetailsForm from './DescriptionDetailForm';
 export {
+	DescriptionDetailsForm,
 	ShopItem,
 	ShopMethod,
 	MyRating,

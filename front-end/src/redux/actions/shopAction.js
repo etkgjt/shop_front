@@ -9,8 +9,10 @@ export const getShopData = () =>
 	});
 
 export const dataSplitter = (array) => {
-	const smartPhone = [...array.filter((v) => v?.caterory?.id === 1)];
-	const laptop = [...array.filter((v) => v?.caterory?.id === 1)];
+	console.log('data trong funcSplit', array);
+	const smartPhone = [...array.filter((v) => v?.category?.id === 1)];
+	console.log('smart phone trong userAction ne', smartPhone);
+	const laptop = [...array.filter((v) => v?.category?.id === 1)];
 	const tablet = [...array.filter((v) => v?.caterory?.id === 1)];
 	const accessories = [...array.filter((v) => v?.caterory?.id === 1)];
 	return {
