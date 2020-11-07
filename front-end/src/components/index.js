@@ -16,6 +16,7 @@ import MyRating from './MyRating';
 import ShopMethod from './ShopMethod';
 import ShopItem from './ShopItem';
 import DescriptionDetailsForm from './DescriptionDetailForm';
+import AlertModal from './AlertModal';
 export {
 	DescriptionDetailsForm,
 	ShopItem,
@@ -34,4 +35,5 @@ export {
 	LoginRequestModal,
 	IndicatorModal,
 	SignInModal,
+	AlertModal,
 };

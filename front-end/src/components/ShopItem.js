@@ -28,7 +28,16 @@ const ShopItem = ({ addToCart, item, idx, dispatch }) => {
 					style={{ borderRadius: 5 }}
 					className="py-4 d-flex flex-column justify-content-center align-items-center mt-4"
 				>
-					<p className="text-center m-0 my-1" style={{ fontSize: 16 }}>
+					<p
+						className="text-center m-0 my-1"
+						style={{
+							fontSize: 16,
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							width: '100%',
+							whiteSpace: 'nowrap',
+						}}
+					>
 						{item?.name}
 					</p>
 					<p className="text-center m-0 my-1">{`${getNumberWithDot(

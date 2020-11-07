@@ -138,10 +138,7 @@ const ProductDetails = ({ productInfo }) => {
 
 				<p className="mb-2">{`${getNumberWithDot(price)} vnđ`}</p>
 				<p className="mb-2" style={{ fontWeight: '300' }}>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
-					sapiente illo. Sit error voluptas repellat rerum quidem, soluta
-					enim perferendis voluptates laboriosam. Distinctio, officia quis
-					dolore quos sapiente tempore alias.
+					{description?.introduction}
 				</p>
 				<Row
 					className="d-flex justify-content-between align-items-center mb-2 px-3"

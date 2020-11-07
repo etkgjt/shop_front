@@ -1,4 +1,5 @@
 import { REDUX } from '../store/type';
+import { API } from '../../untils/api';
 
 export const addToCart = (dispatch, item) => {
 	dispatch({ type: REDUX.ADD_TO_CART, payload: item });
@@ -18,3 +19,13 @@ export const updatePaymentMethod = (dispatch, method) => {
 export const updateShippingInfo = (dispatch, info) => {
 	dispatch({ type: REDUX.UPDATE_SHIPPING_INFO, payload: info });
 };
+export const sendOrder = (token, orderInfo) =>
+	new Promise((resolve, reject) => {
+		API.post('/order/add', orderInfo, {
+			headers: {
+				Authorization: token,
+			},
+		})
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});

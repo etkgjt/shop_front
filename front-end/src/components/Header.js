@@ -226,7 +226,16 @@ const Header = () => {
 			className="header-area header-container slideIn header-gradient-bg z-depth3"
 			style={{ color: 'white' }}
 		>
-			<div>{show ? <SearchBar /> : <NavigationBar setShow={setShow} />}</div>
+			<div>
+				{show ? (
+					<SearchBar
+						onUnfocusFunc={() => setShow(false)}
+						onSubmitFunc={(v) => console.log('Submit', v)}
+					/>
+				) : (
+					<NavigationBar setShow={setShow} />
+				)}
+			</div>
 		</Container>
 	);
 };

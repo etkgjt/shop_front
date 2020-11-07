@@ -2,18 +2,39 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
-export default function SearchBar() {
+import '../styles/forAll.css';
+import { Input } from 'reactstrap';
+export default function SearchBar({
+	onUnfocusFunc = () => {},
+	onSubmitFunc = () => {},
+}) {
 	return (
 		<Autocomplete
 			id="combo-box-demo"
 			options={top100Films}
 			getOptionLabel={(option) => option.title}
-			style={{ width: 300 }}
+			style={{ width: '700px' }}
+			onSubmit={() => console.log('AutoComplete submit')}
+			onBlur={() => onUnfocusFunc()}
+			onChange={(e) => onSubmitFunc(e?.target?.value)}
 			renderInput={(params) => (
-				<TextField {...params} label="Combo box" variant="outlined" />
+				<TextField
+					{...params}
+					label="Search"
+					variant="filled"
+					style={{
+						backgroundColor: 'white',
+						color: 'black',
+						borderRadius: '5px',
+					}}
+					className="search_bar"
+					onBlur={() => onUnfocusFunc()}
+					onSubmit={(e) => console.log('submit ne')}
+				/>
 			)}
 		/>
+
+		// <Input type="text" className="search_bar" />
 	);
 }
 

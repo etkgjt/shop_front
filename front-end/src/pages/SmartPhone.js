@@ -16,7 +16,7 @@ import '../styles/pageTitle.css';
 import '../styles/shopPage.css';
 import '../styles/forAll.css';
 import { SMART_PHONE_BRAND } from '../constants/constants';
-import { CircularProgress } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import moment from 'moment';
 import {
 	dataSplitter,
@@ -27,18 +27,22 @@ import {
 	updateReduxTabletItems,
 } from '../redux/actions/shopAction';
 
-const _renderItems = (dispatch, data) => {
+const _renderItems = (dispatch, data, maxNum) => {
 	let tempArr = [...data];
 
-	return tempArr.map((item, idx) => (
-		<ShopItem
-			key={`${idx}-${item?.name}`}
-			addToCart={addToCart}
-			item={item}
-			idx={idx}
-			dispatch={dispatch}
-		/>
-	));
+	return tempArr.map((item, idx) => {
+		if (idx < maxNum)
+			return (
+				<ShopItem
+					key={`${idx}-${item?.name}`}
+					addToCart={addToCart}
+					item={item}
+					idx={idx}
+					dispatch={dispatch}
+				/>
+			);
+		return <div />;
+	});
 };
 const SmartPhone = memo(() => {
 	console.log('shopage render ne');
@@ -49,10 +53,12 @@ const SmartPhone = memo(() => {
 	const [data, setData] = useState(productsDataRedux ? productsDataRedux : []);
 
 	const [orderBy, setOrderBy] = useState(0);
-	const [categoryFilter, setCategoryFilter] = useState([]);
+	// const [categoryFilter, setCategoryFilter] = useState([]);
 	const [brandFilter, setBrandFilter] = useState([]);
 	const [priceFilter, setPriceFilter] = useState({ min: -1, max: -1 });
 	const [colorFilter, setColorFilter] = useState([]);
+
+	const [numberOfItem, setNumberOfItem] = useState(10);
 
 	const initialData = async () => {
 		try {
@@ -154,7 +160,7 @@ const SmartPhone = memo(() => {
 								priceFilter={priceFilter}
 								colorFilter={colorFilter}
 								setOrderBy={setOrderBy}
-								setCategoryFilter={setCategoryFilter}
+								// setCategoryFilter={setCategoryFilter}
 								setBrandFilter={setBrandFilter}
 								setPriceFilter={setPriceFilter}
 								setColorFilter={setColorFilter}
@@ -163,14 +169,27 @@ const SmartPhone = memo(() => {
 						<Col lg="9" md="6" classNam="p-0">
 							<Row className="m-0 p-0 pt-5 justify-content-center">
 								{data && data.length ? (
-									_renderItems(dispatch, data)
+									_renderItems(dispatch, data, numberOfItem)
 								) : (
 									<CircularProgress />
 								)}
 							</Row>
+							{data && data.length > numberOfItem ? (
+								<Row className="justify-content-center align-items-center">
+									<Button
+										color="primary"
+										border
+										onClick={() => setNumberOfItem((old) => old + 10)}
+									>
+										See more...
+									</Button>
+								</Row>
+							) : (
+								<div />
+							)}
 						</Col>
 					</Row>
-					<ShopMethod />
+					{/* <ShopMethod /> */}
 				</Container>
 			</section>
 		</Container>

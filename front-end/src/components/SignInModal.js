@@ -44,35 +44,46 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 	const history = useHistory();
 	const _handleSignInClick = async () => {
 		try {
-			MyModal.show(() => {}, <IndicatorModal />);
+			MyModal.show(() => {}, <IndicatorModal title="Sign in..." />);
 			const { access_token } = await login(email, password);
 			console.log('token', access_token);
 
 			console.log('long token', parseJwt(access_token));
 			const { sub } = parseJwt(access_token);
 			const res = await getUserInfo(sub, access_token);
-			const { address, id, fullname, username, phone, gender } = res;
-			const userEmail = res?.email;
+			const {
+				address,
+				id,
+				fullname,
+				username,
+				phone_number,
+				gender,
+				first_name,
+				last_name,
+			} = res;
+
 			console.log(
 				'user Info',
 				address,
 				id,
 				fullname,
 				username,
-				phone,
-				userEmail,
-				gender
+				phone_number,
+				gender,
+				first_name,
+				last_name
 			);
 
 			distpatchLoginToRedux(dispatch);
 			updateUserInfoRedux(dispatch, {
 				address,
 				id,
-				fullname,
+				first_name,
+				last_name,
 				username,
-				phone,
-				userEmail,
+				phone_number,
 				gender,
+				access_token,
 			});
 			onSignInSuccess();
 			MyModal.hide();
@@ -118,6 +129,7 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 							className="w-100"
 							color={validateEmail(email) ? 'primary' : 'secondary'}
 							onChange={(e) => setEmail(e?.target?.value)}
+							// value="admin@gmail.com"
 						/>
 					</Row>
 					<Row className="d-flex justify-content-around align-items-center mt-3">
@@ -131,6 +143,7 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 							onChange={(e) => {
 								setPassword(e?.target?.value);
 							}}
+							// value="admin"
 						/>
 					</Row>
 

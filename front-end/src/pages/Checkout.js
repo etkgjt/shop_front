@@ -26,42 +26,41 @@ import '../styles/forAll.css';
 import '../styles/material.css';
 import { MyStepper } from '../components';
 import { updateShippingInfo } from '../redux/actions/cartAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNumberWithDot } from '../untils/numberFormater';
 const Checkout = () => {
 	let { state } = useLocation();
+	const userInfo = useSelector((state) => state.userReducer.userInfo);
+	const { first_name, last_name, phone_number, username } = userInfo;
+	const userAddress = userInfo?.address;
 
 	let { data } = state ? state : {};
 	const dispatch = useDispatch();
 	console.log('state', data);
 	const [items, setItems] = useState(data ? data : []);
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [address, setAddress] = useState('');
+	const [firstName, setFirstName] = useState(first_name ? first_name : '');
+	const [lastName, setLastName] = useState(last_name || '');
+	const [address, setAddress] = useState(userAddress || '');
 	const [secondAddr, setSecondAddr] = useState('');
-	const [phoneNumber, setPhoneNumber] = useState('');
-	const [city, setCity] = useState(0);
-	const [district, setDistrict] = useState(0);
-
+	const [phoneNumber, setPhoneNumber] = useState(phone_number || '');
+	const [city, setCity] = useState(1);
+	const [district, setDistrict] = useState(1);
+	const [note, setNote] = useState('');
 	const _onCheckoutPress = () => {
-		if (
-			!firstName ||
-			!lastName ||
-			!address ||
-			!phoneNumber ||
-			!city ||
-			!district
-		) {
+		if (!firstName || !lastName || !address || !phoneNumber) {
 			console.log('thieu thong tin');
 		} else {
 			console.log('success');
 			updateShippingInfo(dispatch, {
-				firstName,
-				lastName,
+				first_name,
+				last_name,
 				address,
 				secondAddr,
-				phoneNumber,
+				phone_number,
 				city,
 				district,
+				username,
+				note,
 			});
 		}
 	};
@@ -88,17 +87,19 @@ const Checkout = () => {
 							<Row className="pl-0 justify-content-between">
 								<Col md="6" className="m-0 p-0 pr-5">
 									<TextField
-										label="FirstName"
+										label="First Name"
 										className="w-100"
 										onChange={(e) => setFirstName(e?.target?.value)}
 										color="success"
+										value={firstName}
 									/>
 								</Col>
 								<Col md="6" className="p-0">
 									<TextField
-										label="FirstName"
+										label="Last Name"
 										className="w-100"
 										onChange={(e) => setLastName(e?.target?.value)}
+										value={lastName}
 									/>
 								</Col>
 							</Row>
@@ -107,6 +108,7 @@ const Checkout = () => {
 									label="Address"
 									className="w-100"
 									onChange={(e) => setAddress(e?.target?.value)}
+									value={address}
 								/>
 							</Row>
 							<Row className="d-flex justify-content-around align-items-center mt-5">
@@ -114,6 +116,7 @@ const Checkout = () => {
 									onChange={(e) => setSecondAddr(e?.target?.value)}
 									label="Address 2 (optional)"
 									className="w-100"
+									value={secondAddr}
 								/>
 							</Row>
 							<Row className="d-flex justify-content-around align-items-center mt-5">
@@ -121,6 +124,17 @@ const Checkout = () => {
 									label="Phone Number"
 									className="w-100"
 									onChange={(e) => setPhoneNumber(e?.target?.value)}
+									value={phoneNumber}
+								/>
+							</Row>
+							<Row className="d-flex justify-content-around align-items-center mt-5">
+								<TextField
+									label="Note"
+									className="w-100"
+									onChange={(e) => setNote(e?.target?.value)}
+									value={note}
+									multiline
+									variant="outlined"
 								/>
 							</Row>
 							<Row className="mt-5">
@@ -128,11 +142,13 @@ const Checkout = () => {
 									title="City"
 									items={CITY}
 									onSubmit={(val) => setCity(val)}
+									value={city}
 								/>
 								<MyDropdownPicker
 									items={DISTRICTS[0]}
 									title="District"
 									onSubmit={(val) => setDistrict(val)}
+									value={district}
 								/>
 							</Row>
 
@@ -181,7 +197,7 @@ const Checkout = () => {
 										}}
 									>
 										<Button
-											onClick={_onCheckoutPress}
+											onClick={() => _onCheckoutPress()}
 											// disabled={
 											// 	!firstName ||
 											// 	!lastName ||
@@ -228,14 +244,31 @@ const DetailsCheckout = ({ items }) => {
 						<Col>
 							{items?.map((v, i) => (
 								<Row
-									className="justify-content-between align-items-center mb-2"
+									className="justify-content-between align-items-center mb-3"
 									key={`${v?.name}-${i}`}
 								>
-									<small style={{ fontSize: 16 }} className="h-25">
+									<small
+										style={{
+											fontSize: 16,
+											overflow: 'hidden',
+											textOverflow: 'ellipsis',
+											width: '40%',
+											whiteSpace: 'nowrap',
+										}}
+										className="h-25"
+									>
 										{v?.name}
 									</small>
-									<small style={{ fontSize: 16 }}>
-										{v?.amount * v?.price}
+									<small
+										style={{
+											fontSize: 16,
+											overflow: 'hidden',
+											textOverflow: 'ellipsis',
+											width: '40%',
+											whiteSpace: 'nowrap',
+										}}
+									>
+										{`${getNumberWithDot(v?.amount * v?.price)} vnđ`}
 									</small>
 								</Row>
 							))}
@@ -251,8 +284,12 @@ const DetailsCheckout = ({ items }) => {
 							The total amount of (including VAT)
 						</small>
 						<small style={{ fontSize: 16 }}>
-							{items?.reduce((x, y) => (x += y?.price * y?.amount), 0) +
-								5}
+							{`${getNumberWithDot(
+								items?.reduce(
+									(x, y) => (x += y?.price * y?.amount),
+									0
+								) + 5
+							)} vnđ`}
 						</small>
 					</ListGroupItem>
 				</ListGroup>

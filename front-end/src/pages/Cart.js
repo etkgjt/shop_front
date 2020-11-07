@@ -35,6 +35,7 @@ import {
 	SignInModal,
 } from '../components';
 import { login } from '../redux/actions/userAction';
+import { getNumberWithDot } from '../untils/numberFormater';
 
 const Cart = () => {
 	const data = useSelector((state) => state?.cartReducer?.items);
@@ -81,7 +82,18 @@ const Cart = () => {
 };
 const ItemDetails = ({ product }) => {
 	const dispatch = useDispatch();
-	const { name, color, brand, size, amount, price, id, images } = product;
+	const {
+		name,
+
+		brand,
+		size,
+		amount,
+		price,
+		id,
+		images,
+		description,
+	} = product;
+
 	const [amountOfItem, setAmountOfItem] = useState(amount ? amount : 0);
 	const _handleAddItem = () => {
 		setAmountOfItem((amount) => amount + 1);
@@ -124,19 +136,21 @@ const ItemDetails = ({ product }) => {
 									className="mb-3 text-muted text-uppercase small"
 									style={{ fontSize: 12 }}
 								>
-									{`BRAND: ${brand?.toString().toUpperCase()}`}
+									{`BRAND: ${brand?.name?.toString().toUpperCase()}`}
 								</p>
 								<p
 									className="mb-2 text-muted text-uppercase small"
 									style={{ fontSize: 12 }}
 								>
-									{`COLOR: ${color?.toString().toUpperCase()}`}
+									{`COLOR: ${description?.color
+										?.toString()
+										.toUpperCase()}`}
 								</p>
 								<p
 									className="mb-3 text-muted text-uppercase small"
 									style={{ fontSize: 12 }}
 								>
-									{`SIZE: ${size?.toUpperCase()}`}
+									{`SIZE: ${description?.screen_size?.toUpperCase()}`}
 								</p>
 							</div>
 							<div>
@@ -267,9 +281,9 @@ const ItemDetails = ({ product }) => {
 						</div>
 						<p class="mb-0">
 							<span>
-								<strong id="summary">{`$ ${
+								<strong id="summary">{`${getNumberWithDot(
 									amountOfItem * price
-								}`}</strong>
+								)} vnđ`}</strong>
 							</span>
 						</p>
 					</div>
@@ -297,12 +311,14 @@ const SumaryCheckout = ({ items }) => {
 	};
 	return (
 		<Col lg="4">
-			<div className="p-4 z-depth2 bg-white">
+			<div className="p-3 z-depth2 bg-white">
 				<h6 class="mb-3">The total amount of</h6>
 				<ListGroup flush>
 					<ListGroupItem className="d-flex justify-content-between align-items-center">
 						<small style={{ fontSize: 16 }}>Temporary amount</small>
-						<small style={{ fontSize: 16 }}>{_caculateTotal()}</small>
+						<small style={{ fontSize: 16 }}>
+							{`${getNumberWithDot(_caculateTotal())} vnđ`}
+						</small>
 					</ListGroupItem>
 					<ListGroupItem className="d-flex justify-content-between align-items-center">
 						<small style={{ fontSize: 16 }}>Shipping</small>
@@ -313,7 +329,7 @@ const SumaryCheckout = ({ items }) => {
 							The total amount of (including VAT)
 						</small>
 						<small style={{ fontSize: 16 }}>
-							{_caculateTotal() + ship}
+							{`${getNumberWithDot(_caculateTotal() + ship)} vnđ`}
 						</small>
 					</ListGroupItem>
 					{loggedIn && data ? (
