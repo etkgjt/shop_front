@@ -1,5 +1,5 @@
 import React, { useCallback, memo, useState, useEffect } from 'react';
-import { BrowserRouter, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter, Link, NavLink, useHistory } from 'react-router-dom';
 
 import '../styles/header.css';
 
@@ -220,6 +220,10 @@ const NavigationBar = ({ setShow }) => {
 const Header = () => {
 	console.log('header render ??');
 	const [show, setShow] = useState(false);
+	const history = useHistory();
+	const onSearchSubmit = (key) => {
+		history.push('/search', { keyword: key });
+	};
 	return (
 		<Container
 			fluid
@@ -230,7 +234,7 @@ const Header = () => {
 				{show ? (
 					<SearchBar
 						onUnfocusFunc={() => setShow(false)}
-						onSubmitFunc={(v) => console.log('Submit', v)}
+						onSubmitFunc={(v) => onSearchSubmit(v)}
 					/>
 				) : (
 					<NavigationBar setShow={setShow} />

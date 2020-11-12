@@ -17,8 +17,11 @@ export default function SearchBar({
 			onSubmit={() => console.log('AutoComplete submit')}
 			onBlur={() => onUnfocusFunc()}
 			onChange={(e) => onSubmitFunc(e?.target?.value)}
+			freeSolo
+			blurOnSelect
 			renderInput={(params) => (
 				<TextField
+					autoFocus
 					{...params}
 					label="Search"
 					variant="filled"

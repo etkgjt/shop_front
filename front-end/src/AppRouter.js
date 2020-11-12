@@ -23,6 +23,7 @@ import {
 	Accessories,
 	Tablet,
 	Finish,
+	Search,
 } from './pages';
 
 import { Provider } from 'react-redux';
@@ -79,6 +80,7 @@ const AppRoute = () => {
 					<Route path="/tablet" component={Tablet} />
 					<Route path="/accessories" component={Accessories} />
 					<Route path="/finish" component={Finish} />
+					<Route path="/search" component={Search} />
 				</Switch>
 
 				<footer

@@ -1,4 +1,4 @@
-const BASE_URL = 'https://dfea32da9271.ngrok.io'; //API url
+const BASE_URL = 'https://javaapiweb.herokuapp.com'; //API url
 const CITY = [
 	'Hồ Chí Minh',
 	'Hà Nội',

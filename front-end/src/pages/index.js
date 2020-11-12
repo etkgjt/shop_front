@@ -15,6 +15,7 @@ import Laptop from './Laptop';
 import SmartPhone from './SmartPhone';
 import Tablet from './Tablet';
 import Finish from './Finish';
+import Search from './SearchPage';
 
 export {
 	Finish,
@@ -33,4 +34,5 @@ export {
 	Laptop,
 	SmartPhone,
 	Tablet,
+	Search,
 };

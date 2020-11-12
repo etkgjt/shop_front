@@ -1,14 +1,16 @@
 import {
 	Button,
+	Checkbox,
 	Divider,
 	FormControl,
 	Icon,
+	Input,
 	InputLabel,
 	MenuItem,
 	Select,
 	TextField,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
 import '../styles/material.css';
@@ -22,6 +24,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { MyModal, IndicatorModal } from '../components';
 import axios from 'axios';
+import { CheckBox } from '@material-ui/icons';
 function parseJwt(token) {
 	var base64Url = token.split('.')[1];
 	var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -39,8 +42,20 @@ function parseJwt(token) {
 
 const SignInModal = ({ onSignInSuccess = () => {} }) => {
 	const dispatch = useDispatch();
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState(localStorage.getItem('tech_world_acc'));
+	const [password, setPassword] = useState(
+		localStorage.getItem('tech_world_pass')
+	);
+	// useEffect(() => {
+	// 	if (localStorage.getItem('tech_world_acc'))
+	// 		setEmail(localStorage.getItem('tech_world_acc'));
+	// 	if (localStorage.getItem('tech_world_pass'))
+	// 		setPassword(localStorage.getItem('tech_world_pass'));
+	// }, [
+	// 	localStorage.getItem('tech_world_acc'),
+	// 	localStorage.getItem('tech_world_pass'),
+	// ]);
+	const [remember, setRemember] = useState(true);
 	const history = useHistory();
 	const _handleSignInClick = async () => {
 		try {
@@ -85,6 +100,8 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 				gender,
 				access_token,
 			});
+			localStorage.setItem('tech_world_acc', email);
+			localStorage.setItem('tech_world_pass', password);
 			onSignInSuccess();
 			MyModal.hide();
 		} catch (err) {
@@ -129,7 +146,7 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 							className="w-100"
 							color={validateEmail(email) ? 'primary' : 'secondary'}
 							onChange={(e) => setEmail(e?.target?.value)}
-							// value="admin@gmail.com"
+							value={email}
 						/>
 					</Row>
 					<Row className="d-flex justify-content-around align-items-center mt-3">
@@ -143,26 +160,35 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 							onChange={(e) => {
 								setPassword(e?.target?.value);
 							}}
-							// value="admin"
+							value={password}
 						/>
 					</Row>
 
 					<Row className="mt-3 justify-content-around align-items-center">
-						<p
-							style={{
-								fontSize: 14,
-								color: 'black',
-								marginRight: 10,
-								fontWeight: '300',
-							}}
-						>
-							Remember me
-						</p>
+						<Row className="align-content-center">
+							<Checkbox
+								checked={remember}
+								onChange={() => setRemember(!remember)}
+							/>
+							<p
+								style={{
+									paddingTop: 10,
+									fontSize: 14,
+									color: 'black',
+									marginRight: 10,
+									fontWeight: '300',
+								}}
+							>
+								Remember me
+							</p>
+						</Row>
+
 						<p
 							style={{
 								fontSize: 14,
 								color: '#949494',
 								fontWeight: '300',
+								paddingTop: 10,
 							}}
 						>
 							forgot your password ?

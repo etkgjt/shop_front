@@ -9,19 +9,26 @@ export const getShopData = () =>
 	});
 
 export const dataSplitter = (array) => {
-	console.log('data trong funcSplit', array);
 	const smartPhone = [...array.filter((v) => v?.category?.id === 1)];
-	console.log('smart phone trong userAction ne', smartPhone);
-	const laptop = [...array.filter((v) => v?.category?.id === 1)];
-	const tablet = [...array.filter((v) => v?.caterory?.id === 1)];
-	const accessories = [...array.filter((v) => v?.caterory?.id === 1)];
+
+	const laptop = [...array.filter((v) => v?.category?.id === 2)];
+	const tablet = [...array.filter((v) => v?.caterory?.id === 3)];
+	const accessories = [...array.filter((v) => v?.caterory?.id > 3)];
 	return {
 		smartPhone,
 		laptop,
 		tablet,
 		accessories,
+		all: array,
 	};
 };
+
+export const sendCommentToServer = (data) =>
+	new Promise((resolve, reject) => {
+		API.post(`/comment/add`, data)
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});
 
 export const updateReduxShopData = (dispatch, products) => {
 	dispatch({ type: REDUX.UPDATE_SHOP_DATA, payload: products });
