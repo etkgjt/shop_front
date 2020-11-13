@@ -48,7 +48,7 @@ export const sendInquiry = (data) =>
 
 export const verifyEmail = (data) =>
 	new Promise((resolve, reject) => {
-		API.post('/verify', data)
+		API.post('/user/verify', data)
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});

@@ -6,6 +6,7 @@ import '../styles/pageTitle.css';
 import '../styles/shopPage.css';
 import { useHistory } from 'react-router-dom';
 import { getNumberWithDot } from '../untils/numberFormater';
+import { Icon, IconButton } from '@material-ui/core';
 const ShopItem = ({ addToCart, item, idx, dispatch }) => {
 	const history = useHistory();
 	return (
@@ -18,6 +19,9 @@ const ShopItem = ({ addToCart, item, idx, dispatch }) => {
 			key={`${item.name}-${idx}`}
 		>
 			<Col className="button-container-box-shadow">
+				<IconButton>
+					<Icon style={{ fontSize: 30 }}>favorite_border</Icon>
+				</IconButton>
 				<div
 					className="mb-50 text-center single_items pt-5"
 					style={{ maxHeight: '400px' }}

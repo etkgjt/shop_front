@@ -90,7 +90,7 @@ const MyFilterPanel = ({
 					/>
 				</ListGroupItem>
 			</ListGroup>
-			<ListGroup className="mt-3 z-depth1">
+			{/* <ListGroup className="mt-3 z-depth1">
 				<ListGroupItem
 					style={{
 						fontSize: 15,
@@ -108,7 +108,7 @@ const MyFilterPanel = ({
 					items={ITEM_COLORS}
 					onCheckedFunc={setColorFilter}
 				/>
-			</ListGroup>
+			</ListGroup> */}
 			<ListGroup className="mt-3 z-depth1">
 				<ListGroupItem
 					style={{

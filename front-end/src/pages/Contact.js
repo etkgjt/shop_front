@@ -36,6 +36,7 @@ const Contact = memo(() => {
 				message: state.message,
 				date: state.date,
 			});
+			console.log('Send data ne', data);
 			const res = await sendInquiry(data);
 			console.log('send inquiry success', res);
 			MyModal.hide(() => {});

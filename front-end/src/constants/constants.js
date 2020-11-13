@@ -130,21 +130,30 @@ const DISTRICTS = [
 	],
 ];
 const LAPTOP_BRAND = [
-	{ label: 'Asus', value: 0 },
-	{ label: 'MSI', value: 1 },
-	{ label: 'Dell', value: 2 },
-	{ lebel: 'HP', value: 3 },
+	{ label: 'Apple', value: 1 },
+	{ label: 'Acer', value: 2 },
+	{ label: 'Asus', value: 3 },
+	{ label: 'MSI', value: 7 },
+	{ label: 'Dell', value: 4 },
+	{ label: 'HP', value: 5 },
+	{ label: 'Lenovo', value: 6 },
 ];
 const SMART_PHONE_BRAND = [
-	{ label: 'Iphone', value: 0 },
-	{ label: 'OPPO', value: 1 },
-	{ label: 'Xiaomi', value: 2 },
-	{ label: 'realme', value: 3 },
+	{ label: 'Apple', value: 1 },
+	{ label: 'Samsung', value: 7 },
+	{ label: 'Xiaomi', value: 11 },
+	{ label: 'Vivo', value: 12 },
+	{ label: 'LG', value: 8 },
+	{ label: 'Huawie', value: 9 },
+	{ label: 'Oppo', value: 10 },
+	{ label: 'Nokia', value: 13 },
+	{ label: 'Sony', value: 14 },
+	{ label: 'VSmart', value: 15 },
 ];
 const TABLET_BRAND = [
-	{ label: 'IPad', value: 0 },
-	{ label: 'Samsung', value: 1 },
-	{ label: 'Lennnovo', value: 2 },
+	{ label: 'Apple', value: 1 },
+	{ label: 'Samsung', value: 7 },
+	{ label: 'Lennnovo', value: 6 },
 ];
 const ACCESSORIES_BRAND = [
 	{ label: 'ANNKO', value: 0 },
