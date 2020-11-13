@@ -24,6 +24,7 @@ import {
 	Tablet,
 	Finish,
 	Search,
+	Verify,
 } from './pages';
 
 import { Provider } from 'react-redux';
@@ -81,6 +82,7 @@ const AppRoute = () => {
 					<Route path="/accessories" component={Accessories} />
 					<Route path="/finish" component={Finish} />
 					<Route path="/search" component={Search} />
+					<Route path="/verify" component={Verify} />
 				</Switch>
 
 				<footer

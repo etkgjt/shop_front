@@ -8,12 +8,60 @@ import '../styles/contact.css';
 import { Icon, TextField } from '@material-ui/core';
 import '../styles/material.css';
 import FullWidthTabs from './UserInfo';
-import { MyModal } from '../components';
-
+import { AlertModal, IndicatorModal, MyModal } from '../components';
+import moment from 'moment';
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import { sendInquiry } from '../redux/actions/userAction';
 const Contact = memo(() => {
+	const [state, setState] = useState({
+		email: '',
+		phone: '',
+		message: '',
+		date: moment().toString(),
+	});
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggle = () => setIsOpen(!isOpen);
+	const _handleChange = (e) => {
+		e.persist();
+		console.log(e.target.name, e.target.value);
+		setState({ ...state, [e.target.name]: e.target.value });
+	};
+	const _handleSubmit = async () => {
+		try {
+			MyModal.show(() => {}, <IndicatorModal title="Send Inquiry..." />);
+			const data = JSON.stringify({
+				email: state.email,
+				phone: state.phone,
+				message: state.message,
+				date: state.date,
+			});
+			const res = await sendInquiry(data);
+			console.log('send inquiry success', res);
+			MyModal.hide(() => {});
+			MyModal.show(() => {},
+			<AlertModal title="Send inquiry success !" color="#458AFF" />);
+			setTimeout(
+				() =>
+					MyModal.hide(() =>
+						setState({
+							email: '',
+							phone: '',
+							message: '',
+							date: moment().toString(),
+						})
+					),
+				1000
+			);
+		} catch (err) {
+			MyModal.hide(() => {});
+			MyModal.show(() => {},
+			<AlertModal title="Send inquiry failed !" color="#F12849" />);
+			setTimeout(() => MyModal.hide(() => {}), 1000);
+			console.log('Send inquiry err', err);
+		}
+	};
+
 	return (
 		<Container fluid className="p-0 mb-5">
 			<Container fluid className="background p-0 m-0">
@@ -26,32 +74,51 @@ const Contact = memo(() => {
 					</Row>
 					<Row className="justify-content-around  w-50 contact-form z-depth2">
 						<Col lg="9" md="9" className="p-5 ">
-							<Row className="d-flex justify-content-center align-items-center mt-3">
-								<TextField
+							<ValidatorForm
+								className="w-100 h-100 p-5"
+								onSubmit={() => _handleSubmit()}
+							>
+								<TextValidator
 									label="Your Email"
 									className="w-100"
 									variant="outlined"
+									name="email"
+									value={state?.email}
+									onChange={_handleChange}
+									validators={['required', 'isEmail']}
+									errorMessages={[
+										'This field is required',
+										'This is not an email',
+									]}
 								/>
-							</Row>
-							<Row className="d-flex justify-content-around align-items-center mt-5">
-								<TextField
+
+								<TextValidator
 									label="Your Phone"
 									className="w-100"
 									variant="outlined"
+									name="phone"
+									value={state?.phone}
+									onChange={_handleChange}
+									validators={['required']}
+									errorMessages={['This field is required']}
 								/>
-							</Row>
-							<Row className="d-flex justify-content-around align-items-center mt-5">
-								<TextField
+
+								<TextValidator
 									id="outlined-multiline-static"
 									label="Your Message"
 									multiline
 									rows={4}
 									variant="outlined"
 									className="w-100"
+									name="message"
+									value={state?.message}
+									onChange={_handleChange}
+									validators={['required']}
+									errorMessages={['This field is required']}
 								/>
-							</Row>
-							<Row className="z-depth2 mt-3">
+
 								<Button
+									type="submit"
 									className="w-100"
 									style={{
 										backgroundColor: '#2296F3',
@@ -61,7 +128,7 @@ const Contact = memo(() => {
 								>
 									Send Inquiry
 								</Button>
-							</Row>
+							</ValidatorForm>
 						</Col>
 
 						<Col

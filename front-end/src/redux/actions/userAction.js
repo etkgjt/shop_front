@@ -22,10 +22,34 @@ export const getUserInfo = (username, token) =>
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});
+export const signUp = (userInfo) =>
+	new Promise((resolve, reject) => {
+		API.post('/user/add', userInfo, {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});
 export const distpatchLoginToRedux = (dispatch) => {
 	dispatch({ type: REDUX.LOG_IN });
 };
 export const updateUserInfoRedux = (dispatch, payload) => {
 	dispatch({ type: REDUX.UPDATE_USER_INFO, payload: payload });
 };
+
+export const sendInquiry = (data) =>
+	new Promise((resolve, reject) => {
+		API.post('/contact/add', data)
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});
+
+export const verifyEmail = (data) =>
+	new Promise((resolve, reject) => {
+		API.post('/verify', data)
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});
 export const logout = () => {};

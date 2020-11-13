@@ -16,6 +16,7 @@ import SmartPhone from './SmartPhone';
 import Tablet from './Tablet';
 import Finish from './Finish';
 import Search from './SearchPage';
+import Verify from './VerifiyEmail';
 
 export {
 	Finish,
@@ -35,4 +36,5 @@ export {
 	SmartPhone,
 	Tablet,
 	Search,
+	Verify,
 };
