@@ -98,11 +98,11 @@ const useStyles = makeStyles((theme) => ({
 
 function getSteps() {
 	return [
-		'Edit your cart',
-		'Edit shipping information',
-		'Select Payment Method',
-		'Confirmation',
-		'Finish',
+		'Giỏ hàng',
+		'Thông tin thanh toán',
+		'Chọn phương thức thanh toán',
+		'Kiểm tra',
+		'Hoàn tất',
 	];
 }
 

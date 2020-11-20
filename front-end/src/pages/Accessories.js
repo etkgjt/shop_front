@@ -27,6 +27,7 @@ const Accessories = memo(
 		const productsDataRedux = useSelector(
 			(state) => state?.shopReducer?.accessories
 		);
+		console.log(useSelector((state) => state?.shopReducer));
 		const [data, setData] = useState(
 			productsDataRedux ? productsDataRedux : []
 		);
@@ -100,7 +101,7 @@ const Accessories = memo(
 												setNumberOfItem((old) => old + 10)
 											}
 										>
-											See more...
+											Hiển thị thêm...
 										</Button>
 									</Row>
 								) : (

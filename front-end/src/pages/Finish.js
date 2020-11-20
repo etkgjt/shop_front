@@ -16,12 +16,12 @@ const Finish = memo(() => {
 	return (
 		<Container fluid style={{ backgroundColor: '#F4FAFE' }} className="pb-5">
 			<Row className="title-container mt-5">
-				<p class="page-title">Confirmation</p>
+				<p class="page-title">Thành công</p>
 			</Row>
 			<MyStepper activeStep={4} />
 			<Container className="pb-5">
 				<Row className="w-100 justify-content-center">
-					<h3>Order Successful!</h3>
+					<h3>Đặt hàng thành công!</h3>
 				</Row>
 				<NavLink
 					exact
@@ -46,7 +46,7 @@ const Finish = memo(() => {
 							height: 50,
 						}}
 					>
-						Continue Shopping!
+						Tiếp tục mua hàng!
 					</Button>
 				</NavLink>
 			</Container>

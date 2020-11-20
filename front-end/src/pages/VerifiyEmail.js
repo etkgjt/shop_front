@@ -26,6 +26,7 @@ const VeriryEmail = () => {
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
 			<AlertModal title="Verify email success !" color="#458AFF" />);
+			setTimeout(() => MyModal.hide(() => history.replace('/')), 1000);
 		} catch (err) {
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
@@ -35,8 +36,8 @@ const VeriryEmail = () => {
 		}
 	};
 	return (
-		<Container fluid className="pb-5">
-			<Row className="title-container mt-5">
+		<Container fluid className="p-0 pb-5">
+			<Row className="title-container mt-5 p-0">
 				<p class="page-title">Verify</p>
 			</Row>
 		</Container>

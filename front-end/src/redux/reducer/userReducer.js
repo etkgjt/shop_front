@@ -1,4 +1,5 @@
 import { REDUX } from '../../redux/store/type';
+
 const initialState = {
 	loggedIn: false,
 	userInfo: {
@@ -7,6 +8,8 @@ const initialState = {
 		id: '',
 		token: '',
 	},
+	history: [],
+	coupon: [],
 };
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -23,6 +26,18 @@ const userReducer = (state = initialState, action) => {
 			return {
 				...state,
 				userInfo: action.payload,
+			};
+		}
+		case REDUX.UPDATE_ORDER_HISTORY: {
+			return {
+				...state,
+				history: action.payload,
+			};
+		}
+		case REDUX.UPDATE_COUPON_LIST: {
+			return {
+				...state,
+				coupon: action.payload,
 			};
 		}
 		default: {

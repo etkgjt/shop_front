@@ -168,10 +168,10 @@ const CATEGORY_LIST = [
 	{ label: 'Orthers', value: 4 },
 ];
 const ITEMS_ORDER_LIST = [
-	{ label: 'Price High To Low', value: 0 },
-	{ label: 'Price Low To High', value: 1 },
-	{ label: 'Date Arrival', value: 2 },
-	{ label: 'Favorite', value: 3 },
+	{ label: 'Giá giảm dần', value: 0 },
+	{ label: 'Giá tăng dần', value: 1 },
+	{ label: 'Ngày ra mắt', value: 2 },
+	{ label: 'Yêu thích nhất', value: 3 },
 ];
 const ITEM_COLORS = [
 	{ label: 'Red', value: 0 },

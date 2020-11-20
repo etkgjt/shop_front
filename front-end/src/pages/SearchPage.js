@@ -11,6 +11,7 @@ import { nonAccentVietnamese } from '../untils/stringFormat';
 import {
 	dataSplitter,
 	getShopData,
+	loadShopDataSync,
 	updateReduxAccessoriesItems,
 	updateReduxLaptopItems,
 	updateReduxShopData,
@@ -54,22 +55,7 @@ const SearchPage = () => {
 	const [numberOfItem, setNumberOfItem] = useState(10);
 	const dispatch = useDispatch();
 	const initialData = async (dispatch) => {
-		try {
-			console.log('init data ne');
-			const dataRes = await getShopData();
-			console.log('data lay duoc ne', dataRes);
-			const { smartPhone, laptop, tablet, accessories, all } = dataSplitter(
-				dataRes
-			);
-			console.log('smart phone ne', smartPhone);
-			updateReduxShopData(dispatch, all);
-			updateReduxLaptopItems(dispatch, laptop);
-			updateReduxSmartPhoneItems(dispatch, smartPhone);
-			updateReduxTabletItems(dispatch, tablet);
-			updateReduxAccessoriesItems(dispatch, accessories);
-		} catch (err) {
-			console.log('Sync data err', err);
-		}
+		dispatch(loadShopDataSync());
 	};
 
 	useEffect(() => {
@@ -105,7 +91,7 @@ const SearchPage = () => {
 	return (
 		<Container fluid className="gradient-background p-0">
 			<Row className="title-container mt-5">
-				<p className="page-title">Search</p>
+				<p className="page-title">Tìm kiếm</p>
 			</Row>
 			<section className="shop-container">
 				<Container
@@ -127,7 +113,7 @@ const SearchPage = () => {
 								border
 								onClick={() => setNumberOfItem((old) => old + 10)}
 							>
-								See more...
+								Hiển thị thêm...
 							</Button>
 						</Row>
 					) : (

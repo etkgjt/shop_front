@@ -25,6 +25,7 @@ import {
 	Finish,
 	Search,
 	Verify,
+	ForgotPassword,
 } from './pages';
 
 import { Provider } from 'react-redux';
@@ -38,31 +39,13 @@ import MyModal from './components/MyModal';
 
 const AppRoute = () => {
 	let location = useLocation();
+	// console.log = () => {};
 	return (
 		<React.Fragment>
 			<Provider store={store}>
 				<header>
 					<Header />
 				</header>
-
-				{/* <TransitionGroup>
-					<CSSTransition
-						timeout={{ enter: 500 }}
-						classNames="fadeLeft"
-						key={location.key}
-					>
-						<Switch>
-							<Route exact={true} path="/" component={Home} />
-							<Route path="/single_product" component={SingleProduct} />
-							<Route path="/cart" component={Cart} />
-							<Route path="/contact" component={Contact} />
-							<Route path="/category" component={Category} />
-							<Route path="/shop_page" component={ShopPage} />
-							<Route path="/confirmation" component={Confirmation} />
-							<Route path="/checkout" component={Checkout} />
-						</Switch>
-					</CSSTransition>
-				</TransitionGroup> */}
 				<MyModal />
 				<Switch>
 					<Route exact={true} path="/" component={Home} />
@@ -83,6 +66,7 @@ const AppRoute = () => {
 					<Route path="/finish" component={Finish} />
 					<Route path="/search" component={Search} />
 					<Route path="/verify" component={Verify} />
+					<Route path="/forget_password" component={ForgotPassword} />
 				</Switch>
 
 				<footer
@@ -106,7 +90,7 @@ const AppRoute = () => {
 								paddingTop: 15,
 							}}
 						>
-							© 2018 Copyright: MDBootstrap.com
+							© 2020 Copyright: Techworld.com
 						</p>
 					</Row>
 				</footer>

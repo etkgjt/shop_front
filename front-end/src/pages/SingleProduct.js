@@ -20,6 +20,7 @@ import {
 	DescriptionDetailsForm,
 	ShopItem,
 	IndicatorModal,
+	AlertModal,
 } from '../components';
 
 import '../styles/singleProduct.css';
@@ -31,7 +32,14 @@ import { getNumberWithDot } from '../untils/numberFormater';
 import { Rating } from '@material-ui/lab';
 import Cart from './Cart';
 import moment from 'moment';
-import { sendCommentToServer } from '../redux/actions/shopAction';
+import {
+
+	sendCommentToServer,
+	removeFromFavorite,
+	addToFavorite,
+	updateReduxFavoriteList,
+} from '../redux/actions/shopAction';
+import socket from '../untils/socket';
 
 const SingleProduct = memo(() => {
 	console.log('product render ne');
@@ -66,10 +74,10 @@ const SingleProduct = memo(() => {
 	return (
 		<Container fluid className="gradient-background mb-5">
 			<Row className="title-container mt-5">
-				<p className="page-title">Product Details</p>
+				<p className="page-title">Chi tiết sản phẩm</p>
 			</Row>
 			<Container>
-				<h2 className="mt-5">Main Section</h2>
+				<h2 className="mt-5">Chi tiết sản phẩm</h2>
 				<ProductDetails productInfo={itemInfo} />
 			</Container>
 		</Container>
@@ -130,9 +138,14 @@ const ProductDetails = ({ productInfo }) => {
 		comments,
 		id,
 	} = productInfo;
-	const { products, laptop, smartPhone, tablet, accessories } = useSelector(
-		(state) => state.shopReducer
-	);
+	const {
+		products,
+		laptop,
+		smartPhone,
+		tablet,
+		accessories,
+		favorite,
+	} = useSelector((state) => state.shopReducer);
 	const { loggedIn, userInfo } = useSelector((state) => state.userReducer);
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -174,8 +187,7 @@ const ProductDetails = ({ productInfo }) => {
 	};
 	const makeNewCommentFunc = (cmt) => {
 		if (!loggedIn) {
-			MyModal.show(() => {},
-			<SignInModal  />);
+			MyModal.show(() => {}, <SignInModal />);
 		} else sendComment(cmt);
 	};
 	const sendComment = async (cmt) => {
@@ -190,6 +202,9 @@ const ProductDetails = ({ productInfo }) => {
 			};
 			console.log('send data ne', sendData);
 			const res = await sendCommentToServer(JSON.stringify(sendData));
+
+			socket.emit('new-comment')
+
 			console.log('Send thanh cong', res);
 			MyModal.hide(() => {});
 		} catch (err) {
@@ -214,6 +229,40 @@ const ProductDetails = ({ productInfo }) => {
 			return <div />;
 		});
 	};
+	const isFavorite = () => {
+		let tempArr = [...favorite];
+		let flag = tempArr.filter((v) => v === id);
+		if (flag && flag.length) return true;
+		return false;
+	};
+	const _handleFavoriteClick = async () => {
+		try {
+			const sendData = JSON.stringify({
+				product_id: id,
+				user_id: userInfo?.id,
+			});
+			if (!isFavorite()) {
+				console.log('send data', sendData);
+				const res = await addToFavorite(sendData);
+				updateReduxFavoriteList(dispatch, [...favorite, id]);
+				MyModal.show(() => {},
+				<AlertModal title="Add to favorite success !" color="#458AFF" />);
+				setTimeout(() => MyModal.hide(() => {}), 1000);
+			} else {
+				const res = await removeFromFavorite(sendData);
+				const newFavorite = [...favorite].filter((v) => v !== id);
+				updateReduxFavoriteList(dispatch, newFavorite);
+				MyModal.show(() => {},
+				<AlertModal title="Remove from favorite success !" color="#458AFF" />);
+				setTimeout(() => MyModal.hide(() => {}), 1000);
+			}
+		} catch (err) {
+			MyModal.show(() => {},
+			<AlertModal title="Unknown Error !" color="#F12849" />);
+			setTimeout(() => MyModal.hide(() => {}), 1000);
+			console.log('Favorite err', err);
+		}
+	};
 	return (
 		<Row className="pt-4">
 			<ProductImage data={images} />
@@ -236,14 +285,14 @@ const ProductDetails = ({ productInfo }) => {
 					className="d-flex justify-content-between align-items-center mb-2 px-3"
 					style={{ width: '60%' }}
 				>
-					<p style={{ fontWeight: 'bold' }}>Brand</p>
+					<p style={{ fontWeight: 'bold' }}>Hãng</p>
 					<p style={{ fontWeight: '300' }}>{brand?.name}</p>
 				</Row>
 				<Row
 					className="d-flex justify-content-between align-items-center mb-2 px-3"
 					style={{ width: '60%' }}
 				>
-					<p style={{ fontWeight: 'bold' }}>Color</p>
+					<p style={{ fontWeight: 'bold' }}>Màu sắc</p>
 					<p style={{ fontWeight: '300' }}>{description?.color}</p>
 				</Row>
 				<Row
@@ -286,7 +335,7 @@ const ProductDetails = ({ productInfo }) => {
 				/>
 				<Row className="mt-3">
 					<Col className="p-0 pl-3 d-flex flex-column align-items-start justify-content-start">
-						<p className="mb-0">Quantity</p>
+						<p className="mb-0">Số lượng</p>
 
 						<ButtonGroup className="mt-2">
 							<Button
@@ -359,7 +408,7 @@ const ProductDetails = ({ productInfo }) => {
 						}}
 					>
 						<p className="m-0" style={{ fontSize: 10 }}>
-							BUY NOW
+							Mua ngay
 						</p>
 					</Button>
 
@@ -386,7 +435,41 @@ const ProductDetails = ({ productInfo }) => {
 							shopping_cart
 						</Icon>
 						<p className="m-0" style={{ fontSize: 10, color: '#4F4F4F' }}>
-							ADD TO CART
+							Thêm vào giỏ hàng
+						</p>
+					</Button>
+					<Button
+						onClick={() => {
+							for (let i = 0; i < amount; i++)
+								_handleFavoriteClick(dispatch, productInfo);
+						}}
+						style={{
+							backgroundColor: isFavorite() ? '#f73378' : '#f2f2f2',
+							width: 150,
+							height: 50,
+							borderRadius: 25,
+							marginLeft: 10,
+						}}
+						className="d-flex flex-row justify-content-center align-content-between button-shadow"
+					>
+						<Icon
+							style={{
+								fontSize: 16,
+								color: isFavorite() ? '#FFF' : '#f73378',
+								marginRight: 10,
+								// backgroundColor: '#f73378',
+							}}
+						>
+							favorite
+						</Icon>
+						<p
+							className="m-0"
+							style={{
+								fontSize: 10,
+								color: isFavorite() ? '#FFF' : '#f73378',
+							}}
+						>
+							Yêu thích
 						</p>
 					</Button>
 				</Row>
@@ -580,7 +663,7 @@ const CommentArea = ({ data, onSubmitMessage }) => {
 									onClick={() => setOpen(!isOpen)}
 									style={{ width: 100, height: 45 }}
 								>
-									Open
+									{isOpen ? 'Ẩn' : 'Hiện'}
 								</Buttons>
 							</Row>
 						</Col>

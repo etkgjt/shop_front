@@ -78,7 +78,7 @@ const Checkout = () => {
 			</Row>
 			<MyStepper activeStep={1} />
 			<Row className="mt-5 d-flex justify-content-center align-items-center">
-				<h2>Checkout Form</h2>
+				<h2>Thông tin người nhận</h2>
 			</Row>
 			<Container>
 				<Row className="mt-3 px-5">
@@ -87,7 +87,7 @@ const Checkout = () => {
 							<Row className="pl-0 justify-content-between">
 								<Col md="6" className="m-0 p-0 pr-5">
 									<TextField
-										label="First Name"
+										label="Họ"
 										className="w-100"
 										onChange={(e) => setFirstName(e?.target?.value)}
 										color="success"
@@ -96,7 +96,7 @@ const Checkout = () => {
 								</Col>
 								<Col md="6" className="p-0">
 									<TextField
-										label="Last Name"
+										label="Tên"
 										className="w-100"
 										onChange={(e) => setLastName(e?.target?.value)}
 										value={lastName}
@@ -105,7 +105,7 @@ const Checkout = () => {
 							</Row>
 							<Row className="d-flex justify-content-around align-items-center mt-3">
 								<TextField
-									label="Address"
+									label="Địa chỉ"
 									className="w-100"
 									onChange={(e) => setAddress(e?.target?.value)}
 									value={address}
@@ -114,14 +114,14 @@ const Checkout = () => {
 							<Row className="d-flex justify-content-around align-items-center mt-5">
 								<TextField
 									onChange={(e) => setSecondAddr(e?.target?.value)}
-									label="Address 2 (optional)"
+									label="Địa chỉ 2 (tuỳ chọn)"
 									className="w-100"
 									value={secondAddr}
 								/>
 							</Row>
 							<Row className="d-flex justify-content-around align-items-center mt-5">
 								<TextField
-									label="Phone Number"
+									label="Số điện thoại"
 									className="w-100"
 									onChange={(e) => setPhoneNumber(e?.target?.value)}
 									value={phoneNumber}
@@ -129,7 +129,7 @@ const Checkout = () => {
 							</Row>
 							<Row className="d-flex justify-content-around align-items-center mt-5">
 								<TextField
-									label="Note"
+									label="Ghi chú"
 									className="w-100"
 									onChange={(e) => setNote(e?.target?.value)}
 									value={note}
@@ -137,7 +137,7 @@ const Checkout = () => {
 									variant="outlined"
 								/>
 							</Row>
-							<Row className="mt-5">
+							{/* <Row className="mt-5">
 								<MyDropdownPicker
 									title="City"
 									items={CITY}
@@ -150,7 +150,7 @@ const Checkout = () => {
 									onSubmit={(val) => setDistrict(val)}
 									value={district}
 								/>
-							</Row>
+							</Row> */}
 
 							<Row className="my-3">
 								<Divider className="w-100" />
@@ -180,7 +180,7 @@ const Checkout = () => {
 												height: 50,
 											}}
 										>
-											Back
+											Trở về
 										</Button>
 									</NavLink>
 								</Col>
@@ -218,7 +218,7 @@ const Checkout = () => {
 												height: 50,
 											}}
 										>
-											Next step
+											Tiếp tục
 										</Button>
 									</NavLink>
 								</Col>
@@ -236,9 +236,9 @@ const DetailsCheckout = ({ items }) => {
 	return (
 		<Col md="4" className="p-0">
 			<Col className="z-depth2 m-0 py-3 bg-white">
-				<h4 style={{ textAlign: 'start' }}>Your Cart (3)</h4>
+				<h4 style={{ textAlign: 'start' }}>Giỏ hàng (3)</h4>
 
-				<h6 class="mb-3 mt-3">The total amount of</h6>
+				<h6 class="mb-3 mt-3">Tạm tính</h6>
 				<ListGroup flush>
 					<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
 						<Col>
@@ -276,12 +276,12 @@ const DetailsCheckout = ({ items }) => {
 					</ListGroupItem>
 
 					<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
-						<small style={{ fontSize: 16 }}>Shipping</small>
+						<small style={{ fontSize: 16 }}>Phí giao hàng</small>
 						<small style={{ fontSize: 16 }}>5</small>
 					</ListGroupItem>
 					<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
 						<small style={{ fontSize: 16, fontWeight: 'bold' }}>
-							The total amount of (including VAT)
+							Tổng cộng (đã bao gồm VAT)
 						</small>
 						<small style={{ fontSize: 16 }}>
 							{`${getNumberWithDot(

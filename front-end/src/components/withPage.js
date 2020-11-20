@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/actions/cartAction';
 import {
 	dataSplitter,
 	getShopData,
+	loadShopDataSync,
 	updateReduxAccessoriesItems,
 	updateReduxLaptopItems,
 	updateReduxShopData,
@@ -17,14 +18,17 @@ const withPages = (OriginalComponent = <div />) => {
 	// useEffect(() => {
 	// 	console.log('Price filter', priceFilter);
 	// }, [priceFilter]);
+
 	const newComponent = () => {
-		const _renderItems = (dispatch, data, maxNum) => {
+		const _renderItems = (dispatch, data, maxNum, favorite = []) => {
+			console.log('favorite list ne', favorite);
 			let tempArr = [...data];
 
 			return tempArr.map((item, idx) => {
 				if (idx < maxNum)
 					return (
 						<ShopItem
+							favoriteList={favorite}
 							key={`${idx}-${item?.name}`}
 							addToCart={addToCart}
 							item={item}
@@ -36,26 +40,27 @@ const withPages = (OriginalComponent = <div />) => {
 			});
 		};
 		const initialData = async (dispatch) => {
-			try {
-				console.log('init data ne');
-				const dataRes = await getShopData();
-				console.log('data lay duoc ne', dataRes);
-				const {
-					smartPhone,
-					laptop,
-					tablet,
-					accessories,
-					all,
-				} = dataSplitter(dataRes);
-				console.log('smart phone ne', smartPhone);
-				updateReduxShopData(dispatch, all);
-				updateReduxLaptopItems(dispatch, laptop);
-				updateReduxSmartPhoneItems(dispatch, smartPhone);
-				updateReduxTabletItems(dispatch, tablet);
-				updateReduxAccessoriesItems(dispatch, accessories);
-			} catch (err) {
-				console.log('Sync data err', err);
-			}
+			// try {
+			// console.log('init data ne');
+			// const dataRes = await getShopData();
+			// console.log('data lay duoc ne', dataRes);
+			// const {
+			// 	smartPhone,
+			// 	laptop,
+			// 	tablet,
+			// 	accessories,
+			// 	all,
+			// } = dataSplitter(dataRes);
+			// console.log('smart phone ne', smartPhone);
+			// updateReduxShopData(dispatch, all);
+			// updateReduxLaptopItems(dispatch, laptop);
+			// updateReduxSmartPhoneItems(dispatch, smartPhone);
+			// updateReduxTabletItems(dispatch, tablet);
+			// updateReduxAccessoriesItems(dispatch, accessories);
+			dispatch(loadShopDataSync());
+			// } catch (err) {
+			// console.log('Sync data err', err);
+			// }
 		};
 		const _onFilterClick = (
 			productsDataRedux,
@@ -64,10 +69,11 @@ const withPages = (OriginalComponent = <div />) => {
 			orderBy,
 			onDoneFunc
 		) => {
+			console.log('brand ne', brandFilter);
 			let temp = [...productsDataRedux];
 			if (brandFilter && brandFilter.length) {
 				let newBrandFilterList = brandFilter.reduce((a, b) => {
-					return [...a, ...temp.filter((v) => v.brand === b.value)];
+					return [...a, ...temp.filter((v) => v.brand?.id === b.value)];
 				}, []);
 				temp = newBrandFilterList;
 			}

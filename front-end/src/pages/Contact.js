@@ -11,7 +11,8 @@ import FullWidthTabs from './UserInfo';
 import { AlertModal, IndicatorModal, MyModal } from '../components';
 import moment from 'moment';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
-import { sendInquiry } from '../redux/actions/userAction';
+import { sendInquiry, sendNoti } from '../redux/actions/userAction';
+import socket from '../untils/socket';
 const Contact = memo(() => {
 	const [state, setState] = useState({
 		email: '',
@@ -39,9 +40,18 @@ const Contact = memo(() => {
 			console.log('Send data ne', data);
 			const res = await sendInquiry(data);
 			console.log('send inquiry success', res);
+			const noti = {
+				type: 3,
+				email: state.email,
+				date: moment().format('YYYY-MM-DD HH:mm:SS'),
+			};
+			const res1 = await sendNoti(JSON.stringify(noti));
+			console.log('send notie', res1);
+			socket.emit('new-message');
+
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
-			<AlertModal title="Send inquiry success !" color="#458AFF" />);
+			<AlertModal title="Gửi phàn hồi thành công !" color="#458AFF" />);
 			setTimeout(
 				() =>
 					MyModal.hide(() =>
@@ -57,7 +67,7 @@ const Contact = memo(() => {
 		} catch (err) {
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
-			<AlertModal title="Send inquiry failed !" color="#F12849" />);
+			<AlertModal title="Gửi phản hồi thất bại !" color="#F12849" />);
 			setTimeout(() => MyModal.hide(() => {}), 1000);
 			console.log('Send inquiry err', err);
 		}
@@ -71,7 +81,7 @@ const Contact = memo(() => {
 					className="top-layer p-0 m-0 align-items-center justify-content-center d-flex flex-column"
 				>
 					<Row className="justify-content-center align-items-center pt-5 w-100 mb-5">
-						<h1 style={{ color: 'black' }}>Contact Us</h1>
+						<h1 style={{ color: 'black' }}>Phản hồi</h1>
 					</Row>
 					<Row className="justify-content-around  w-50 contact-form z-depth2">
 						<Col lg="9" md="9" className="p-5 ">
@@ -80,7 +90,7 @@ const Contact = memo(() => {
 								onSubmit={() => _handleSubmit()}
 							>
 								<TextValidator
-									label="Your Email"
+									label="Email"
 									className="w-100"
 									variant="outlined"
 									name="email"
@@ -94,7 +104,7 @@ const Contact = memo(() => {
 								/>
 
 								<TextValidator
-									label="Your Phone"
+									label="Số điện thoại"
 									className="w-100"
 									variant="outlined"
 									name="phone"
@@ -106,7 +116,7 @@ const Contact = memo(() => {
 
 								<TextValidator
 									id="outlined-multiline-static"
-									label="Your Message"
+									label="Phản hồi của bạn"
 									multiline
 									rows={4}
 									variant="outlined"
@@ -127,7 +137,7 @@ const Contact = memo(() => {
 										height: 50,
 									}}
 								>
-									Send Inquiry
+									Gửi
 								</Button>
 							</ValidatorForm>
 						</Col>
@@ -154,7 +164,7 @@ const Contact = memo(() => {
 									marginLeft: 20,
 								}}
 							>
-								1632 Main Street
+								1632 An Dương Vương
 							</p>
 
 							<p
@@ -164,7 +174,7 @@ const Contact = memo(() => {
 									marginLeft: 20,
 								}}
 							>
-								New York, 94126
+								Quận 5, TP Hồ CHí Minh
 							</p>
 							<p
 								style={{
@@ -173,7 +183,7 @@ const Contact = memo(() => {
 									marginLeft: 20,
 								}}
 							>
-								United States
+								Việt Nam
 							</p>
 							<Icon
 								style={{
@@ -212,7 +222,7 @@ const Contact = memo(() => {
 									marginLeft: 20,
 								}}
 							>
-								info@gmail.com
+								techworld@gmail.com
 							</p>
 						</Col>
 					</Row>

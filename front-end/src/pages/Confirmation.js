@@ -15,6 +15,9 @@ import { getNumberWithDot } from '../untils/numberFormater';
 import { clearCart, sendOrder } from '../redux/actions/cartAction';
 import { Alert } from 'reactstrap/lib/Alert';
 import MyModal from '../components/MyModal';
+import socket from '../untils/socket';
+import { sendNoti } from '../redux/actions/userAction';
+import moment from 'moment';
 
 const Confirmation = memo(() => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -65,6 +68,15 @@ const Confirmation = memo(() => {
 			const res = await sendOrder(access_token, orderInfo);
 			console.log('order success', res);
 			// MyModal.show(() => {}, <AlertModal title="Order Successfully !" />);
+			const noti = {
+				type: 2,
+				email: `${first_name} ${last_name}`,
+				date: moment().format('YYYY-MM-DD HH:mm:SS'),
+			};
+			socket.emit('new-order');
+
+			const res1 = await sendNoti(JSON.stringify(noti));
+			console.log('send notie', res1);
 			MyModal.hide();
 			clearCart(dispatch);
 			history.push('/finish');
@@ -77,19 +89,19 @@ const Confirmation = memo(() => {
 	return (
 		<Container fluid style={{ backgroundColor: '#F4FAFE' }} className="pb-5">
 			<Row className="title-container mt-5">
-				<p class="page-title">Confirmation</p>
+				<p class="page-title">Xác nhận</p>
 			</Row>
 			<MyStepper activeStep={3} />
 			<Container className="pb-5">
 				<Row className="w-100 justify-content-center">
-					<h3>Order Confirmation</h3>
+					<h3>Kiểm tra lại thông tin</h3>
 				</Row>
 				<Container className="z-depth2 p-5 bg-white">
 					<Row>
 						<Col lg="6" md="10">
 							<Row className="justify-content-between px-4">
-								<h6>Your Infomation</h6>
-								<p style={{ color: '#4489FD' }}>Edit</p>
+								<h6>Người mua</h6>
+								<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
 							</Row>
 							<p
 								style={{
@@ -105,7 +117,7 @@ const Confirmation = memo(() => {
 								----------------------------------
 							</p>
 							<Row className="justify-content-between px-4">
-								<h6>Name: </h6>
+								<h6>Tên: </h6>
 								<p>{`${first_name} ${last_name}`}</p>
 							</Row>
 							<Row className="justify-content-between px-4">
@@ -113,18 +125,18 @@ const Confirmation = memo(() => {
 								<p>{username}</p>
 							</Row>
 							<Row className="justify-content-between px-4">
-								<h6>Phone Number: </h6>
+								<h6>Số điện thoại: </h6>
 								<p>{`${phone_number}`}</p>
 							</Row>
 							<Row className="justify-content-between px-4">
-								<h6>Note: </h6>
+								<h6>Ghi chú: </h6>
 								<p>{`${note}`}</p>
 							</Row>
 						</Col>
 						<Col lg="6" md="10">
 							<Row className="justify-content-between px-4">
-								<h6>Shipping Address</h6>
-								<p style={{ color: '#4489FD' }}>Edit</p>
+								<h6>Địa chỉ nhận hàng</h6>
+								<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
 							</Row>
 							<p
 								style={{
@@ -140,19 +152,19 @@ const Confirmation = memo(() => {
 								--------------------------------
 							</p>
 							<Row className="justify-content-between px-4">
-								<h6>City: </h6>
+								<h6>Thành phố: </h6>
 								<p>{city}</p>
 							</Row>
 							<Row className="justify-content-between px-4">
-								<h6>District: </h6>
+								<h6>Quận: </h6>
 								<p>{district}</p>
 							</Row>
 							<Row className="justify-content-between px-4">
-								<h6>Address </h6>
+								<h6>Địa chỉ </h6>
 								<p>{address}</p>
 							</Row>
 							<Row className="justify-content-between px-4">
-								<h6>Second Address</h6>
+								<h6>Địa chỉ 2</h6>
 								<p>{secondAddr}</p>
 							</Row>
 						</Col>
@@ -161,8 +173,8 @@ const Confirmation = memo(() => {
 						{method !== 'delivery' ? (
 							<Col lg="6" md="10">
 								<Row className="justify-content-between px-4">
-									<h6>Payment</h6>
-									<p style={{ color: '#4489FD' }}>Edit</p>
+									<h6>Thanh toán</h6>
+									<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
 								</Row>
 								<p
 									style={{
@@ -178,15 +190,15 @@ const Confirmation = memo(() => {
 									--------------------------------
 								</p>
 								<Row className="justify-content-between px-4">
-									<h6>Payment method: </h6>
+									<h6>Phương thúc thanh toán: </h6>
 									<p>{method}</p>
 								</Row>
 								<Row className="justify-content-between px-4">
-									<h6>Card Name: </h6>
+									<h6>Tên chủ thẻ: </h6>
 									<p>{cardName ? cardName : 'None'}</p>
 								</Row>
 								<Row className="justify-content-between px-4">
-									<h6>Card Number: </h6>
+									<h6>Số thẻ: </h6>
 									<p>{cardNumber ? cardNumber : 'None'}</p>
 								</Row>
 								<Row className="justify-content-between px-4">
@@ -194,15 +206,15 @@ const Confirmation = memo(() => {
 									<p>{cvv ? cvv : 'None'}</p>
 								</Row>
 								<Row className="justify-content-between px-4">
-									<h6>Expiration Date: </h6>
+									<h6>Ngày hết hạn: </h6>
 									<p>{expireDate ? expireDate : 'None'}</p>
 								</Row>
 							</Col>
 						) : (
 							<Col lg="6" md="10">
 								<Row className="justify-content-between px-4">
-									<h6>Payment</h6>
-									<p style={{ color: '#4489FD' }}>Edit</p>
+									<h6>Thanh toán</h6>
+									<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
 								</Row>
 								<p
 									style={{
@@ -218,7 +230,7 @@ const Confirmation = memo(() => {
 									--------------------------------
 								</p>
 								<Row className="justify-content-between px-4">
-									<h6>Payment method: </h6>
+									<h6>Phương thức: </h6>
 									<p>{method}</p>
 								</Row>
 							</Col>
@@ -226,8 +238,8 @@ const Confirmation = memo(() => {
 
 						<Col lg="6" md="10">
 							<Row className="justify-content-between px-4">
-								<h6>Order Details</h6>
-								<p style={{ color: '#4489FD' }}>Edit</p>
+								<h6>Đơn hàng</h6>
+								<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
 							</Row>
 							<p
 								style={{
@@ -268,7 +280,7 @@ const Confirmation = memo(() => {
 						height: 50,
 					}}
 				>
-					Place Order
+					Đặt hàng
 				</Button>
 			</Container>
 		</Container>

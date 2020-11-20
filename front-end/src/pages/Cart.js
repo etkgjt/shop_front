@@ -53,14 +53,14 @@ const Cart = () => {
 			style={{ backgroundColor: '#e3f2fd66' }}
 		>
 			<Row className="title-container mt-5">
-				<p class="page-title">Cart List</p>
+				<p class="page-title">Chi tiết giỏ hàng</p>
 			</Row>
 			<MyStepper activeStep={0} />
 			<Container>
 				<Row className="mt-5">
 					<Col lg="7" className="z-depth2 mr-5 bg-white">
 						<h6 style={{ fontSize: 20 }} className="m-3">
-							{`Cart ${cartData?.length} items`}
+							{`${cartData?.length} sản phẩm`}
 						</h6>
 
 						{cartData.length ? (
@@ -71,7 +71,7 @@ const Cart = () => {
 								/>
 							))
 						) : (
-							<h3>There is no items</h3>
+							<h3>Không có sản phẩm nào!</h3>
 						)}
 					</Col>
 					<SumaryCheckout items={cartData ? cartData : []} />
@@ -136,13 +136,13 @@ const ItemDetails = ({ product }) => {
 									className="mb-3 text-muted text-uppercase small"
 									style={{ fontSize: 12 }}
 								>
-									{`BRAND: ${brand?.name?.toString().toUpperCase()}`}
+									{`Hãng: ${brand?.name?.toString().toUpperCase()}`}
 								</p>
 								<p
 									className="mb-2 text-muted text-uppercase small"
 									style={{ fontSize: 12 }}
 								>
-									{`COLOR: ${description?.color
+									{`Màu sắc: ${description?.color
 										?.toString()
 										.toUpperCase()}`}
 								</p>
@@ -150,7 +150,7 @@ const ItemDetails = ({ product }) => {
 									className="mb-3 text-muted text-uppercase small"
 									style={{ fontSize: 12 }}
 								>
-									{`SIZE: ${description?.screen_size?.toUpperCase()}`}
+									{`Màn hình: ${description?.screen_size?.toUpperCase()}`}
 								</p>
 							</div>
 							<div>
@@ -247,7 +247,7 @@ const ItemDetails = ({ product }) => {
 											color: '#888',
 										}}
 									>
-										REMOVE
+										Xoá
 									</small>
 								</div>
 							</Button>
@@ -274,7 +274,7 @@ const ItemDetails = ({ product }) => {
 											color: '#888',
 										}}
 									>
-										MOVE TO WISH LIST
+										Yêu thích
 									</small>
 								</div>
 							</Button>
@@ -312,21 +312,21 @@ const SumaryCheckout = ({ items }) => {
 	return (
 		<Col lg="4">
 			<div className="p-3 z-depth2 bg-white">
-				<h6 class="mb-3">The total amount of</h6>
+				<h6 class="mb-3">Tổng cộng</h6>
 				<ListGroup flush>
 					<ListGroupItem className="d-flex justify-content-between align-items-center">
-						<small style={{ fontSize: 16 }}>Temporary amount</small>
+						<small style={{ fontSize: 16 }}>Tạm tính</small>
 						<small style={{ fontSize: 16 }}>
 							{`${getNumberWithDot(_caculateTotal())} vnđ`}
 						</small>
 					</ListGroupItem>
 					<ListGroupItem className="d-flex justify-content-between align-items-center">
-						<small style={{ fontSize: 16 }}>Shipping</small>
+						<small style={{ fontSize: 16 }}>Phí giao hàng</small>
 						<small style={{ fontSize: 16 }}>{ship}</small>
 					</ListGroupItem>
 					<ListGroupItem className="d-flex justify-content-between align-items-center">
 						<small style={{ fontSize: 16, fontWeight: 'bold' }}>
-							The total amount of (including VAT)
+							Tổng cộng (đã bao gồm VAT)
 						</small>
 						<small style={{ fontSize: 16 }}>
 							{`${getNumberWithDot(_caculateTotal() + ship)} vnđ`}
@@ -358,7 +358,7 @@ const SumaryCheckout = ({ items }) => {
 									borderRadius: 25,
 								}}
 							>
-								Next Step
+								Tiếp tục
 							</Button>
 						</NavLink>
 					) : (
@@ -379,7 +379,7 @@ const SumaryCheckout = ({ items }) => {
 								borderRadius: 25,
 							}}
 						>
-							Next Step
+							Tiếp tục
 						</Button>
 					)}
 
@@ -398,7 +398,7 @@ const SumaryCheckout = ({ items }) => {
 							borderRadius: 25,
 						}}
 					>
-						Add a discount code (optional)
+						Mã giảm giá (tuỳ chọn)
 					</Button>
 					<Fade in={isFaded} className="mt-3">
 						<Input className="mb-3" />

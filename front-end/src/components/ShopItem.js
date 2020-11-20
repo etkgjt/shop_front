@@ -7,7 +7,7 @@ import '../styles/shopPage.css';
 import { useHistory } from 'react-router-dom';
 import { getNumberWithDot } from '../untils/numberFormater';
 import { Icon, IconButton } from '@material-ui/core';
-const ShopItem = ({ addToCart, item, idx, dispatch }) => {
+const ShopItem = ({ addToCart, item, idx, dispatch, favoriteList = [] }) => {
 	const history = useHistory();
 	return (
 		<Col
@@ -20,7 +20,13 @@ const ShopItem = ({ addToCart, item, idx, dispatch }) => {
 		>
 			<Col className="button-container-box-shadow">
 				<IconButton>
-					<Icon style={{ fontSize: 30 }}>favorite_border</Icon>
+					{favoriteList.filter((v) => v === item?.id).length === 1 ? (
+						<Icon style={{ fontSize: 30, color: '#f73378' }}>
+							favorite
+						</Icon>
+					) : (
+						<Icon style={{ fontSize: 30 }}>favorite_border</Icon>
+					)}
 				</IconButton>
 				<div
 					className="mb-50 text-center single_items pt-5"
@@ -69,7 +75,7 @@ const ShopItem = ({ addToCart, item, idx, dispatch }) => {
 								}}
 								onClick={() => addToCart(dispatch, item)}
 							>
-								Add to cart
+								Thêm vào giỏ hàng
 							</Button>
 						</Col>
 						<Col lg="5" md="12" sm="12" className="p-0 w-100">
@@ -87,7 +93,7 @@ const ShopItem = ({ addToCart, item, idx, dispatch }) => {
 									fontSize: 13,
 								}}
 							>
-								Detail
+								Chi tiết
 							</Button>
 						</Col>
 					</Row>

@@ -8,10 +8,7 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case REDUX.CLEAR_DATA: {
-			return {
-				...state,
-				items: [],
-			};
+			return initialState;
 		}
 		case REDUX.ADD_TO_CART: {
 			let idx = [...state.items].findIndex(

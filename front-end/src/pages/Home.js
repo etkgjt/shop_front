@@ -78,10 +78,11 @@ const data = [
 const ShopMethod = () => (
 	<Container className="justify-content-center">
 		<h4 className="text-center" style={{ fontWeight: 'bold', fontSize: 40 }}>
-			Our services
+			Dịch vụ của chúng tôi
 		</h4>
 		<h4 className="text-center my-4" style={{ fontWeight: '200' }}>
-			Join thousands of satisfied customers using our template globally.
+			Với việc mua hàng tại TechWorld, chúng tôi tin rằng quý khách luôn có
+			những trải nghiệm mua hàng an toàn và tuyệt vời.
 		</h4>
 		<Row className="my-5 py-5">
 			<Col xl="3" lg="6" className="px-3">
@@ -95,11 +96,12 @@ const ShopMethod = () => (
 						</Icon>
 					</Row>
 					<Row className="px-5 mt-4">
-						<h5>Shipping</h5>
+						<h5>Vận chuyển</h5>
 					</Row>
 					<Row className="px-5 mt-2">
 						<p>
-							aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.
+							Quy mô vận chuyển khắp cả nước, đáp ứng nhu cầu của mọi
+							khác hàng từ mọi vùng miền.
 						</p>
 					</Row>
 				</Col>
@@ -113,11 +115,13 @@ const ShopMethod = () => (
 						<Icon style={{ fontSize: 70 }}>verified_user</Icon>
 					</Row>
 					<Row className="px-5 mt-4">
-						<h5>Security</h5>
+						<h5>Bảo mật</h5>
 					</Row>
 					<Row className="px-5 mt-2">
 						<p>
-							aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.
+							Bảo mật là một trong những phương châm hàng đầu của chúng
+							tôi. Với công nghệ tiên tiến nhất, chúng tôi tin rằng sẽ
+							mang lại cho khách hàng cảm giác an toàn khi mua hàng
 						</p>
 					</Row>
 				</Col>
@@ -131,11 +135,12 @@ const ShopMethod = () => (
 						<Icon style={{ fontSize: 70 }}>headset_mic_rounded</Icon>
 					</Row>
 					<Row className="px-5 mt-4">
-						<h5>Good Support</h5>
+						<h5>Hỗ trợ tận tình</h5>
 					</Row>
 					<Row className="px-5 mt-2">
 						<p>
-							aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.
+							Chúng tôi có đội ngũ hỗ trợ tận tình, luôn giải đáp mọi
+							thắc mắc của quý khách
 						</p>
 					</Row>
 				</Col>
@@ -149,11 +154,13 @@ const ShopMethod = () => (
 						<Icon style={{ fontSize: 70 }}>cached_two_tone</Icon>
 					</Row>
 					<Row className="px-5 mt-4">
-						<h5>Exchanges</h5>
+						<h5>Hoàn trả</h5>
 					</Row>
 					<Row className="px-5 mt-2">
 						<p>
-							aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.
+							Mọi sản phẩm sẽ được đổi trả trong vòng 30 ngày kể từ ngày
+							nhận hàng nếu khách hàng không hài lòng hoặc sản phậm không
+							đúng với mô tả.
 						</p>
 					</Row>
 				</Col>
@@ -209,7 +216,7 @@ const _renderItems = () => {
 								width: 100,
 							}}
 						>
-							Buy Now
+							Mua ngay
 						</Button>
 						<Button
 							style={{
@@ -221,7 +228,7 @@ const _renderItems = () => {
 								width: 100,
 							}}
 						>
-							Detail
+							Xem chi tiết
 						</Button>
 					</Row>
 				</Col>
@@ -268,7 +275,7 @@ const NewArrival = () => (
 	<Container className="section-padding">
 		<Row className="w-100 section-title-container">
 			<h2 style={{ textAlign: 'center', fontWeight: '600' }}>
-				New Arrivals
+				Sản phẩm mới
 			</h2>
 		</Row>
 		<Row className="w-100 justify-content-center align-items-center mb-5">
@@ -335,7 +342,7 @@ const Gallery = () => (
 	<Container className="gallery-area p-0 fix mt-5">
 		<Row className="w-100 section-title-container">
 			<h2 style={{ textAlign: 'center', fontWeight: '600' }}>
-				Our Best Seller
+				Sản phẩm bán chạy
 			</h2>
 		</Row>
 		<Row className="w-100 justify-content-center align-items-center mb-5">
@@ -415,7 +422,7 @@ const Popular = () => (
 					className="popular-section-big-title mb-3"
 					style={{ fontSize: 40 }}
 				>
-					Popular Items
+					Sản phẩm được yêu thích
 				</h4>
 				<p
 					style={{

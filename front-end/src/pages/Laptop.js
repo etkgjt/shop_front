@@ -100,7 +100,7 @@ const Laptop = memo(
 												setNumberOfItem((old) => old + 10)
 											}
 										>
-											See more...
+											Hiển thị thêm...
 										</Button>
 									</Row>
 								) : (

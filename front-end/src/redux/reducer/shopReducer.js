@@ -6,10 +6,32 @@ const initialState = {
 	smartPhone: [],
 	tablet: [],
 	accessories: [],
+	favorite: [],
+	// loading: false,
+	// error: false,
 };
 
 const shopReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case REDUX.LOADING: {
+			return {
+				...state,
+				loading: true,
+			};
+		}
+		case REDUX.LOAD_ERROR: {
+			return {
+				...state,
+				error: true,
+			};
+		}
+		case REDUX.LOAD_SUCCESS: {
+			return {
+				...state,
+				loading: false,
+				error: false,
+			};
+		}
 		case REDUX.UPDATE_SHOP_DATA: {
 			return {
 				...state,
@@ -41,6 +63,12 @@ const shopReducer = (state = initialState, action) => {
 			return {
 				...state,
 				tablet: action.payload,
+			};
+		}
+		case REDUX.UPDATE_FAVORITE_LIST: {
+			return {
+				...state,
+				favorite: action.payload,
 			};
 		}
 		default: {

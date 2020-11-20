@@ -28,6 +28,7 @@ import mastercard from '../assets/mastercard.svg';
 import paypal from '../assets/paypal.svg';
 import pay from '../assets/pay.svg';
 import { updatePaymentMethod } from '../redux/actions/cartAction';
+import moment from 'moment';
 const PaymentMethod = () => {
 	console.log('cart render ne');
 	const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const PaymentMethod = () => {
 	const [cardNumber, setCardNumber] = useState('');
 	const [cvv, setCVV] = useState('');
 
-	const [expireDate, setExpireDate] = useState('');
+	const [expireDate, setExpireDate] = useState('20/2/2020');
 	const [method, setMethod] = useState('credit');
 	useEffect(() => {
 		setCardName('');
@@ -47,7 +48,7 @@ const PaymentMethod = () => {
 	return (
 		<Container fluid className="pb-5" style={{ backgroundColor: '#F9F9FF' }}>
 			<Row className="title-container mt-5">
-				<p class="page-title">Payment Method</p>
+				<p class="page-title">Phương thức thanh toán</p>
 			</Row>
 			<MyStepper activeStep={2} />
 			<Container className="mt-5" style={{ backgroundColor: '#F9F9FF' }}>
@@ -73,7 +74,7 @@ const PaymentMethod = () => {
 									marginRight: 5,
 								}}
 							/>
-							<p>Pay with credit card</p>
+							<p>Thanh toán với Credit Card</p>
 						</Row>
 					</Col>
 					<Col lg="4" md="3" sm="6" className="pt-2">
@@ -91,7 +92,7 @@ const PaymentMethod = () => {
 									marginRight: 5,
 								}}
 							/>
-							<p>Pay with paypal</p>
+							<p>Thanh toán với Paypal</p>
 						</Row>
 					</Col>
 					<Col lg="4" md="3" sm="6" className="pt-2">
@@ -109,7 +110,7 @@ const PaymentMethod = () => {
 									marginRight: 5,
 								}}
 							/>
-							<p>Payment on delivery</p>
+							<p>Thanh toán khi nhận hàng</p>
 						</Row>
 					</Col>
 				</Row>
@@ -119,7 +120,7 @@ const PaymentMethod = () => {
 					<Container fluid className="p-0">
 						<Row className="d-flex justify-content-around align-items-center mt-5">
 							<TextField
-								label="Name on Card"
+								label="Tên chủ thẻ"
 								className="w-100"
 								variant="outlined"
 								onChange={(e) => setCardName(e?.target?.value)}
@@ -128,7 +129,7 @@ const PaymentMethod = () => {
 						<Row className="pl-0 justify-content-between align-items-center justify-content-center mt-3">
 							<Col md="6" className="m-0 p-0 pr-5">
 								<TextField
-									label="Card Number"
+									label="Số thẻ"
 									className="w-100"
 									variant="outlined"
 									onChange={(e) => setCardNumber(e?.target?.value)}
@@ -146,9 +147,11 @@ const PaymentMethod = () => {
 						<Row className="d-flex justify-content-around align-items-center mt-1">
 							<TextField
 								onChange={(e) => setExpireDate(e?.target?.value)}
-								label="Expiration Date"
+								label="Ngày hết hạn"
 								className="w-100"
 								variant="outlined"
+								type="date"
+								defaultValue={moment().format('YYYY-MM-DD')}
 							/>
 						</Row>
 					</Container>
@@ -193,7 +196,7 @@ const PaymentMethod = () => {
 							height: 50,
 						}}
 					>
-						Next step
+						Tiếp tục
 					</Button>
 				</NavLink>
 			</Container>

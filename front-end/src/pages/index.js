@@ -17,6 +17,7 @@ import Tablet from './Tablet';
 import Finish from './Finish';
 import Search from './SearchPage';
 import Verify from './VerifiyEmail';
+import ForgotPassword from './ForgotPassword';
 
 export {
 	Finish,
@@ -37,4 +38,5 @@ export {
 	Tablet,
 	Search,
 	Verify,
+	ForgotPassword,
 };

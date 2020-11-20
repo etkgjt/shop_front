@@ -2,6 +2,14 @@ import { BASE_URL } from '../../constants/constants';
 import { API } from '../../untils/api';
 import axios from 'axios';
 import { REDUX } from '../store/type';
+import { reject } from 'lodash';
+
+export const sendNoti = (noti) =>
+	new Promise((resolve, reject) => {
+		API.post('/noti/add', noti)
+			.then((res) => resolve(res.data))
+			.catch((err) => reject(err));
+	});
 
 export const login = (userName, password) => {
 	const data = JSON.stringify({ username: userName, password: password });
@@ -52,4 +60,53 @@ export const verifyEmail = (data) =>
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});
+export const updateUserInfo = (token, info, id) =>
+	new Promise((resolve, reject) => {
+		API.put(`/user/${id}`, info, {
+			headers: {
+				Authorization: token,
+			},
+		})
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});
+export const getOrderHistorySync = (userId) => async (dispatch) => {
+	try {
+		const { data } = await API.get(`/order/search?user=${userId}`);
+		dispatch(updateOrderHistoryCreator(data));
+	} catch (err) {
+		console.log('get order history sync err', err);
+		dispatch(updateOrderHistoryCreator([]));
+	}
+};
+export const changePassword = (token, pass, id) =>
+	new Promise((resolve, reject) => {
+		API.put(`/user/pw?id=${id}`, pass)
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});
+export const getAllCoupon = () => async (dispatch) => {
+	try {
+		const { data } = await API.get('/voucher');
+		dispatch(updateCouponListCreator(data));
+	} catch (err) {
+		console.log('get coupon list err', err);
+		dispatch(updateCouponListCreator([]));
+	}
+};
+export const recoveryPassword = (email) =>
+	new Promise((resolve, reject) => {
+		API.post('/user/forget', email)
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});
+
+const updateOrderHistoryCreator = (payload) => ({
+	type: REDUX.UPDATE_ORDER_HISTORY,
+	payload,
+});
+const updateCouponListCreator = (payload) => ({
+	type: REDUX.UPDATE_COUPON_LIST,
+	payload,
+});
 export const logout = () => {};

@@ -23,6 +23,8 @@ const SmartPhone = memo(
 		onFilterClick = () => {},
 	}) => {
 		console.log('shopage render ne');
+		const { favorite } = useSelector((state) => state.shopReducer);
+		console.log('favorite ne', favorite);
 		const dispatch = useDispatch();
 		const productsDataRedux = useSelector(
 			(state) => state?.shopReducer?.smartPhone
@@ -86,7 +88,7 @@ const SmartPhone = memo(
 							<Col lg="9" md="6" classNam="p-0">
 								<Row className="m-0 p-0 pt-5 justify-content-center">
 									{data && data.length ? (
-										renderItem(dispatch, data, numberOfItem)
+										renderItem(dispatch, data, numberOfItem, favorite)
 									) : (
 										<CircularProgress />
 									)}
@@ -100,7 +102,7 @@ const SmartPhone = memo(
 												setNumberOfItem((old) => old + 10)
 											}
 										>
-											See more...
+											Hiển thị thêm...
 										</Button>
 									</Row>
 								) : (

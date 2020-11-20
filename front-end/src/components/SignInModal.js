@@ -19,12 +19,18 @@ import {
 	login,
 	updateUserInfoRedux,
 	distpatchLoginToRedux,
+	recoveryPassword,
 } from '../redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { MyModal, IndicatorModal } from '../components';
 import axios from 'axios';
 import { CheckBox } from '@material-ui/icons';
+import AlertModal from './AlertModal';
+import {
+	getFavoriteList,
+	updateReduxFavoriteList,
+} from '../redux/actions/shopAction';
 function parseJwt(token) {
 	var base64Url = token.split('.')[1];
 	var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -42,6 +48,7 @@ function parseJwt(token) {
 
 const SignInModal = ({ onSignInSuccess = () => {} }) => {
 	const dispatch = useDispatch();
+	const [isForget, setIsForget] = useState(false);
 	const [email, setEmail] = useState(localStorage.getItem('tech_world_acc'));
 	const [password, setPassword] = useState(
 		localStorage.getItem('tech_world_pass')
@@ -75,8 +82,15 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 				gender,
 				first_name,
 				last_name,
+				verified,
 			} = res;
-
+			if (!verified) {
+				MyModal.hide(() => {});
+				MyModal.show(() => {},
+				<AlertModal title="Your account was not verified !" color="#F12849" />);
+				setTimeout(() => MyModal.hide(() => {}), 1000);
+				return;
+			}
 			console.log(
 				'user Info',
 				address,
@@ -88,7 +102,8 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 				first_name,
 				last_name
 			);
-
+			const favorite = await getFavoriteList(id);
+			updateReduxFavoriteList(dispatch, favorite);
 			distpatchLoginToRedux(dispatch);
 			updateUserInfoRedux(dispatch, {
 				address,
@@ -120,127 +135,184 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 	const gotoProfile = () => {
 		history.push('/user_info');
 	};
+	const [recoveryEmail, setRecoveryEmail] = useState('');
+	const _handleRecover = async () => {
+		try {
+			MyModal.show(() => {}, <IndicatorModal title="Đang gửi..." />);
+			const sendData = JSON.stringify({ email: recoveryEmail });
+			const res = await recoveryPassword(sendData);
+			console.log('send success ', res);
+			onSignInSuccess();
+			MyModal.hide();
+		} catch (err) {
+			MyModal.hide();
+			console.log('recovery err', err);
+		}
+	};
 	return (
 		<Container className="d-flex justify-content-center align-items-center w-75">
-			<Col lg="5" md="10" sm="10" className="mt-5 z-depth3 bg-white w-50">
-				<Icon
-					onClick={() => MyModal.hide()}
-					className="_icon"
-					style={{
-						fontSize: 30,
-						position: 'absolute',
-						right: -30,
-						top: -30,
-						color: 'white',
-					}}
-				>
-					highlight_off_outlined
-				</Icon>
-				<form className="m-5">
-					<Row className="justify-content-center p-0 m-0">
-						<h3 style={{ color: '#4F4F4F' }}>Sign In</h3>
-					</Row>
-					<Row className="d-flex justify-content-around align-items-center mt-3">
-						<TextField
-							label="Email"
-							className="w-100"
-							color={validateEmail(email) ? 'primary' : 'secondary'}
-							onChange={(e) => setEmail(e?.target?.value)}
-							value={email}
-						/>
-					</Row>
-					<Row className="d-flex justify-content-around align-items-center mt-3">
-						<TextField
-							label="Password"
-							className="w-100"
-							color={
-								validatePassword(password) ? 'primary' : 'secondary'
-							}
-							type="password"
-							onChange={(e) => {
-								setPassword(e?.target?.value);
-							}}
-							value={password}
-						/>
-					</Row>
-
-					<Row className="mt-3 justify-content-around align-items-center">
-						<Row className="align-content-center">
-							<Checkbox
-								checked={remember}
-								onChange={() => setRemember(!remember)}
+			{!isForget ? (
+				<Col lg="5" md="10" sm="10" className="mt-5 z-depth3 bg-white w-50">
+					<Icon
+						onClick={() => MyModal.hide()}
+						className="_icon"
+						style={{
+							fontSize: 30,
+							position: 'absolute',
+							right: -30,
+							top: -30,
+							color: 'white',
+						}}
+					>
+						highlight_off_outlined
+					</Icon>
+					<form className="m-5">
+						<Row className="justify-content-center p-0 m-0">
+							<h3 style={{ color: '#4F4F4F' }}>Đăng nhập</h3>
+						</Row>
+						<Row className="d-flex justify-content-around align-items-center mt-3">
+							<TextField
+								label="Tài khoản"
+								className="w-100"
+								color={validateEmail(email) ? 'primary' : 'secondary'}
+								onChange={(e) => setEmail(e?.target?.value)}
+								value={email}
 							/>
-							<p
-								style={{
-									paddingTop: 10,
-									fontSize: 14,
-									color: 'black',
-									marginRight: 10,
-									fontWeight: '300',
+						</Row>
+						<Row className="d-flex justify-content-around align-items-center mt-3">
+							<TextField
+								label="Mật khẩu"
+								className="w-100"
+								color={
+									validatePassword(password) ? 'primary' : 'secondary'
+								}
+								type="password"
+								onChange={(e) => {
+									setPassword(e?.target?.value);
 								}}
-							>
-								Remember me
-							</p>
+								value={password}
+							/>
 						</Row>
 
-						<p
-							style={{
-								fontSize: 14,
-								color: '#949494',
-								fontWeight: '300',
-								paddingTop: 10,
-							}}
-						>
-							forgot your password ?
-						</p>
-					</Row>
-
-					<Row className="justify-content-around align-items-center">
-						<Col lg="5" md="5">
+						<Row className="mt-3 justify-content-around align-items-center">
+							<Row className="align-content-center">
+								<Checkbox
+									checked={remember}
+									onChange={() => setRemember(!remember)}
+								/>
+								<p
+									style={{
+										paddingTop: 10,
+										fontSize: 14,
+										color: 'black',
+										marginRight: 10,
+										fontWeight: '300',
+									}}
+								>
+									Nhớ tài khoản
+								</p>
+							</Row>
 							<Button
-								// disabled={
-								// 	validateEmail(email) && validatePassword(password)
-								// 		? false
-								// 		: true
-								// }
-								onClick={_handleSignInClick}
-								className="button-container-box-shadow"
+								onClick={() => setIsForget(!isForget)}
 								style={{
-									marginTop: 10,
-									color: 'white',
-									backgroundColor:
-										validateEmail(email) && validatePassword(password)
-											? '#4285f4'
-											: '#7a7a7a',
-									color: 'white',
 									borderWidth: 0,
-									borderRadius: 25,
-									width: '100%',
-									height: 50,
+									backgroundColor: 'transparent',
 								}}
 							>
-								Sign In
+								<p
+									style={{
+										fontSize: 10,
+										color: '#949494',
+										fontWeight: '300',
+										paddingTop: 10,
+										textDecoration: 'underline',
+									}}
+								>
+									quên mật khẩu ?
+								</p>
 							</Button>
-						</Col>
-					</Row>
-					<Row className="justify-content-center align-items-center mt-3">
-						<p style={{ color: '#949494', fontWeight: '300' }}>
-							Not a member ?{' '}
-						</p>
-						<NavLink exact to="/sign_up" onClick={() => MyModal.hide()}>
-							<p
-								style={{
-									marginLeft: 10,
-									color: '#4285f4',
-									fontWeight: '300',
-								}}
-							>
-								register
+						</Row>
+
+						<Row className="justify-content-around align-items-center">
+							<Col lg="5" md="5">
+								<Button
+									// disabled={
+									// 	validateEmail(email) && validatePassword(password)
+									// 		? false
+									// 		: true
+									// }
+									onClick={_handleSignInClick}
+									className="button-container-box-shadow"
+									style={{
+										marginTop: 10,
+										color: 'white',
+										backgroundColor:
+											validateEmail(email) &&
+											validatePassword(password)
+												? '#4285f4'
+												: '#7a7a7a',
+										color: 'white',
+										borderWidth: 0,
+										borderRadius: 25,
+										width: '100%',
+										height: 50,
+									}}
+								>
+									Đăng nhập
+								</Button>
+							</Col>
+						</Row>
+						<Row className="justify-content-center align-items-center mt-3">
+							<p style={{ color: '#949494', fontWeight: '300' }}>
+								Chưa có tài khoản ?{' '}
 							</p>
-						</NavLink>
-					</Row>
-				</form>
-			</Col>
+							<NavLink
+								exact
+								to="/sign_up"
+								onClick={() => MyModal.hide()}
+							>
+								<p
+									style={{
+										marginLeft: 10,
+										color: '#4285f4',
+										fontWeight: '300',
+									}}
+								>
+									đăng ký
+								</p>
+							</NavLink>
+						</Row>
+					</form>
+				</Col>
+			) : (
+				<Col
+					lg="5"
+					md="10"
+					sm="10"
+					className="mt-5 z-depth3 bg-white w-50 d-flex flex-column p-5"
+				>
+					<h3
+						style={{ textAlign: 'center', color: '#4F4F4F' }}
+						className="mt-2 mb-2"
+					>
+						Quên mật khẩu
+					</h3>
+					<TextField
+						varian="contained"
+						className="mb-3"
+						label="Emal"
+						onChange={(e) => setRecoveryEmail(e?.target?.value)}
+					/>
+					<Button
+						variant="contained"
+						className="mt-2 mb-3"
+						onClick={() => _handleRecover()}
+						color="primary"
+					>
+						Khôi phục mật khẩu
+					</Button>
+				</Col>
+			)}
 		</Container>
 	);
 };

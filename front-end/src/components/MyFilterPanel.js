@@ -28,7 +28,7 @@ const MyFilterPanel = ({
 }) => {
 	return (
 		<Col className="pt-2">
-			<h3>Filter By</h3>
+			<h3>Bộ lọc</h3>
 			<ListGroup className="z-depth1">
 				<ListGroupItem
 					style={{
@@ -40,7 +40,7 @@ const MyFilterPanel = ({
 						color: '#4285F4',
 					}}
 				>
-					<h6 className="text-start p-0 m-0">Order by</h6>
+					<h6 className="text-start p-0 m-0">Sắp xếp theo</h6>
 				</ListGroupItem>
 				<CustomRadioButton
 					items={ITEMS_ORDER_LIST}
@@ -58,7 +58,7 @@ const MyFilterPanel = ({
 						color: '#4285F4',
 					}}
 				>
-					<h6 className="text-start p-0 m-0">Brand</h6>
+					<h6 className="text-start p-0 m-0">Hãng</h6>
 				</ListGroupItem>
 				<MyCheckboxList
 					items={brands ? brands : []}
@@ -77,7 +77,7 @@ const MyFilterPanel = ({
 						color: '#4285F4',
 					}}
 				>
-					<h6 className="text-start p-0 m-0">Price</h6>
+					<h6 className="text-start p-0 m-0">Giá</h6>
 				</ListGroupItem>
 
 				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
@@ -121,7 +121,7 @@ const MyFilterPanel = ({
 						color: '#4285F4',
 					}}
 				>
-					<h6 className="text-start p-0 m-0">Rating</h6>
+					<h6 className="text-start p-0 m-0">Đánh giá</h6>
 				</ListGroupItem>
 				<ListGroupItem style={{ fontSize: 15, margin: 0 }}>
 					<Row className="align-items-center pl-3 pt-0">

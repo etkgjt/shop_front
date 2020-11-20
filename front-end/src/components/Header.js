@@ -32,7 +32,7 @@ import SearchBar from './SearchBar';
 const data = [
 	{
 		path: '/',
-		title: 'Home',
+		title: 'Trang chủ',
 	},
 	{
 		path: '/laptop',
@@ -40,19 +40,19 @@ const data = [
 	},
 	{
 		path: '/smart_phone',
-		title: 'Smart Phone',
+		title: 'Điện thoại',
 	},
 	{
 		path: '/tablet',
-		title: 'Tablet',
+		title: 'Máy tính bảng',
 	},
 	{
 		path: '/accessories',
-		title: 'Accessories',
+		title: 'Phụ kiện',
 	},
 	{
 		path: '/contact',
-		title: 'Contact',
+		title: 'Liên hệ',
 	},
 ];
 const _renderNavItem = (data) => (

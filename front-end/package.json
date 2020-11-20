@@ -27,7 +27,9 @@
 		"react-swipeable-views": "^0.13.9",
 		"react-transition-group": "^4.4.1",
 		"reactstrap": "^8.5.1",
-		"redux": "^4.0.5"
+		"redux": "^4.0.5",
+		"redux-thunk": "^2.3.0",
+		"socket.io-client": "^3.0.2"
 	},
 	"scripts": {
 		"start": "node server.js",
