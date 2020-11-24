@@ -18,6 +18,7 @@ import Finish from './Finish';
 import Search from './SearchPage';
 import Verify from './VerifiyEmail';
 import ForgotPassword from './ForgotPassword';
+import ScrollToTop from './ScrollToTop';
 
 export {
 	Finish,
@@ -39,4 +40,5 @@ export {
 	Search,
 	Verify,
 	ForgotPassword,
+	ScrollToTop,
 };

@@ -1,5 +1,5 @@
 import React, { useCallback, memo, useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, Link } from 'react-router-dom';
 import { Button, Container, Row } from 'reactstrap';
 import Header from '../components/Header';
 import TitleBackground from '../assets/slider_background.png';
@@ -16,7 +16,10 @@ import { clearCart, sendOrder } from '../redux/actions/cartAction';
 import { Alert } from 'reactstrap/lib/Alert';
 import MyModal from '../components/MyModal';
 import socket from '../untils/socket';
-import { sendNoti } from '../redux/actions/userAction';
+import {
+	sendNoti,
+	useCoupon as usingCoupon,
+} from '../redux/actions/userAction';
 import moment from 'moment';
 
 const Confirmation = memo(() => {
@@ -27,6 +30,7 @@ const Confirmation = memo(() => {
 	const { id, access_token } = useSelector(
 		(state) => state.userReducer.userInfo
 	);
+	const { coupon } = useSelector((state) => state?.userReducer);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { method, cardName, cardNumber, cvv, expireDate } = payment;
@@ -40,8 +44,9 @@ const Confirmation = memo(() => {
 		district,
 		username,
 		note,
+		voucher,
 	} = shippingInfo;
-
+	console.log('voucher ne', voucher);
 	console.log('load ne', payment, shippingInfo, items);
 	const toggle = () => setIsOpen(!isOpen);
 	const formatPlaceOrderData = () => {
@@ -49,7 +54,11 @@ const Confirmation = memo(() => {
 			product_id: v?.id,
 			quantity: v?.amount,
 		}));
-		const total = [...items].reduce((x, y) => (x += y?.price * y?.amount), 0);
+		let total = [...items].reduce((x, y) => (x += y?.price * y?.amount), 0);
+		if (voucher && voucher.discount_percent) {
+			total -= (total / 100) * voucher.discount_percent;
+		}
+		total += 50000;
 		return {
 			user_id: id,
 			shipping_address: address,
@@ -68,11 +77,16 @@ const Confirmation = memo(() => {
 			const res = await sendOrder(access_token, orderInfo);
 			console.log('order success', res);
 			// MyModal.show(() => {}, <AlertModal title="Order Successfully !" />);
+
+			if (voucher && voucher.discount_percent) {
+				dispatch(usingCoupon(id, voucher.voucher, coupon));
+			}
 			const noti = {
 				type: 2,
 				email: `${first_name} ${last_name}`,
 				date: moment().format('YYYY-MM-DD HH:mm:SS'),
 			};
+
 			socket.emit('new-order');
 
 			const res1 = await sendNoti(JSON.stringify(noti));
@@ -101,7 +115,7 @@ const Confirmation = memo(() => {
 						<Col lg="6" md="10">
 							<Row className="justify-content-between px-4">
 								<h6>Người mua</h6>
-								<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
+								<p style={{ color: '#4489FD' }}></p>
 							</Row>
 							<p
 								style={{
@@ -136,7 +150,7 @@ const Confirmation = memo(() => {
 						<Col lg="6" md="10">
 							<Row className="justify-content-between px-4">
 								<h6>Địa chỉ nhận hàng</h6>
-								<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
+								<p style={{ color: '#4489FD' }}></p>
 							</Row>
 							<p
 								style={{
@@ -174,7 +188,7 @@ const Confirmation = memo(() => {
 							<Col lg="6" md="10">
 								<Row className="justify-content-between px-4">
 									<h6>Thanh toán</h6>
-									<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
+									<p style={{ color: '#4489FD' }}></p>
 								</Row>
 								<p
 									style={{
@@ -214,7 +228,7 @@ const Confirmation = memo(() => {
 							<Col lg="6" md="10">
 								<Row className="justify-content-between px-4">
 									<h6>Thanh toán</h6>
-									<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
+									<p style={{ color: '#4489FD' }}></p>
 								</Row>
 								<p
 									style={{
@@ -239,7 +253,7 @@ const Confirmation = memo(() => {
 						<Col lg="6" md="10">
 							<Row className="justify-content-between px-4">
 								<h6>Đơn hàng</h6>
-								<p style={{ color: '#4489FD' }}>Chỉnh sửa</p>
+								<p style={{ color: '#4489FD' }}></p>
 							</Row>
 							<p
 								style={{
@@ -265,23 +279,40 @@ const Confirmation = memo(() => {
 						</Col>
 					</Row>
 				</Container>
-
-				<Button
-					onClick={_onCheckoutPress}
-					className="button-container-box-shadow mt-5"
-					style={{
-						marginTop: 10,
-						color: 'white',
-						backgroundColor: '#4285f4',
-						color: 'white',
-						borderWidth: 0,
-						borderRadius: 25,
-						width: '100%',
-						height: 50,
-					}}
-				>
-					Đặt hàng
-				</Button>
+				<Row className="w-100 justify-content-center">
+					<Button
+						onClick={() => history.goBack()}
+						className="button-container-box-shadow mt-5 w-25 mr-4"
+						style={{
+							marginTop: 10,
+							color: 'white',
+							backgroundColor: '#4285f4',
+							color: 'white',
+							borderWidth: 0,
+							borderRadius: 25,
+							width: '100%',
+							height: 50,
+						}}
+					>
+						Trở về
+					</Button>
+					<Button
+						onClick={_onCheckoutPress}
+						className="button-container-box-shadow mt-5 w-25"
+						style={{
+							marginTop: 10,
+							color: 'white',
+							backgroundColor: '#4285f4',
+							color: 'white',
+							borderWidth: 0,
+							borderRadius: 25,
+							width: '100%',
+							height: 50,
+						}}
+					>
+						Đặt hàng
+					</Button>
+				</Row>
 			</Container>
 		</Container>
 	);

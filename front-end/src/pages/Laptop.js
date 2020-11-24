@@ -7,7 +7,11 @@ import { TopAdCarousel, MyFilterPanel } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../redux/actions/cartAction';
 
-import { SMART_PHONE_BRAND } from '../constants/constants';
+import {
+	LAPTOP_BRAND,
+	LAPTOP_BRAND_LOGO,
+	SMART_PHONE_BRAND,
+} from '../constants/constants';
 import { Button, CircularProgress } from '@material-ui/core';
 
 import withPages from '../components/withPage';
@@ -71,7 +75,7 @@ const Laptop = memo(
 											(v) => setData(v)
 										)
 									}
-									brands={SMART_PHONE_BRAND}
+									brands={LAPTOP_BRAND}
 									orderBy={orderBy}
 									brandFilter={brandFilter}
 									priceFilter={priceFilter}
@@ -84,6 +88,18 @@ const Laptop = memo(
 								/>
 							</Col>
 							<Col lg="9" md="6" classNam="p-0">
+								<Row className="justify-content-center p-0">
+									{LAPTOP_BRAND_LOGO.map((v, i) => (
+										<Col
+											lg="2"
+											md="2"
+											key={i}
+											className="m-2 p-2 d-flex flex-column border bg-white justify-content-center align-items-center"
+										>
+											<img src={v} />
+										</Col>
+									))}
+								</Row>
 								<Row className="m-0 p-0 pt-5 justify-content-center">
 									{data && data.length ? (
 										renderItem(dispatch, data, numberOfItem)

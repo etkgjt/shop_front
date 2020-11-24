@@ -1,4 +1,4 @@
-import React, { useCallback, memo, useState } from 'react';
+import React, { useCallback, memo, useState, useEffect } from 'react';
 
 import { Button, Col, Container, Row } from 'reactstrap';
 import { CustomCarousel } from '../components';
@@ -25,8 +25,13 @@ import '../styles/shopPage.css';
 import '../styles/material.css';
 import Icon from '@material-ui/core/Icon';
 import { Rating } from '@material-ui/lab';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MyModal from '../components/MyModal';
+import { useHistory } from 'react-router-dom';
+import { getNumberWithDot } from '../untils/numberFormater';
+import { addToCart } from '../redux/actions/cartAction';
+import { CircularProgress } from '@material-ui/core';
+import { loadShopDataSync } from '../redux/actions/shopAction';
 const data = [
 	{
 		name: 'Thermo Ball Etip Gloves',
@@ -88,7 +93,11 @@ const ShopMethod = () => (
 			<Col xl="3" lg="6" className="px-3">
 				<Col
 					className="button-hover-depth3 pt-3"
-					style={{ backgroundColor: '#00C851', color: 'white' }}
+					style={{
+						backgroundColor: '#00C851',
+						color: 'white',
+						height: '400px',
+					}}
 				>
 					<Row className="px-5 mt-2 justify-content-center ">
 						<Icon style={{ fontSize: 70, color: 'white' }}>
@@ -103,13 +112,18 @@ const ShopMethod = () => (
 							Quy mô vận chuyển khắp cả nước, đáp ứng nhu cầu của mọi
 							khác hàng từ mọi vùng miền.
 						</p>
+						<br />
 					</Row>
 				</Col>
 			</Col>
 			<Col xl="3" lg="6" className="px-3">
 				<Col
 					className="button-hover-depth3 pt-3"
-					style={{ backgroundColor: '#ff4444', color: 'white' }}
+					style={{
+						backgroundColor: '#ff4444',
+						color: 'white',
+						height: '400px',
+					}}
 				>
 					<Row className="px-5 mt-2 justify-content-center">
 						<Icon style={{ fontSize: 70 }}>verified_user</Icon>
@@ -129,35 +143,52 @@ const ShopMethod = () => (
 			<Col xl="3" lg="6" className="px-3">
 				<Col
 					className="button-hover-depth3 pt-3"
-					style={{ color: 'white', backgroundColor: '#ffbb33' }}
+					style={{
+						color: 'white',
+						backgroundColor: '#ffbb33',
+						height: '400px',
+					}}
 				>
 					<Row className="px-5 mt-2 justify-content-center">
 						<Icon style={{ fontSize: 70 }}>headset_mic_rounded</Icon>
 					</Row>
 					<Row className="px-5 mt-4">
-						<h5>Hỗ trợ tận tình</h5>
+						<h5 style={{ textAlign: 'center' }}>Hỗ trợ tận tình</h5>
 					</Row>
 					<Row className="px-5 mt-2">
-						<p>
+						<p style={{ textAlign: 'center' }}>
 							Chúng tôi có đội ngũ hỗ trợ tận tình, luôn giải đáp mọi
 							thắc mắc của quý khách
 						</p>
+						<br />
+						<br />
 					</Row>
 				</Col>
 			</Col>
 			<Col xl="3" lg="6" className="px-3">
 				<Col
 					className="button-hover-depth3 pt-3"
-					style={{ backgroundColor: '#7E57C3', color: 'white' }}
+					style={{
+						backgroundColor: '#7E57C3',
+						color: 'white',
+						height: '400px',
+					}}
 				>
 					<Row className="px-5 mt-2 justify-content-center">
 						<Icon style={{ fontSize: 70 }}>cached_two_tone</Icon>
 					</Row>
-					<Row className="px-5 mt-4">
-						<h5>Hoàn trả</h5>
+					<Row className="mt-4 text-center w-100">
+						<h5
+							style={{
+								textAlign: 'center',
+								width: '100%',
+							}}
+						>
+							Hoàn trả
+						</h5>
 					</Row>
-					<Row className="px-5 mt-2">
-						<p>
+					<Row className="px-4 mt-2">
+						<p style={{ textAlign: 'center' }}>
 							Mọi sản phẩm sẽ được đổi trả trong vòng 30 ngày kể từ ngày
 							nhận hàng nếu khách hàng không hài lòng hoặc sản phậm không
 							đúng với mô tả.
@@ -174,67 +205,98 @@ const MyRating = ({ value }) => {
 	);
 };
 const _renderItems = () => {
+	const history = useHistory();
 	const productsDataRedux = useSelector(
 		(state) => state?.shopReducer?.products
 	);
-	const [data, setData] = useState(productsDataRedux ? productsDataRedux : []);
-	let tempArr = [...data];
 
-	return tempArr.splice(0, 6).map((item, idx) => (
-		<Col
-			className="px-5 my-1 mt-5"
-			xl="4"
-			lg="4"
-			md="6"
-			sm="6"
-			key={`${item.name}-${idx}`}
-		>
-			<Col className="button-container-box-shadow">
-				<div className="mb-50 text-center single_items bg-primary">
-					<img src={item.img}></img>
-				</div>
-				<Col
-					style={{ borderRadius: 5 }}
-					className="py-4 d-flex flex-column justify-content-center align-items-center mt-4"
-				>
-					<p
-						className="text-center m-0 my-1"
-						style={{ fontWeight: 'bold', color: '#0276D8' }}
+	const dispatch = useDispatch();
+	const [data, setData] = useState(productsDataRedux ? productsDataRedux : []);
+	let tempArr = [...data].sort((a, b) => b.rating - a.rating);
+	useEffect(() => {
+		if (productsDataRedux && productsDataRedux.length)
+			setData(productsDataRedux);
+		else dispatch(loadShopDataSync());
+	}, [productsDataRedux]);
+
+	return tempArr && tempArr.length ? (
+		tempArr.splice(0, 6).map((item, idx) => (
+			<Col
+				className="p-3 mt-1"
+				xl="4"
+				lg="12"
+				md="12"
+				sm="12"
+				key={`${item.name}-${idx}`}
+			>
+				<Col className="button-container-box-shadow">
+					<div
+						className="mb-50 text-center single_items pt-5"
+						style={{ maxHeight: '400px' }}
 					>
-						{item?.name}
-					</p>
-					<p className="text-center m-0 my-1">{`$${item?.price}`}</p>
-					<MyRating value={item?.rating} />
-					<Row className="justify-content-center mt-2">
-						<Button
+						<img src={item.images?.[0]?.url}></img>
+					</div>
+					<Col
+						style={{ borderRadius: 5 }}
+						className="py-4 d-flex flex-column justify-content-center align-items-center mt-4"
+					>
+						<p
+							className="text-center m-0 my-1"
 							style={{
-								borderRadius: 20,
-								backgroundColor: '#4285F4',
-								color: 'white',
-								borderWidth: 0,
-								marginRight: 20,
-								width: 100,
+								fontSize: 16,
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+								width: '100%',
+								whiteSpace: 'nowrap',
 							}}
 						>
-							Mua ngay
-						</Button>
-						<Button
-							style={{
-								borderRadius: 20,
-								borderWidth: 2,
-								borderColor: '#4285F4',
-								backgroundColor: 'white',
-								color: '#4285F4',
-								width: 100,
-							}}
-						>
-							Xem chi tiết
-						</Button>
-					</Row>
+							{item?.name}
+						</p>
+						<p className="text-center m-0 my-1">{`${getNumberWithDot(
+							item?.price
+						)}`}</p>
+
+						<MyRating value={item?.rating} />
+						<Row className="justify-content-around p-0 w-100">
+							<Col className="p-0 w-50 px-2">
+								<Button
+									className="button-thin-shadow w-100"
+									style={{
+										borderRadius: 20,
+										backgroundColor: '#4285F4',
+										color: 'white',
+										borderWidth: 0,
+										fontSize: 15,
+									}}
+									onClick={() => addToCart(dispatch, item)}
+								>
+									Thêm
+								</Button>
+							</Col>
+							<Col className="p-0 w-50 px-2">
+								<Button
+									onClick={() => history.push('/single_product', item)}
+									className="button-thin-shadow w-100"
+									style={{
+										borderRadius: 20,
+										borderWidth: 2,
+										borderColor: '#4285F4',
+										backgroundColor: 'white',
+										color: '#4285F4',
+										fontSize: 15,
+									}}
+								>
+									Chi tiết
+								</Button>
+							</Col>
+						</Row>
+					</Col>
 				</Col>
 			</Col>
-		</Col>
-	));
+		))
+	) : (
+		<CircularProgress />
+	);
 };
 
 const Intro = () => (
@@ -438,7 +500,7 @@ const Popular = () => (
 				</p>
 			</div>
 		</Col>
-		<Row>{_renderItems(data)}</Row>
+		<Row className="w-100 justify-content-center">{_renderItems(data)}</Row>
 		<Row
 			style={{
 				justifyContent: 'center',

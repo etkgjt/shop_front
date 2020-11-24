@@ -18,6 +18,9 @@ import {
 	Button,
 	ListGroup,
 	ListGroupItem,
+	Fade,
+	Collapse,
+	UncontrolledCollapse,
 } from 'reactstrap';
 import { CITY, DISTRICTS } from '../constants/constants';
 import '../styles/pageTitle.css';
@@ -28,6 +31,10 @@ import { MyStepper } from '../components';
 import { updateShippingInfo } from '../redux/actions/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNumberWithDot } from '../untils/numberFormater';
+import { getAllCoupon } from '../redux/actions/userAction';
+
+import moment from 'moment';
+import { conforms } from 'lodash';
 const Checkout = () => {
 	let { state } = useLocation();
 	const userInfo = useSelector((state) => state.userReducer.userInfo);
@@ -46,6 +53,7 @@ const Checkout = () => {
 	const [city, setCity] = useState(1);
 	const [district, setDistrict] = useState(1);
 	const [note, setNote] = useState('');
+	const [voucher, setVoucher] = useState(null);
 	const _onCheckoutPress = () => {
 		if (!firstName || !lastName || !address || !phoneNumber) {
 			console.log('thieu thong tin');
@@ -61,6 +69,7 @@ const Checkout = () => {
 				district,
 				username,
 				note,
+				voucher,
 			});
 		}
 	};
@@ -225,14 +234,53 @@ const Checkout = () => {
 							</Row>
 						</form>
 					</Col>
-					<DetailsCheckout items={data} />
+					<DetailsCheckout
+						items={data}
+						voucherChange={(v) => setVoucher(v)}
+					/>
 				</Row>
 			</Container>
 		</Container>
 	);
 };
-const DetailsCheckout = ({ items }) => {
+const DetailsCheckout = ({ items, voucherChange }) => {
 	console.log('items ne', items);
+
+	const [data, setData] = useState(items ? items : []);
+
+	const ship = 10;
+	const { coupon, userInfo } = useSelector((state) => state?.userReducer);
+	const [state, setState] = useState(coupon);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		if (!state || !state.length) {
+			dispatch(getAllCoupon(userInfo?.id));
+		}
+	}, []);
+	const [currentCoupon, setCurrentCoupon] = useState(null);
+	useEffect(() => {
+		if (coupon && coupon.length) setState(coupon);
+	}, [coupon]);
+	useEffect(() => {
+		if (items && items.length) setData(items);
+	}, [items]);
+	const _caculateTotal = () => {
+		if (data && data.length) {
+			let total = data?.reduce((x, y) => (x += y?.price * y?.amount), 0);
+			if (currentCoupon) {
+				console.log('currnet', currentCoupon);
+				total -= (total / 100) * currentCoupon.discount_percent;
+				console.log('total ne', total);
+			}
+
+			return total + 50000;
+		}
+		return 0;
+	};
+	useEffect(() => {
+		voucherChange(currentCoupon);
+	}, [currentCoupon]);
+
 	return (
 		<Col md="4" className="p-0">
 			<Col className="z-depth2 m-0 py-3 bg-white">
@@ -277,19 +325,109 @@ const DetailsCheckout = ({ items }) => {
 
 					<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
 						<small style={{ fontSize: 16 }}>Phí giao hàng</small>
-						<small style={{ fontSize: 16 }}>5</small>
+						<small style={{ fontSize: 16 }}>50.000</small>
 					</ListGroupItem>
+
+					<ListGroupItem className="d-flex my-2 p-0 flex-column justify-content-center align-items-center">
+						{state && state.length ? (
+							state.map((v, i) => (
+								<Button
+									onClick={() => setCurrentCoupon(v)}
+									className="w-100 d-flex flex-column align-items-center justify-content-center mb-2"
+									style={{
+										borderColor:
+											currentCoupon?.voucher === v?.voucher
+												? 'red'
+												: 'transparent',
+										padding: 0,
+										borderWidth: 1,
+										backgroundColor: 'transparent',
+									}}
+								>
+									<Row
+										className="justify-content-around w-100 align-items-center border"
+										style={{
+											borderRadius: 5,
+										}}
+									>
+										<Col lg="8" md="8">
+											<p
+												style={{
+													fontWeight: '500',
+													fontSize: 14,
+													height: 15,
+													textAlign: 'start',
+													letterSpacing: '5',
+													lineHeightStep: '10',
+													paddingTop: 5,
+													color: 'black',
+												}}
+											>
+												{v?.name}
+											</p>
+											<p
+												style={{
+													fontSize: 12,
+													color: '#aaa',
+													textAlign: 'start',
+												}}
+											>
+												HSD:{moment(v?.end).format('DD-MM-YYYY')}
+											</p>
+										</Col>
+
+										{/* <div
+									style={{ borderWidth: 1, borderStyle: 'dotted',height:'100%' }}
+								/> */}
+
+										<Col
+											lg="3"
+											md="3"
+											className="d-flex flex-column justify-content-center align-items-center px-2"
+											style={{
+												borderStyle: 'dashed',
+												borderLeftWidth: 1,
+												borderTopWidth: 0,
+												borderRightWidth: 0,
+												borderBottomWidth: 0,
+												borderColor: '#999',
+											}}
+										>
+											<p
+												style={{
+													color: '#999',
+													fontWeight: '500',
+													paddingTop: 10,
+													height: 15,
+													fontSize: 14,
+												}}
+											>
+												{v?.voucher}
+											</p>
+											<p
+												style={{
+													fontWeight: '600',
+													color: '#0E9D59',
+													height: 15,
+												}}
+											>
+												- {v?.discount_percent}%
+											</p>
+										</Col>
+									</Row>
+								</Button>
+							))
+						) : (
+							<div />
+						)}
+					</ListGroupItem>
+
 					<ListGroupItem className="d-flex my-2 p-0 justify-content-between align-items-center">
 						<small style={{ fontSize: 16, fontWeight: 'bold' }}>
 							Tổng cộng (đã bao gồm VAT)
 						</small>
 						<small style={{ fontSize: 16 }}>
-							{`${getNumberWithDot(
-								items?.reduce(
-									(x, y) => (x += y?.price * y?.amount),
-									0
-								) + 5
-							)} vnđ`}
+							{`${getNumberWithDot(_caculateTotal())} vnđ`}
 						</small>
 					</ListGroupItem>
 				</ListGroup>
@@ -297,6 +435,7 @@ const DetailsCheckout = ({ items }) => {
 		</Col>
 	);
 };
+
 const MyDropdownPicker = ({ items, title, onSubmit }) => {
 	const [value, setValue] = useState(0);
 	useEffect(() => {

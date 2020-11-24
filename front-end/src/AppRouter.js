@@ -26,6 +26,7 @@ import {
 	Search,
 	Verify,
 	ForgotPassword,
+	ScrollToTop,
 } from './pages';
 
 import { Provider } from 'react-redux';
@@ -47,28 +48,30 @@ const AppRoute = () => {
 					<Header />
 				</header>
 				<MyModal />
-				<Switch>
-					<Route exact={true} path="/" component={Home} />
-					<Route path="/single_product" component={SingleProduct} />
-					<Route path="/cart" component={Cart} />
-					<Route path="/contact" component={Contact} />
-					<Route path="/category" component={Category} />
-					<Route path="/confirmation" component={Confirmation} />
-					<Route path="/checkout" component={Checkout} />
-					<Route path="/payment" component={PaymentMethod} />
-					<Route path="/sign_in" component={SignIn} />
-					<Route path="/sign_up" component={SignUp} />
-					<Route path="/user_info" component={UserInfo} />
-					<Route path="/smart_phone" component={SmartPhone} />
-					<Route path="/laptop" component={Laptop} />
-					<Route path="/tablet" component={Tablet} />
-					<Route path="/accessories" component={Accessories} />
-					<Route path="/finish" component={Finish} />
-					<Route path="/search" component={Search} />
-					<Route path="/verify" component={Verify} />
-					<Route path="/forget_password" component={ForgotPassword} />
-				</Switch>
-
+				<Route>
+					<ScrollToTop />
+					<Switch>
+						<Route exact={true} path="/" component={Home} />
+						<Route path="/single_product" component={SingleProduct} />
+						<Route path="/cart" component={Cart} />
+						<Route path="/contact" component={Contact} />
+						<Route path="/category" component={Category} />
+						<Route path="/confirmation" component={Confirmation} />
+						<Route path="/checkout" component={Checkout} />
+						<Route path="/payment" component={PaymentMethod} />
+						<Route path="/sign_in" component={SignIn} />
+						<Route path="/sign_up" component={SignUp} />
+						<Route path="/user_info" component={UserInfo} />
+						<Route path="/smart_phone" component={SmartPhone} />
+						<Route path="/laptop" component={Laptop} />
+						<Route path="/tablet" component={Tablet} />
+						<Route path="/accessories" component={Accessories} />
+						<Route path="/finish" component={Finish} />
+						<Route path="/search" component={Search} />
+						<Route path="/verify" component={Verify} />
+						<Route path="/forget_password" component={ForgotPassword} />
+					</Switch>
+				</Route>
 				<footer
 					className="box-shadow footer-background"
 					style={{ color: 'white' }}

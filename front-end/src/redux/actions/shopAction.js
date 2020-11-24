@@ -107,3 +107,6 @@ export const updateAccessoriesDataCreator = (payload) => ({
 	type: REDUX.UPDATE_ACCESSORIES_DATA,
 	payload,
 });
+
+
+

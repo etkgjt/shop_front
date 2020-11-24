@@ -334,7 +334,7 @@ const ChangePassword = ({ data }) => {
 	};
 	const _handleSubmit = async () => {
 		try {
-			MyModal.show(() => {}, <IndicatorModal/>);
+			MyModal.show(() => {}, <IndicatorModal />);
 
 			const sendData = JSON.stringify({
 				password: state.password,
@@ -488,7 +488,7 @@ const CouponList = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		if (!state || !state.length) {
-			dispatch(getAllCoupon());
+			dispatch(getAllCoupon(userInfo?.id));
 		}
 	}, []);
 	useEffect(() => {

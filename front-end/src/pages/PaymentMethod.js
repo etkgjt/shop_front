@@ -20,7 +20,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import useDebounce from '../untils/debounce';
 import _ from 'lodash';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import '../styles/forAll.css';
 import { MyStepper } from '../components';
 import visa from '../assets/visa.svg';
@@ -30,6 +30,7 @@ import pay from '../assets/pay.svg';
 import { updatePaymentMethod } from '../redux/actions/cartAction';
 import moment from 'moment';
 const PaymentMethod = () => {
+	const history = useHistory();
 	console.log('cart render ne');
 	const dispatch = useDispatch();
 	const [cardName, setCardName] = useState('');
@@ -158,33 +159,10 @@ const PaymentMethod = () => {
 				) : (
 					<div />
 				)}
-
-				<NavLink
-					exact
-					to={{
-						pathname: '/confirmation',
-						// state: { data },
-					}}
-					style={{
-						color: 'white',
-						textDecoration: 'none',
-					}}
-				>
+				<Row className="justify-content-center w-100">
 					<Button
-						onClick={() =>
-							updatePaymentMethod(dispatch, {
-								method,
-								cardName,
-								cardNumber,
-								cvv,
-								expireDate,
-							})
-						}
-						disabled={
-							method !== 'delivery' &&
-							(!cardName || !cardNumber || !cvv || !expireDate)
-						}
-						className="button-container-box-shadow"
+						onClick={() => history.goBack()}
+						className="button-container-box-shadow w-25 mr-4"
 						style={{
 							marginTop: 10,
 							color: 'white',
@@ -196,9 +174,37 @@ const PaymentMethod = () => {
 							height: 50,
 						}}
 					>
+						Trở về
+					</Button>
+					<Button
+						onClick={() => {
+							updatePaymentMethod(dispatch, {
+								method,
+								cardName,
+								cardNumber,
+								cvv,
+								expireDate,
+							});
+							history.push('/confirmation');
+						}}
+						disabled={
+							method !== 'delivery' &&
+							(!cardName || !cardNumber || !cvv || !expireDate)
+						}
+						className="button-container-box-shadow w-25 "
+						style={{
+							marginTop: 10,
+							color: 'white',
+							backgroundColor: '#4285f4',
+							color: 'white',
+							borderWidth: 0,
+							borderRadius: 25,
+							height: 50,
+						}}
+					>
 						Tiếp tục
 					</Button>
-				</NavLink>
+				</Row>
 			</Container>
 		</Container>
 	);

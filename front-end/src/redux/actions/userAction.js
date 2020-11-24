@@ -79,15 +79,34 @@ export const getOrderHistorySync = (userId) => async (dispatch) => {
 		dispatch(updateOrderHistoryCreator([]));
 	}
 };
+
+export const useCoupon = (userId, voucherCode, oldArr = []) => async (
+	dispatch
+) => {
+	try {
+		const sendData = JSON.stringify({
+			voucher: voucherCode,
+			user_id: userId,
+		});
+		const res = await API.post('/voucher/use', sendData);
+		const newArr = [...oldArr].filter((v) => v.voucher !== voucherCode);
+		console.log('use voucher success', res);
+		dispatch(updateCouponListCreator(newArr));
+	} catch (err) {
+		console.log('get list used voucher err', err);
+		dispatch(updateCouponListCreator(oldArr));
+	}
+};
+
 export const changePassword = (token, pass, id) =>
 	new Promise((resolve, reject) => {
 		API.put(`/user/pw?id=${id}`, pass)
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});
-export const getAllCoupon = () => async (dispatch) => {
+export const getAllCoupon = (userId) => async (dispatch) => {
 	try {
-		const { data } = await API.get('/voucher');
+		const { data } = await API.get(`/voucher/user?id=${userId}`);
 		dispatch(updateCouponListCreator(data));
 	} catch (err) {
 		console.log('get coupon list err', err);

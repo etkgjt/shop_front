@@ -10,6 +10,9 @@ const cartReducer = (state = initialState, action) => {
 		case REDUX.CLEAR_DATA: {
 			return initialState;
 		}
+		case REDUX.CLEAR_CART: {
+			return initialState;
+		}
 		case REDUX.ADD_TO_CART: {
 			let idx = [...state.items].findIndex(
 				(v) => v.id === action.payload.id

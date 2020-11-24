@@ -34,7 +34,7 @@ import {
 	MyModal,
 	SignInModal,
 } from '../components';
-import { login } from '../redux/actions/userAction';
+import { getAllCoupon, login } from '../redux/actions/userAction';
 import { getNumberWithDot } from '../untils/numberFormater';
 
 const Cart = () => {
@@ -298,7 +298,17 @@ const SumaryCheckout = ({ items }) => {
 	const { loggedIn } = useSelector((state) => state.userReducer);
 	const history = useHistory();
 	const ship = 10;
-	const discount = 0;
+	const { coupon, userInfo } = useSelector((state) => state?.userReducer);
+	const [state, setState] = useState(coupon);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		if (!state || !state.length) {
+			dispatch(getAllCoupon());
+		}
+	}, []);
+	useEffect(() => {
+		if (coupon && coupon.length) setState(coupon);
+	}, [coupon]);
 	useEffect(() => {
 		if (items && items.length) setData(items);
 	}, [items]);
@@ -309,6 +319,8 @@ const SumaryCheckout = ({ items }) => {
 		}
 		return 0;
 	};
+	const [currentCoupon, setCurrentCoupon] = useState(null);
+
 	return (
 		<Col lg="4">
 			<div className="p-3 z-depth2 bg-white">
@@ -383,7 +395,7 @@ const SumaryCheckout = ({ items }) => {
 						</Button>
 					)}
 
-					<Button
+					{/* <Button
 						outline
 						color="primary"
 						className="mt-4 button-container-box-shadow"
@@ -401,8 +413,19 @@ const SumaryCheckout = ({ items }) => {
 						Mã giảm giá (tuỳ chọn)
 					</Button>
 					<Fade in={isFaded} className="mt-3">
-						<Input className="mb-3" />
-					</Fade>
+						<Input
+							className="mb-3"
+							value={
+								currentCoupon?.voucher ? currentCoupon?.voucher : ''
+							}
+						/>
+						{state?.map((v, i) => (
+							<Row className="justify-content-around w-100">
+								<p>{v?.voucher}</p>
+								<p>{v?.discount_percent}</p>
+							</Row>
+						))}
+					</Fade> */}
 				</ListGroup>
 			</div>
 		</Col>

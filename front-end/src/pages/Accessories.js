@@ -6,6 +6,7 @@ import { TopAdCarousel, MyFilterPanel } from '../components';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../redux/actions/cartAction';
+import ScrollToTop from './ScrollToTop';
 
 import { SMART_PHONE_BRAND } from '../constants/constants';
 import { Button, CircularProgress } from '@material-ui/core';

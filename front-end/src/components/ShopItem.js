@@ -15,7 +15,7 @@ const ShopItem = ({ addToCart, item, idx, dispatch, favoriteList = [] }) => {
 			xl="4"
 			lg="12"
 			md="12"
-			sm="12"
+		sm="12"
 			key={`${item.name}-${idx}`}
 		>
 			<Col className="button-container-box-shadow">
@@ -61,7 +61,7 @@ const ShopItem = ({ addToCart, item, idx, dispatch, favoriteList = [] }) => {
 
 					<MyRating value={item?.rating} />
 					<Row className="justify-content-around p-0 w-100">
-						<Col lg="5" md="12" sm="12" className="w-100 p-0">
+						<Col className="p-0 w-50 px-2">
 							<Button
 								className="button-thin-shadow w-100"
 								style={{
@@ -69,28 +69,24 @@ const ShopItem = ({ addToCart, item, idx, dispatch, favoriteList = [] }) => {
 									backgroundColor: '#4285F4',
 									color: 'white',
 									borderWidth: 0,
-									width: '100%',
-									fontSize: 13,
-									height: 40,
+									fontSize: 15,
 								}}
 								onClick={() => addToCart(dispatch, item)}
 							>
-								Thêm vào giỏ hàng
+								Thêm
 							</Button>
 						</Col>
-						<Col lg="5" md="12" sm="12" className="p-0 w-100">
+						<Col className="p-0 w-50 px-2">
 							<Button
 								onClick={() => history.push('/single_product', item)}
-								className="button-thin-shadow"
+								className="button-thin-shadow w-100"
 								style={{
 									borderRadius: 20,
 									borderWidth: 2,
 									borderColor: '#4285F4',
 									backgroundColor: 'white',
 									color: '#4285F4',
-									width: '100%',
-									height: 40,
-									fontSize: 13,
+									fontSize: 15,
 								}}
 							>
 								Chi tiết

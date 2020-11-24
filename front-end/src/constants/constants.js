@@ -1,3 +1,20 @@
+import samsung from '../assets/samsung.png';
+import huawei from '../assets/huawei.jpg';
+import nokia from '../assets/nokia.png';
+import iphone from '../assets/iphon.jpg';
+import oppo from '../assets/oppo.png';
+import vivo from '../assets/vivo.png';
+import vsmart from '../assets/vsmart.jpg';
+import xiaomi from '../assets/xiaomi.png';
+
+import apple from '../assets/apple.png';
+import dell from '../assets/dell.png';
+import msi from '../assets/msi.jpg';
+import acer from '../assets/acer.png';
+import asus from '../assets/asus.png';
+import lenovo from '../assets/lenovo.png';
+import hp from '../assets/hp.png';
+
 const BASE_URL = 'https://javaapiweb.herokuapp.com'; //API url
 const CITY = [
 	'Hồ Chí Minh',
@@ -180,6 +197,17 @@ const ITEM_COLORS = [
 	{ label: 'Blue', value: 3 },
 	{ label: 'Yellow', value: 4 },
 ];
+const SMART_PHONE_BRAND_LOGO = [
+	huawei,
+	samsung,
+	iphone,
+	vsmart,
+	vivo,
+	nokia,
+	oppo,
+	xiaomi,
+];
+const LAPTOP_BRAND_LOGO = [apple, acer, asus, hp, dell, lenovo, msi];
 
 export {
 	BASE_URL,
@@ -192,4 +220,6 @@ export {
 	CATEGORY_LIST,
 	ITEMS_ORDER_LIST,
 	ITEM_COLORS,
+	SMART_PHONE_BRAND_LOGO,
+	LAPTOP_BRAND_LOGO,
 };
