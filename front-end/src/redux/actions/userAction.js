@@ -106,7 +106,8 @@ export const changePassword = (token, pass, id) =>
 	});
 export const getAllCoupon = (userId) => async (dispatch) => {
 	try {
-		const { data } = await API.get(`/voucher/user?id=${userId}`);
+		const { data } = await API.get(`/voucher?user=${userId}`);
+		console.log('Voucher lay duowc ne', data);
 		dispatch(updateCouponListCreator(data));
 	} catch (err) {
 		console.log('get coupon list err', err);

@@ -68,6 +68,8 @@ const Confirmation = memo(() => {
 			total,
 			details: cartDetails,
 			method: payment,
+			discount:
+				voucher && voucher.discount_percent ? voucher.discount_percent : 0,
 		};
 	};
 	const _onCheckoutPress = async () => {

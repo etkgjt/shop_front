@@ -254,6 +254,7 @@ const DetailsCheckout = ({ items, voucherChange }) => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		if (!state || !state.length) {
+		
 			dispatch(getAllCoupon(userInfo?.id));
 		}
 	}, []);
@@ -280,6 +281,7 @@ const DetailsCheckout = ({ items, voucherChange }) => {
 	useEffect(() => {
 		voucherChange(currentCoupon);
 	}, [currentCoupon]);
+	console.log('Voucher ne',coupon)
 
 	return (
 		<Col md="4" className="p-0">
