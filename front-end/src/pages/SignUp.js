@@ -48,7 +48,7 @@ const SignUp = () => {
 			return true;
 		});
 		// return ValidatorForm.removeValidationRule('isPasswordMatch');
-	}, []);
+	});
 
 	console.log('state pass', state);
 	const _handleSubmit = async () => {
