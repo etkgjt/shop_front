@@ -33,7 +33,6 @@ import { Rating } from '@material-ui/lab';
 import Cart from './Cart';
 import moment from 'moment';
 import {
-
 	sendCommentToServer,
 	removeFromFavorite,
 	addToFavorite,
@@ -78,7 +77,7 @@ const SingleProduct = memo(() => {
 			</Row>
 			<Container>
 				<h2 className="mt-5">Chi tiết sản phẩm</h2>
-				<ProductDetails productInfo={itemInfo} />
+				<ProductDetails productInfo={itemInfo} setInfo={setItemInfo} />
 			</Container>
 		</Container>
 	);
@@ -124,7 +123,8 @@ const ProductImage = ({ data }) => {
 	);
 };
 
-const ProductDetails = ({ productInfo }) => {
+const ProductDetails = ({ productInfo, setInfo }) => {
+	console.log('product info', productInfo);
 	const {
 		rating,
 		name,
@@ -147,6 +147,7 @@ const ProductDetails = ({ productInfo }) => {
 		favorite,
 	} = useSelector((state) => state.shopReducer);
 	const { loggedIn, userInfo } = useSelector((state) => state.userReducer);
+
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [amount, setAmount] = useState(1);
@@ -188,7 +189,9 @@ const ProductDetails = ({ productInfo }) => {
 	const makeNewCommentFunc = (cmt) => {
 		if (!loggedIn) {
 			MyModal.show(() => {}, <SignInModal />);
-		} else sendComment(cmt);
+		} else {
+			sendComment(cmt);
+		}
 	};
 	const sendComment = async (cmt) => {
 		try {
@@ -200,10 +203,37 @@ const ProductDetails = ({ productInfo }) => {
 				rate: cmt?.rate,
 				date: moment().toString(),
 			};
-			console.log('send data ne', sendData);
-			const res = await sendCommentToServer(JSON.stringify(sendData));
 
-			socket.emit('new-comment')
+			const res = await sendCommentToServer(JSON.stringify(sendData));
+			setInfo({
+				rating,
+				name,
+				category,
+				price,
+				brand,
+				description,
+				color,
+				delivery,
+				images,
+				comments: [
+					...comments,
+					{
+						bought: false,
+						customer: {
+							first_name: userInfo.first_name,
+							id: userInfo?.id,
+							last_name: userInfo.last_name,
+							verified: true,
+						},
+
+						date: moment().toString(),
+						id: 199,
+						message: cmt.message,
+						rate: cmt.rate,
+					},
+				],
+			});
+			socket.emit('new-comment');
 
 			console.log('Send thanh cong', res);
 			MyModal.hide(() => {});
