@@ -66,7 +66,7 @@ const SignUp = () => {
 			});
 			console.log(data);
 			const res = await signUp(data);
-
+			console.log('Signup thanh cong ne');
 			const noti = {
 				type: 1,
 				email: `${state.firstName} ${state.lastName}`,

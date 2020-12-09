@@ -1,7 +1,6 @@
-import { Container } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { Row } from 'reactstrap';
+import { Row, Container } from 'reactstrap';
 import { AlertModal, IndicatorModal, MyModal } from '../components';
 import { verifyEmail } from '../redux/actions/userAction';
 function useQuery() {
@@ -10,7 +9,7 @@ function useQuery() {
 const VeriryEmail = () => {
 	const history = useHistory();
 	let query = useQuery();
-	const email = query.get('email');
+	const email = query.get('token');
 
 	useEffect(() => {
 		if (email) {

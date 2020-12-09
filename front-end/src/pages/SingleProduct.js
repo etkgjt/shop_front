@@ -194,6 +194,7 @@ const ProductDetails = ({ productInfo, setInfo }) => {
 		}
 	};
 	const sendComment = async (cmt) => {
+		console.log('Send comment ne', cmt);
 		try {
 			MyModal.show(() => {}, <IndicatorModal title="Send..." />);
 			const sendData = {
@@ -227,7 +228,7 @@ const ProductDetails = ({ productInfo, setInfo }) => {
 						},
 
 						date: moment().toString(),
-						id: 199,
+						id: Math.floor(Math.random() * 100),
 						message: cmt.message,
 						rate: cmt.rate,
 					},

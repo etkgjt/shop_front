@@ -114,9 +114,15 @@ export const getAllCoupon = (userId) => async (dispatch) => {
 		dispatch(updateCouponListCreator([]));
 	}
 };
-export const recoveryPassword = (email) =>
+export const sendEmailToRecoveryPassword = (email) =>
 	new Promise((resolve, reject) => {
-		API.post('/user/forget', email)
+		API.post('/user/send-fp', email)
+			.then((res) => resolve(res?.data))
+			.catch((err) => reject(err));
+	});
+export const sendRecoveryPassWord = (pass) =>
+	new Promise((resolve, reject) => {
+		API.post('/user/forget', pass)
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});

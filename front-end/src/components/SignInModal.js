@@ -19,7 +19,7 @@ import {
 	login,
 	updateUserInfoRedux,
 	distpatchLoginToRedux,
-	recoveryPassword,
+	sendEmailToRecoveryPassword,
 } from '../redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -140,12 +140,19 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 		try {
 			MyModal.show(() => {}, <IndicatorModal title="Đang gửi..." />);
 			const sendData = JSON.stringify({ email: recoveryEmail });
-			const res = await recoveryPassword(sendData);
+			const res = await sendEmailToRecoveryPassword(sendData);
 			console.log('send success ', res);
 			onSignInSuccess();
-			MyModal.hide();
+			MyModal.hide(() => {});
+			MyModal.show(() => {},
+			<AlertModal title="Send success !" color="#F12849" />);
+			setTimeout(() => MyModal.hide(() => {}), 1000);
+			// MyModal.hide();
 		} catch (err) {
 			MyModal.hide();
+			MyModal.show(() => {},
+			<AlertModal title="Send failed !" color="#F12849" />);
+			setTimeout(() => MyModal.hide(() => {}), 1000);
 			console.log('recovery err', err);
 		}
 	};

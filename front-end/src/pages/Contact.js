@@ -83,8 +83,8 @@ const Contact = memo(() => {
 					<Row className="justify-content-center align-items-center pt-5 w-100 mb-5">
 						<h1 style={{ color: 'black' }}>Phản hồi</h1>
 					</Row>
-					<Row className="justify-content-around  w-50 contact-form z-depth2">
-						<Col lg="9" md="9" className="p-5 ">
+					<Row className="justify-content-around  w-50 contact-form z-depth2 pr-5">
+						<Col lg="8" md="8" className="p-5 ">
 							<ValidatorForm
 								className="w-100 h-100 p-5"
 								onSubmit={() => _handleSubmit()}
@@ -143,9 +143,9 @@ const Contact = memo(() => {
 						</Col>
 
 						<Col
-							lg="3"
-							md="3"
-							className="d-flex flex-column align-items-start justify-content-center text-black "
+							lg="4"
+							md="4"
+							className="d-flex flex-column align-items-start justify-content-center text-black"
 						>
 							<Icon
 								style={{
@@ -153,53 +153,43 @@ const Contact = memo(() => {
 									color: '#2296F3',
 									justifyContent: 'center',
 									alignItems: 'center',
+									textAlign: 'center',
+									width: '100%',
 								}}
 							>
 								room
 							</Icon>
 							<p
 								style={{
-									fontSize: 20,
+									fontSize: 15,
+									textAlign: 'center',
 									fontWeight: '500',
-									marginLeft: 20,
+									// marginLeft: 20,
 								}}
 							>
-								1632 An Dương Vương
+								1632 An Dương Vương Quận 5, TP Hồ CHí Minh Việt Nam
 							</p>
 
-							<p
-								style={{
-									fontSize: 20,
-									fontWeight: '500',
-									marginLeft: 20,
-								}}
-							>
-								Quận 5, TP Hồ CHí Minh
-							</p>
-							<p
-								style={{
-									fontSize: 20,
-									fontWeight: '500',
-									marginLeft: 20,
-								}}
-							>
-								Việt Nam
-							</p>
 							<Icon
 								style={{
 									fontSize: 50,
 									color: '#2296F3',
 									justifyContent: 'center',
 									alignItems: 'center',
+									width: '100%',
+									textAlign: 'center',
+									marginTop: 10,
 								}}
 							>
 								phone
 							</Icon>
 							<p
 								style={{
-									fontSize: 20,
+									fontSize: 15,
+									textAlign: 'center',
 									fontWeight: '500',
-									marginLeft: 20,
+									textAlign: 'center',
+									width: '100%',
 								}}
 							>
 								+ 01 234 567 89
@@ -211,15 +201,19 @@ const Contact = memo(() => {
 									color: '#2296F3',
 									justifyContent: 'center',
 									alignItems: 'center',
+									width: '100%',
+									textAlign: 'center',
+									marginTop: 10,
 								}}
 							>
 								mail
 							</Icon>
 							<p
 								style={{
-									fontSize: 20,
+									fontSize: 15,
+									textAlign: 'center',
 									fontWeight: '500',
-									marginLeft: 20,
+									width: '100%',
 								}}
 							>
 								techworld@gmail.com

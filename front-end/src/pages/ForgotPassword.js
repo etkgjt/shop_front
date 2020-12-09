@@ -1,17 +1,23 @@
-import { Card, Container, Button } from '@material-ui/core';
+import { Card, Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { useLocation, useHistory } from 'react-router-dom';
-import { Row } from 'reactstrap';
+import { Row, Container } from 'reactstrap';
 import { AlertModal, IndicatorModal, MyModal } from '../components';
-import { changePassword, verifyEmail } from '../redux/actions/userAction';
+import { sendRecoveryPassWord, verifyEmail } from '../redux/actions/userAction';
+
+import '../styles/checkout.css';
+import '../styles/forAll.css';
+import '../styles/material.css';
+import '../styles/pageTitle.css';
+
 function useQuery() {
 	return new URLSearchParams(useLocation().search);
 }
 const ForgotPassword = () => {
 	const history = useHistory();
 	let query = useQuery();
-	const id = query.get('id');
+	const token = query.get('token');
 	const [state, setState] = useState({
 		password: '',
 		confirm_password: '',
@@ -37,9 +43,10 @@ const ForgotPassword = () => {
 
 			const sendData = JSON.stringify({
 				password: state.password,
+				token: token,
 			});
 			console.log('send Data', sendData);
-			const res = await changePassword('access_token', sendData, id);
+			const res = await sendRecoveryPassWord(sendData);
 			console.log('', res);
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
@@ -56,13 +63,13 @@ const ForgotPassword = () => {
 	return (
 		<Container
 			fluid
-			className="p-0 pb-5 d-flex flex-column justify-content-center align-items-center"
+			className="p-0 pb-5 d-flex flex-column justify-content-center align-items-center w-100"
 		>
-			<Row className="title-container mt-5 w-100">
-				<p class="page-title">Forget Password</p>
+			<Row className="title-container">
+				<p class="page-title">Đổi mật khẩu</p>
 			</Row>
 			<Card
-				className="mt-3 p-2 d-flex flex-row justify-content-center align-content-center w-50"
+				className="mt-5 p-2 d-flex flex-row justify-content-center align-content-center w-50"
 				elevation={3}
 			>
 				<ValidatorForm
