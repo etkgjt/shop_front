@@ -121,7 +121,10 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 			MyModal.hide();
 		} catch (err) {
 			console.log('long signin err', err);
-			MyModal.hide(() => alert('wrong'));
+			MyModal.hide();
+			MyModal.show(() => {},
+			<AlertModal title="Invalid Email or Password !" color="#F12849" />);
+			setTimeout(() => MyModal.hide(() => {}), 1000);
 		}
 	};
 	const validateEmail = (email) => {
@@ -145,7 +148,7 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 			onSignInSuccess();
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
-			<AlertModal title="Send success !" color="#F12849" />);
+			<AlertModal title="Send success !" color="#458AFF" />);
 			setTimeout(() => MyModal.hide(() => {}), 1000);
 			// MyModal.hide();
 		} catch (err) {

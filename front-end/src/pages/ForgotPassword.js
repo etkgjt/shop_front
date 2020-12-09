@@ -49,14 +49,16 @@ const ForgotPassword = () => {
 			const res = await sendRecoveryPassWord(sendData);
 			console.log('', res);
 			MyModal.hide(() => {});
-			MyModal.show(() => {},
-			<AlertModal title="Đổi mật khẩu thành công !" color="#458AFF" />);
+			MyModal.show(
+				() => history.push('/'),
+				<AlertModal title="Đổi mật khẩu thành công !" color="#458AFF" />
+			);
 			setTimeout(() => MyModal.hide(), 1000);
 		} catch (err) {
 			console.log('Update info err', err);
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
-			<AlertModal title="Đổi mật khẩu thất bại !" color="#458AFF" />);
+			<AlertModal title="Đổi mật khẩu thất bại !" color="#F12849" />);
 			setTimeout(() => MyModal.hide(), 1000);
 		}
 	};

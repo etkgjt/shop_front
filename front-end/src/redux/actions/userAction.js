@@ -72,8 +72,9 @@ export const updateUserInfo = (token, info, id) =>
 	});
 export const getOrderHistorySync = (userId) => async (dispatch) => {
 	try {
-		const { data } = await API.get(`/order/search?user=${userId}`);
-		dispatch(updateOrderHistoryCreator(data));
+		const res = await API.get(`/order/search?user=${userId}`);
+		console.log('Histore trong acion', res);
+		dispatch(updateOrderHistoryCreator(res.data));
 	} catch (err) {
 		console.log('get order history sync err', err);
 		dispatch(updateOrderHistoryCreator([]));

@@ -109,7 +109,7 @@ const MyFilterPanel = ({
 					onCheckedFunc={setColorFilter}
 				/>
 			</ListGroup> */}
-			<ListGroup className="mt-3 z-depth1">
+			{/* <ListGroup className="mt-3 z-depth1">
 				<ListGroupItem
 					style={{
 						fontSize: 15,
@@ -167,7 +167,7 @@ const MyFilterPanel = ({
 						</p>
 					</Row>
 				</ListGroupItem>
-			</ListGroup>
+			</ListGroup> */}
 			<Button
 				onClick={() => {
 					console.log('filter click ne');

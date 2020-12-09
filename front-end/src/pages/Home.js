@@ -27,7 +27,7 @@ import Icon from '@material-ui/core/Icon';
 import { Rating } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import MyModal from '../components/MyModal';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { getNumberWithDot } from '../untils/numberFormater';
 import { addToCart } from '../redux/actions/cartAction';
 import { CircularProgress } from '@material-ui/core';
@@ -476,49 +476,60 @@ const Gallery = () => (
 		</Row>
 	</Container>
 );
-const Popular = () => (
-	<Container className="popular-section-padding">
-		<Col className="popular-section-title-container">
-			<div className="popular-section-title">
-				<h4
-					className="popular-section-big-title mb-3"
-					style={{ fontSize: 40 }}
-				>
-					Sản phẩm được yêu thích
-				</h4>
-				<p
+const Popular = () => {
+	const history = useHistory();
+	return (
+		<Container className="popular-section-padding">
+			<Col className="popular-section-title-container">
+				<div className="popular-section-title">
+					<h4
+						className="popular-section-big-title mb-3"
+						style={{ fontSize: 40 }}
+					>
+						Sản phẩm được yêu thích
+					</h4>
+					<p
+						style={{
+							textAlign: 'center',
+							color: '#777777',
+							fontWeight: '300',
+							fontSize: '16px',
+						}}
+					>
+						Consectetur adipiscing elit, sed do eiusmod tempor incididunt
+						ut labore et dolore magna aliqua. Quis ipsum suspendisse
+						ultrices gravida.
+					</p>
+				</div>
+			</Col>
+			<Row className="w-100 justify-content-center">
+				{_renderItems(data)}
+			</Row>
+			<Row
+				style={{
+					justifyContent: 'center',
+					alignItems: 'center',
+					marginTop: '50px',
+				}}
+			>
+				<Button
+					onClick={() => history.push('/smart_phone')}
+					className="view-more-button container-box-shadow w-25"
 					style={{
-						textAlign: 'center',
-						color: '#777777',
-						fontWeight: '300',
-						fontSize: '16px',
+						borderWidth: 0,
+						width: 150,
+						height: 70,
+						borderRadius: 35,
 					}}
 				>
-					Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-					labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-					gravida.
-				</p>
-			</div>
-		</Col>
-		<Row className="w-100 justify-content-center">{_renderItems(data)}</Row>
-		<Row
-			style={{
-				justifyContent: 'center',
-				alignItems: 'center',
-				marginTop: '50px',
-			}}
-		>
-			<Button
-				className="view-more-button container-box-shadow w-25"
-				style={{ borderWidth: 0, width: 150, height: 70, borderRadius: 35 }}
-			>
-				<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
-					View more product
-				</h4>
-			</Button>
-		</Row>
-	</Container>
-);
+					<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
+						View more product
+					</h4>
+				</Button>
+			</Row>
+		</Container>
+	);
+};
 const VideoArea = () => (
 	<Container fluid className="video-area p-0 my-5 pt-5">
 		<div className="video-background">
@@ -532,58 +543,62 @@ const VideoArea = () => (
 		</div>
 	</Container>
 );
-const ChoseWatchAd = () => (
-	<Container className="watch-area-padding">
-		<Row className="choice-container z-depth3 p-5 bg-white">
-			<Col lg="5" md="6" className="px-5">
-				<h2 className="choice-title">Choose Your Best</h2>
-				<p>
-					Enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-					reprehenderit in voluptate velit esse.
-				</p>
-				<Button
-					style={{ borderWidth: 0, borderRadius: 50 }}
-					className="view-more-button container-box-shadow"
-				>
-					<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
-						View more product
-					</h4>
-				</Button>
-			</Col>
-			<Col lg="6" md="6" sm="10">
-				<div className="choice-watch-img1" />
-			</Col>
-		</Row>
-		<Row className="choice-container z-depth3 p-5 bg-white">
-			<Col lg="6" md="6" sm="10">
-				<div className="choice-watch-img2" />
-			</Col>
-			<Col lg="5" md="6" className="px-5">
-				<h2 className="choice-title">Choose Your Best</h2>
-				<p>
-					Enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-					reprehenderit in voluptate velit esse.
-				</p>
-				<Button
-					style={{ borderWidth: 0, borderRadius: 50 }}
-					className="view-more-button container-box-shadow"
-				>
-					<h4
-						style={{
-							textAlign: 'center',
-
-							fontSize: 20,
-						}}
+const ChoseWatchAd = () => {
+	const history = useHistory();
+	return (
+		<Container className="watch-area-padding">
+			<Row className="choice-container z-depth3 p-5 bg-white">
+				<Col lg="5" md="6" className="px-5">
+					<h2 className="choice-title">Choose Your Best</h2>
+					<p>
+						Enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+						irure dolor in reprehenderit in voluptate velit esse.
+					</p>
+					<Button
+						onClick={() => history.push('/laptop')}
+						style={{ borderWidth: 0, borderRadius: 50 }}
+						className="view-more-button container-box-shadow"
 					>
-						View more product
-					</h4>
-				</Button>
-			</Col>
-		</Row>
-	</Container>
-);
+						<h4 style={{ textAlign: 'center', fontWeight: '600' }}>
+							View more product
+						</h4>
+					</Button>
+				</Col>
+				<Col lg="6" md="6" sm="10">
+					<div className="choice-watch-img1" />
+				</Col>
+			</Row>
+			<Row className="choice-container z-depth3 p-5 bg-white">
+				<Col lg="6" md="6" sm="10">
+					<div className="choice-watch-img2" />
+				</Col>
+				<Col lg="5" md="6" className="px-5">
+					<h2 className="choice-title">Choose Your Best</h2>
+					<p>
+						Enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+						irure dolor in reprehenderit in voluptate velit esse.
+					</p>
+					<Button
+						style={{ borderWidth: 0, borderRadius: 50 }}
+						className="view-more-button container-box-shadow"
+					>
+						<h4
+							style={{
+								textAlign: 'center',
+
+								fontSize: 20,
+							}}
+						>
+							View more product
+						</h4>
+					</Button>
+				</Col>
+			</Row>
+		</Container>
+	);
+};
 const Home = memo(() => {
 	console.log('homepage render ne');
 
@@ -592,7 +607,7 @@ const Home = memo(() => {
 			{/* <CustomCarousel fluid className = "large-margin" /> */}
 			<Intro />
 			<NewArrival />
-			<CustomCarousel />
+			{/* <CustomCarousel /> */}
 			<Gallery />
 			<Popular />
 

@@ -131,13 +131,14 @@ const NavigationBar = ({ setShow }) => {
 
 	return (
 		<Navbar expand="md" light>
-			<NavbarBrand to="/">
+			<NavLink exact to="/">
 				<img
 					src={mainLogo}
 					className="img-fluid"
 					style={{ height: 80, width: 120 }}
 				></img>
-			</NavbarBrand>
+			</NavLink>
+
 			<Collapse navbar className="justify-content-center ">
 				<div className="ml-sm-auto navbar-nav main-menu">
 					<Nav navbar>{data.map((item) => _renderNavItem(item))}</Nav>
