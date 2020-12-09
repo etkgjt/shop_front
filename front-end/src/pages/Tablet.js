@@ -7,7 +7,10 @@ import { TopAdCarousel, MyFilterPanel } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../redux/actions/cartAction';
 
-import { SMART_PHONE_BRAND, SMART_PHONE_BRAND_LOGO } from '../constants/constants';
+import {
+	SMART_PHONE_BRAND,
+	SMART_PHONE_BRAND_LOGO,
+} from '../constants/constants';
 import { Button, CircularProgress } from '@material-ui/core';
 
 import withPages from '../components/withPage';
@@ -37,7 +40,7 @@ const Tablet = memo(
 		const [priceFilter, setPriceFilter] = useState({ min: -1, max: -1 });
 		const [colorFilter, setColorFilter] = useState([]);
 
-		const [numberOfItem, setNumberOfItem] = useState(10);
+		const [numberOfItem, setNumberOfItem] = useState(12);
 		useEffect(() => {
 			console.log('Long chay lan dau thoi ne', productsDataRedux);
 

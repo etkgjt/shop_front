@@ -42,7 +42,7 @@ const Accessories = memo(
 		const [priceFilter, setPriceFilter] = useState({ min: -1, max: -1 });
 		const [colorFilter, setColorFilter] = useState([]);
 
-		const [numberOfItem, setNumberOfItem] = useState(10);
+		const [numberOfItem, setNumberOfItem] = useState(12);
 		useEffect(() => {
 			console.log('Long chay lan dau thoi ne', productsDataRedux);
 
