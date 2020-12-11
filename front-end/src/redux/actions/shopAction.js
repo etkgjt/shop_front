@@ -16,6 +16,14 @@ export const dataSplitter = (array = []) => {
 		all: array,
 	};
 };
+const getShuffledArr = (arr) => {
+	const newArr = arr.slice();
+	for (let i = newArr.length - 1; i > 0; i--) {
+		const rand = Math.floor(Math.random() * (i + 1));
+		[newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
+	}
+	return newArr;
+};
 export const loadShopDataSync = () => async (dispatch) => {
 	try {
 		dispatch(loading());
@@ -26,10 +34,10 @@ export const loadShopDataSync = () => async (dispatch) => {
 		);
 		console.log(tablet, accessories);
 		dispatch(updateAllShopDataCreator(all));
-		dispatch(updateSmartPhoneDataCreator(smartPhone));
-		dispatch(updateLaptopDataCreator(laptop));
-		dispatch(updateTabletDataCreator(tablet));
-		dispatch(updateAccessoriesDataCreator(accessories));
+		dispatch(updateSmartPhoneDataCreator(getShuffledArr(smartPhone)));
+		dispatch(updateLaptopDataCreator(getShuffledArr(laptop)));
+		dispatch(updateTabletDataCreator(getShuffledArr(tablet)));
+		dispatch(updateAccessoriesDataCreator(getShuffledArr(accessories)));
 		dispatch(loadSuccess());
 	} catch (err) {
 		console.log('load data err', err);
@@ -107,6 +115,3 @@ export const updateAccessoriesDataCreator = (payload) => ({
 	type: REDUX.UPDATE_ACCESSORIES_DATA,
 	payload,
 });
-
-
-

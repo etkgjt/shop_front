@@ -20,7 +20,7 @@ const VeriryEmail = () => {
 		try {
 			MyModal.show(() => {}, <IndicatorModal title="Verifing..." />);
 			console.log('email', email);
-			const res = await verifyEmail(JSON.stringify({ email: email }));
+			const res = await verifyEmail(JSON.stringify({ token: email }));
 			console.log('Verifi email success', res);
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
