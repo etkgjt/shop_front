@@ -2,18 +2,54 @@ import { REDUX } from '../store/type';
 import { API } from '../../untils/api';
 
 export const dataSplitter = (array = []) => {
-	const smartPhone = [...array]?.filter((v) => v?.category?.id === 1);
+	const smartPhone = [...array]
+		?.filter((v) => v?.categoryId === 1)
+		.map((v) => ({
+			...v,
+			buying_times: v.buyingTimes,
+			date_arrive: v.dateArrive,
+			description: v.descriptions[0],
+		}));
 
-	const laptop = [...array]?.filter((v) => v?.category?.id === 2);
-	const tablet = [...array]?.filter((v) => v?.category?.id === 3);
-	const accessories = [...array]?.filter((v) => v?.category?.id > 3);
+	const laptop = [...array]
+		?.filter((v) => v?.categoryId === 2)
+		.map((v) => ({
+			...v,
+			buying_times: v.buyingTimes,
+			date_arrive: v.dateArrive,
+			description: v.descriptions[0],
+		}));
+
+	const tablet = [...array]
+		?.filter((v) => v?.categoryId === 3)
+		.map((v) => ({
+			...v,
+			buying_times: v.buyingTimes,
+			date_arrive: v.dateArrive,
+			description: v.descriptions[0],
+		}));
+
+	const accessories = [...array]
+		?.filter((v) => v?.categoryId > 3)
+		.map((v) => ({
+			...v,
+			buying_times: v.buyingTimes,
+			date_arrive: v.dateArrive,
+			description: v.descriptions[0],
+		}));
+	const all = [...array].map((v) => ({
+		...v,
+		buying_times: v.buyingTimes,
+		date_arrive: v.dateArrive,
+		description: v.descriptions[0],
+	}));
 
 	return {
 		smartPhone,
 		laptop,
 		tablet,
 		accessories,
-		all: array,
+		all,
 	};
 };
 const getShuffledArr = (arr) => {
@@ -27,7 +63,7 @@ const getShuffledArr = (arr) => {
 export const loadShopDataSync = () => async (dispatch) => {
 	try {
 		dispatch(loading());
-		const { data } = await API.get('/product');
+		const { data } = await API.get('/products');
 
 		const { smartPhone, laptop, tablet, accessories, all } = dataSplitter(
 			data
@@ -45,15 +81,15 @@ export const loadShopDataSync = () => async (dispatch) => {
 	}
 };
 
-export const sendCommentToServer = (data) =>
+export const sendCommentToServer = (data, token) =>
 	new Promise((resolve, reject) => {
-		API.post(`/comment/add`, data)
+		API.post(`/comments`, data)
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});
 export const getFavoriteList = (userId) =>
 	new Promise((resolve, reject) => {
-		API.get(`/favorite?user=${userId}`)
+		API.get(`/favorite/${userId}`)
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});

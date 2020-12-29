@@ -105,11 +105,35 @@ const withPages = (OriginalComponent = <div />) => {
 					break;
 				case 2:
 					temp = temp.sort((a, b) => {
-						if (moment(a.dateArrive).isBefore(moment(b.dateArrive)))
-							return 1;
-						if (moment(a.dateArrive).isAfter(moment(b.dateArrive)))
+						console.log(
+							'Date arr',
+							a.dateArrive,
+							b.dateArrive,
+							moment(a.dateArrive),
+							moment(b.dateArrive),
+							'/n'
+						);
+						if (
+							moment(
+								a.dateArrive ? a.dateArrive : '2000-01-01'
+							).isBefore(
+								moment(b.dateArrive ? b.dateArrive : '2000-01-01')
+							)
+						)
 							return -1;
-						if (moment(a.dateArrive).isSame(moment(b.dateArrive)))
+						if (
+							moment(a.dateArrive ? a.dateArrive : '2000-01-01').isAfter(
+								moment(b.dateArrive ? b.dateArrive : '2000-01-01')
+							)
+						)
+							return 1;
+						if (
+							moment(a.dateArrive)
+								? a.dateArrive
+								: '2020-01-01'.isSame(
+										moment(b.dateArrive ? b.dateArrive : '2020-01-01')
+								  )
+						)
 							return 0;
 					});
 					break;

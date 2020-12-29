@@ -126,7 +126,7 @@ const UserInfoTable = ({ data }) => {
 		username,
 		phone_number,
 		gender,
-		access_token,
+		token,
 	} = data;
 
 	console.log('data ', data);
@@ -168,7 +168,7 @@ const UserInfoTable = ({ data }) => {
 				// password: state.password,
 			});
 			console.log('send Data', sendData);
-			const res = await updateUserInfo(access_token, sendData, id);
+			const res = await updateUserInfo(token, sendData, id);
 			console.log('Update info success', res);
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
@@ -315,7 +315,7 @@ const ChangePassword = ({ data }) => {
 		username,
 		phone_number,
 		gender,
-		access_token,
+		token,
 	} = data;
 	useEffect(() => {
 		ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
@@ -337,10 +337,11 @@ const ChangePassword = ({ data }) => {
 			MyModal.show(() => {}, <IndicatorModal />);
 
 			const sendData = JSON.stringify({
-				password: state.password,
+				CustomerId:id,
+				NewPassword: state.password,
 			});
 			console.log('send Data', sendData);
-			const res = await changePassword(access_token, sendData, id);
+			const res = await changePassword(token, sendData, id);
 			console.log('', res);
 			MyModal.hide(() => {});
 			MyModal.show(() => {},
@@ -416,7 +417,7 @@ const InvoiceHistory = ({ userId }) => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		if (!state || !state.length) {
-			dispatch(getOrderHistorySync(userInfo?.id));
+			dispatch(getOrderHistorySync(userInfo?.id, userInfo.token));
 		}
 	}, []);
 	useEffect(() => {
@@ -515,10 +516,12 @@ const CouponList = () => {
 							state?.map((v, i) => (
 								<TableRow key={v?.id}>
 									<TableCell>#{i}</TableCell>
-									<TableCell>{v?.voucher}</TableCell>
+									<TableCell>{v?.code}</TableCell>
 									<TableCell>
-										{v?.end
-											? moment(v?.end).format('YYYY-MM-DD HH:mm:SS')
+										{v?.endDate
+											? moment(v?.endDate).format(
+													'YYYY-MM-DD HH:mm:SS'
+											  )
 											: moment().format('YYYY-MM-DD HH:mm:SS')}
 									</TableCell>
 									<TableCell>{v?.name}</TableCell>

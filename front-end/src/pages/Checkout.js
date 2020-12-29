@@ -254,7 +254,6 @@ const DetailsCheckout = ({ items, voucherChange }) => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		if (!state || !state.length) {
-		
 			dispatch(getAllCoupon(userInfo?.id));
 		}
 	}, []);
@@ -270,7 +269,7 @@ const DetailsCheckout = ({ items, voucherChange }) => {
 			let total = data?.reduce((x, y) => (x += y?.price * y?.amount), 0);
 			if (currentCoupon) {
 				console.log('currnet', currentCoupon);
-				total -= (total / 100) * currentCoupon.discount_percent;
+				total -= (total / 100) * currentCoupon.discountPercent;
 				console.log('total ne', total);
 			}
 
@@ -281,7 +280,7 @@ const DetailsCheckout = ({ items, voucherChange }) => {
 	useEffect(() => {
 		voucherChange(currentCoupon);
 	}, [currentCoupon]);
-	console.log('Voucher ne',coupon)
+	console.log('Voucher ne', coupon);
 
 	return (
 		<Col md="4" className="p-0">
@@ -338,7 +337,7 @@ const DetailsCheckout = ({ items, voucherChange }) => {
 									className="w-100 d-flex flex-column align-items-center justify-content-center mb-2"
 									style={{
 										borderColor:
-											currentCoupon?.voucher === v?.voucher
+											currentCoupon?.code === v?.code
 												? 'red'
 												: 'transparent',
 										padding: 0,
@@ -374,7 +373,8 @@ const DetailsCheckout = ({ items, voucherChange }) => {
 													textAlign: 'start',
 												}}
 											>
-												HSD:{moment(v?.end).format('DD-MM-YYYY')}
+												HSD:
+												{moment(v?.endDate).format('DD-MM-YYYY')}
 											</p>
 										</Col>
 
@@ -404,7 +404,7 @@ const DetailsCheckout = ({ items, voucherChange }) => {
 													fontSize: 14,
 												}}
 											>
-												{v?.voucher}
+												{v?.code}
 											</p>
 											<p
 												style={{
@@ -413,7 +413,7 @@ const DetailsCheckout = ({ items, voucherChange }) => {
 													height: 15,
 												}}
 											>
-												- {v?.discount_percent}%
+												- {v?.discountPercent}%
 											</p>
 										</Col>
 									</Row>

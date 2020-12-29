@@ -32,10 +32,9 @@ const Contact = memo(() => {
 		try {
 			MyModal.show(() => {}, <IndicatorModal title="Send Inquiry..." />);
 			const data = JSON.stringify({
-				email: state.email,
-				phone: state.phone,
-				message: state.message,
-				date: state.date,
+				Email: state.email,
+				Phone: state.phone,
+				Message: state.message,
 			});
 			console.log('Send data ne', data);
 			const res = await sendInquiry(data);

@@ -67,53 +67,75 @@ const SignInModal = ({ onSignInSuccess = () => {} }) => {
 	const _handleSignInClick = async () => {
 		try {
 			MyModal.show(() => {}, <IndicatorModal title="Sign in..." />);
-			const { access_token } = await login(email, password);
-			console.log('token', access_token);
-
-			console.log('long token', parseJwt(access_token));
-			const { sub } = parseJwt(access_token);
-			const res = await getUserInfo(sub, access_token);
+			const { token, user } = await login(email, password);
 			const {
-				address,
 				id,
-				fullname,
-				username,
-				phone_number,
+				userName,
+				// password,
+				role,
+				firstname,
+				lastname,
 				gender,
-				first_name,
-				last_name,
+
+				phone,
+				address,
 				verified,
-			} = res;
-			if (!verified) {
-				MyModal.hide(() => {});
-				MyModal.show(() => {},
-				<AlertModal title="Your account was not verified !" color="#F12849" />);
-				setTimeout(() => MyModal.hide(() => {}), 1000);
-				return;
-			}
+				// roleNavigation,
+				// carts,
+				// comments,
+				// favorites,
+				// orders,
+			} = user;
+
+			// console.log('token', access_token);
+
+			// console.log('long token', parseJwt(access_token));
+			// const { sub } = parseJwt(access_token);
+			// const res = await getUserInfo(sub, access_token);
+			// const {
+			// 	address,
+			// 	id,
+			// 	fullname,
+			// 	username,
+			// 	phone_number,
+			// 	gender,
+			// 	first_name,
+			// 	last_name,
+			// 	verified,
+			// } = res;
+
+			// if (!verified) {
+			// 	MyModal.hide(() => {});
+			// 	MyModal.show(() => {},
+			// 	<AlertModal title="Your account was not verified !" color="#F12849" />);
+			// 	setTimeout(() => MyModal.hide(() => {}), 1000);
+			// 	return;
+			// }
+
 			console.log(
 				'user Info',
 				address,
 				id,
-				fullname,
-				username,
-				phone_number,
+
+				userName,
+				phone,
 				gender,
-				first_name,
-				last_name
+				firstname,
+				lastname
 			);
-			const favorite = await getFavoriteList(id);
-			updateReduxFavoriteList(dispatch, favorite);
+			// const favorite = await getFavoriteList(id);
+			// console.log('favorite ne', favorite);
+			// updateReduxFavoriteList(dispatch, favorite);
 			distpatchLoginToRedux(dispatch);
 			updateUserInfoRedux(dispatch, {
 				address,
 				id,
-				first_name,
-				last_name,
-				username,
-				phone_number,
+				first_name: firstname,
+				last_name: lastname,
+				username: email || userName,
+				phone_number: phone,
 				gender,
-				access_token,
+				token,
 			});
 			localStorage.setItem('tech_world_acc', email);
 			localStorage.setItem('tech_world_pass', password);

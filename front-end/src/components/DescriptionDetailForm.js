@@ -5,7 +5,7 @@ const DescriptionDetailsForm = ({ description = {}, type, name }) => {
 		cpu,
 		ram,
 		os,
-		screen_size,
+		screenSize,
 		battery,
 		memory,
 		color,
@@ -34,13 +34,13 @@ const DescriptionDetailsForm = ({ description = {}, type, name }) => {
 					<small style={{ fontSize: 16, fontWeight: 'bold' }}>
 						Screen
 					</small>
-					<small style={{ fontSize: 16 }}>{screen_size} inch</small>
+					<small style={{ fontSize: 16 }}>{screenSize} inch</small>
 				</ListGroupItem>
 				<ListGroupItem className="d-flex justify-content-between align-items-center border-top-0 border-left-0 border-right-0">
 					<small style={{ fontSize: 16, fontWeight: 'bold' }}>
 						Battery
 					</small>
-					<small style={{ fontSize: 16 }}>{`${battery} mAh`}</small>
+					<small style={{ fontSize: 16 }}>{`${battery}`}</small>
 				</ListGroupItem>
 				<ListGroupItem className="d-flex justify-content-between align-items-center border-top-0 border-left-0 border-right-0">
 					<small style={{ fontSize: 16, fontWeight: 'bold' }}>

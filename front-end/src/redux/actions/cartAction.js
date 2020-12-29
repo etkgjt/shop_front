@@ -21,9 +21,9 @@ export const updateShippingInfo = (dispatch, info) => {
 };
 export const sendOrder = (token, orderInfo) =>
 	new Promise((resolve, reject) => {
-		API.post('/order/add', orderInfo, {
+		API.post('/orders', orderInfo, {
 			headers: {
-				Authorization: token,
+				Authorization: `Bearer ${token}`,
 			},
 		})
 			.then((res) => resolve(res?.data))

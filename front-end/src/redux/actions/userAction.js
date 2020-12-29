@@ -12,12 +12,16 @@ export const sendNoti = (noti) =>
 	});
 
 export const login = (userName, password) => {
-	const data = JSON.stringify({ username: userName, password: password });
+	const data = JSON.stringify({ UserName: userName, Password: password });
+	console.log('Data', data);
 	return new Promise((resolve, reject) => {
 		console.log(data);
-		API.post('/login', data)
+		API.post('/login/customer', data)
 			.then((res) => resolve(res?.data))
-			.catch((err) => reject(err));
+			.catch((err) => {
+				console.log('Error', err);
+				reject(err);
+			});
 	});
 };
 export const getUserInfo = (username, token) =>
@@ -49,7 +53,7 @@ export const updateUserInfoRedux = (dispatch, payload) => {
 
 export const sendInquiry = (data) =>
 	new Promise((resolve, reject) => {
-		API.post('/contact/add', data)
+		API.post('/contacts', data)
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});
@@ -70,9 +74,14 @@ export const updateUserInfo = (token, info, id) =>
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});
-export const getOrderHistorySync = (userId) => async (dispatch) => {
+export const getOrderHistorySync = (userId, token) => async (dispatch) => {
 	try {
-		const res = await API.get(`/order/search?user=${userId}`);
+		const res = await API.get(`/orders/search?customerId=${userId}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+		});
 		console.log('Histore trong acion', res);
 		dispatch(updateOrderHistoryCreator(res.data));
 	} catch (err) {
@@ -81,16 +90,21 @@ export const getOrderHistorySync = (userId) => async (dispatch) => {
 	}
 };
 
-export const useCoupon = (userId, voucherCode, oldArr = []) => async (
+export const useCoupon = (userId, voucherCode, oldArr = [], token) => async (
 	dispatch
 ) => {
 	try {
 		const sendData = JSON.stringify({
-			voucher: voucherCode,
-			user_id: userId,
+			CodeVoucher: voucherCode,
+			CustomerId: userId,
 		});
-		const res = await API.post('/voucher/use', sendData);
-		const newArr = [...oldArr].filter((v) => v.voucher !== voucherCode);
+		const res = await API.post('/usevouchers', sendData, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+		});
+		const newArr = [...oldArr].filter((v) => v.code !== voucherCode);
 		console.log('use voucher success', res);
 		dispatch(updateCouponListCreator(newArr));
 	} catch (err) {
@@ -101,13 +115,18 @@ export const useCoupon = (userId, voucherCode, oldArr = []) => async (
 
 export const changePassword = (token, pass, id) =>
 	new Promise((resolve, reject) => {
-		API.put(`/user/pw?id=${id}`, pass)
+		API.put(`/customers/changepassword`, pass, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+		})
 			.then((res) => resolve(res?.data))
 			.catch((err) => reject(err));
 	});
 export const getAllCoupon = (userId) => async (dispatch) => {
 	try {
-		const { data } = await API.get(`/voucher?user=${userId}`);
+		const { data } = await API.get(`/vouchers/customer/${userId}`);
 		console.log('Voucher lay duowc ne', data);
 		dispatch(updateCouponListCreator(data));
 	} catch (err) {

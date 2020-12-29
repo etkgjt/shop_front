@@ -194,18 +194,20 @@ const ProductDetails = ({ productInfo, setInfo }) => {
 		}
 	};
 	const sendComment = async (cmt) => {
-		console.log('Send comment ne', cmt);
+		console.log('Send comment ne', cmt, userInfo);
 		try {
 			MyModal.show(() => {}, <IndicatorModal title="Send..." />);
 			const sendData = {
-				customer_id: userInfo?.id,
-				product_id: id,
-				message: cmt?.message,
-				rate: cmt?.rate,
-				date: moment().toString(),
+				CustomerId: userInfo?.id,
+				ProductId: id,
+				Message: cmt?.message,
+				Rating: cmt?.rate,
 			};
 
-			const res = await sendCommentToServer(JSON.stringify(sendData));
+			const res = await sendCommentToServer(
+				JSON.stringify(sendData),
+				userInfo.token
+			);
 			setInfo({
 				rating,
 				name,

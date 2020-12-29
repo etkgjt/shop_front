@@ -214,9 +214,9 @@ const _renderItems = () => {
 	const [data, setData] = useState(productsDataRedux ? productsDataRedux : []);
 	let tempArr = [...data].sort((a, b) => b.rating - a.rating);
 	useEffect(() => {
-		if (productsDataRedux && productsDataRedux.length)
-			setData(productsDataRedux);
-		else dispatch(loadShopDataSync());
+		// if (productsDataRedux && productsDataRedux.length)
+		// 	setData(productsDataRedux);
+		// else dispatch(loadShopDataSync());
 	}, [productsDataRedux]);
 
 	return tempArr && tempArr.length ? (

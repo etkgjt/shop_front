@@ -27,9 +27,7 @@ const Confirmation = memo(() => {
 	const { payment, shippingInfo, items } = useSelector(
 		(state) => state.cartReducer
 	);
-	const { id, access_token } = useSelector(
-		(state) => state.userReducer.userInfo
-	);
+	const { id, token } = useSelector((state) => state.userReducer.userInfo);
 	const { coupon } = useSelector((state) => state?.userReducer);
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -51,37 +49,37 @@ const Confirmation = memo(() => {
 	const toggle = () => setIsOpen(!isOpen);
 	const formatPlaceOrderData = () => {
 		const cartDetails = [...items]?.map((v) => ({
-			product_id: v?.id,
+			productId: v?.id,
 			quantity: v?.amount,
 		}));
 		let total = [...items].reduce((x, y) => (x += y?.price * y?.amount), 0);
-		if (voucher && voucher.discount_percent) {
-			total -= (total / 100) * voucher.discount_percent;
+		if (voucher && voucher.discountPercent) {
+			total -= (total / 100) * voucher.discountPercent;
 		}
 		total += 50000;
 		return {
-			user_id: id,
-			shipping_address: address,
-			buying_date: new Date().toString(),
-			note,
-			status: 1,
-			total,
-			details: cartDetails,
-			method: payment,
-			discount:
-				voucher && voucher.discount_percent ? voucher.discount_percent : 0,
+			CustomerId: id,
+			ShippingAddress: address,
+			Note: note,
+			StatusId: 1,
+			Total: total,
+			OrderDetails: cartDetails,
+			PaymentMethod: payment.method,
+			Discount:
+				voucher && voucher.discountPercent ? voucher.discountPercent : 0,
 		};
 	};
 	const _onCheckoutPress = async () => {
 		try {
 			MyModal.show(() => {}, <IndicatorModal title="Order sending..." />);
 			const orderInfo = JSON.stringify(formatPlaceOrderData());
-			const res = await sendOrder(access_token, orderInfo);
+			console.log(orderInfo);
+			const res = await sendOrder(token, orderInfo);
 			console.log('order success', res);
 			// MyModal.show(() => {}, <AlertModal title="Order Successfully !" />);
 
-			if (voucher && voucher.discount_percent) {
-				dispatch(usingCoupon(id, voucher.voucher, coupon));
+			if (voucher && voucher.discountPercent) {
+				dispatch(usingCoupon(id, voucher.code, coupon, token));
 			}
 			const noti = {
 				type: 2,
